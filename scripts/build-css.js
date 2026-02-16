@@ -1,11 +1,26 @@
 import {
-  readdirSync, readFileSync, writeFileSync, watch, existsSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  watch,
+  existsSync,
 } from 'fs';
-import { join, dirname, basename, sep, normalize } from 'path';
+import {
+  join,
+  dirname,
+  basename,
+  sep,
+  normalize,
+} from 'path';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import postcss from 'postcss';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import postcssImport from 'postcss-import';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import postcssNesting from 'postcss-nesting';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import postcssPresetEnv from 'postcss-preset-env';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import autoprefixer from 'autoprefixer';
 import { fileURLToPath } from 'url';
 
@@ -21,13 +36,13 @@ const removeComments = () => ({
 
       // Keep comments that start with specific keywords (case-insensitive)
       const keepPatterns = [
-        /^stylelint/i,           // Keep stylelint comments
-        /^filepath:/i,           // Keep filepath comments
-        /^@preserve/i,           // Keep preserve comments
+        /^stylelint/i,
+        /^filepath:/i,
+        /^@preserve/i,
       ];
 
       // Check if comment should be kept
-      const shouldKeep = keepPatterns.some(pattern => pattern.test(text));
+      const shouldKeep = keepPatterns.some((pattern) => pattern.test(text));
 
       if (!shouldKeep) {
         comment.remove();
@@ -83,6 +98,7 @@ function findSourceFiles(dir, files = []) {
 
   const entries = readdirSync(dir, { withFileTypes: true });
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
 
@@ -113,6 +129,7 @@ async function processFile(sourcePath) {
 
   // Verify file exists before processing
   if (!existsSync(normalizedPath)) {
+    // eslint-disable-next-line no-console
     console.error(`❌ Source file not found: ${normalizedPath}`);
     return false;
   }
@@ -123,7 +140,8 @@ async function processFile(sourcePath) {
     const filename = basename(normalizedPath);
     const outputPath = join(parentDir, filename);
 
-    console.log(`📝 Processing: ${normalizedPath.replace(rootDir, '.')}`);
+    // eslint-disable-next-line no-console
+    console.info(`📝 Processing: ${normalizedPath.replace(rootDir, '.')}`);
 
     const css = readFileSync(normalizedPath, 'utf8');
     const result = await processor.process(css, {
@@ -132,13 +150,17 @@ async function processFile(sourcePath) {
     });
 
     writeFileSync(outputPath, result.css);
-    console.log(`✅ Compiled: ${outputPath.replace(rootDir, '.')}`);
+    // eslint-disable-next-line no-console
+    console.info(`✅ Compiled: ${outputPath.replace(rootDir, '.')}`);
 
     return true;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(`❌ Error processing ${normalizedPath}:`);
+    // eslint-disable-next-line no-console
     console.error(`   ${error.message}`);
     if (error.line && error.column) {
+      // eslint-disable-next-line no-console
       console.error(`   at line ${error.line}, column ${error.column}`);
     }
     return false;
@@ -150,7 +172,8 @@ async function processFile(sourcePath) {
  * @returns {Promise<{success: number, failed: number}>}
  */
 async function buildAll() {
-  console.log('\n🔨 Building CSS files...\n');
+  // eslint-disable-next-line no-console
+  console.info('\n🔨 Building CSS files...\n');
 
   const sourceFiles = [
     ...findSourceFiles(join(rootDir, 'styles')),
@@ -158,21 +181,31 @@ async function buildAll() {
   ];
 
   if (sourceFiles.length === 0) {
-    console.log('⚠️  No source CSS files found in styles/source or blocks/*/source directories.\n');
-    console.log('   Expected structure:');
-    console.log('   styles/source/*.css');
-    console.log('   blocks/<block-name>/source/<block-name>.css\n');
+    // eslint-disable-next-line no-console
+    console.warn('⚠️  No source CSS files found in styles/source or blocks/*/source directories.\n');
+    // eslint-disable-next-line no-console
+    console.info('   Expected structure:');
+    // eslint-disable-next-line no-console
+    console.info('   styles/source/*.css');
+    // eslint-disable-next-line no-console
+    console.info('   blocks/<block-name>/source/<block-name>.css\n');
     return { success: 0, failed: 0 };
   }
 
-  console.log(`Found ${sourceFiles.length} source CSS file(s):\n`);
-  sourceFiles.forEach((f) => console.log(`   ${f.replace(rootDir, '.')}`));
-  console.log();
+  // eslint-disable-next-line no-console
+  console.info(`Found ${sourceFiles.length} source CSS file(s):\n`);
+  // eslint-disable-next-line no-console
+  sourceFiles.forEach((f) => console.info(`   ${f.replace(rootDir, '.')}`));
+  // eslint-disable-next-line no-console
+  console.info();
 
   let success = 0;
   let failed = 0;
 
+  // Process files sequentially to avoid overwhelming the system
+  // eslint-disable-next-line no-restricted-syntax
   for (const file of sourceFiles) {
+    // eslint-disable-next-line no-await-in-loop
     const result = await processFile(file);
     if (result) {
       success += 1;
@@ -181,8 +214,10 @@ async function buildAll() {
     }
   }
 
-  console.log('\n✨ CSS build complete!');
-  console.log(`   ✅ ${success} compiled, ❌ ${failed} failed\n`);
+  // eslint-disable-next-line no-console
+  console.info('\n✨ CSS build complete!');
+  // eslint-disable-next-line no-console
+  console.info(`   ✅ ${success} compiled, ❌ ${failed} failed\n`);
 
   return { success, failed };
 }
@@ -191,9 +226,12 @@ async function buildAll() {
  * Watch mode - monitors for CSS file changes
  */
 async function watchMode() {
-  console.log('\n👀 Watching for CSS changes...');
-  console.log('   Monitoring: styles/source/, blocks/*/source/');
-  console.log('   Press Ctrl+C to stop.\n');
+  // eslint-disable-next-line no-console
+  console.info('\n👀 Watching for CSS changes...');
+  // eslint-disable-next-line no-console
+  console.info('   Monitoring: styles/source/, blocks/*/source/');
+  // eslint-disable-next-line no-console
+  console.info('   Press Ctrl+C to stop.\n');
 
   const dirs = [
     join(rootDir, 'styles'),
@@ -233,19 +271,23 @@ async function watchMode() {
 
       // Verify file still exists (might have been deleted)
       if (!existsSync(fullPath)) {
-        console.log(`⚠️  File deleted or moved: ${normalizedFilename}`);
+        // eslint-disable-next-line no-console
+        console.warn(`⚠️  File deleted or moved: ${normalizedFilename}`);
         return;
       }
 
       // Extra guard: skip if file is empty (editor mid-write)
       const content = readFileSync(fullPath, 'utf8');
       if (content.trim().length === 0) {
-        console.log(`⚠️  Skipping empty source file (likely mid-save): ${normalizedFilename}`);
+        // eslint-disable-next-line no-console
+        console.warn(`⚠️  Skipping empty source file (likely mid-save): ${normalizedFilename}`);
         return;
       }
 
-      console.log(`\n🔄 Change detected: ${normalizedFilename}`);
-      console.log('⚙️  Recompiling...\n');
+      // eslint-disable-next-line no-console
+      console.info(`\n🔄 Change detected: ${normalizedFilename}`);
+      // eslint-disable-next-line no-console
+      console.info('⚙️  Recompiling...\n');
       await processFile(fullPath);
     }, DEBOUNCE_MS);
 
@@ -254,9 +296,12 @@ async function watchMode() {
 
   // Create watchers for each directory
   const watchers = [];
+  // eslint-disable-next-line no-restricted-syntax
   for (const dir of dirs) {
     if (!existsSync(dir)) {
+      // eslint-disable-next-line no-console
       console.warn(`⚠️  Directory not found, skipping watch: ${dir}`);
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -265,25 +310,30 @@ async function watchMode() {
         handleChange(dir, filename);
       });
       watchers.push(watcher);
-      console.log(`   Watching: ${dir.replace(rootDir, '.')}`);
+      // eslint-disable-next-line no-console
+      console.info(`   Watching: ${dir.replace(rootDir, '.')}`);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(`❌ Failed to watch ${dir}: ${err.message}`);
     }
   }
 
   if (watchers.length === 0) {
+    // eslint-disable-next-line no-console
     console.error('❌ No directories could be watched. Exiting.');
     process.exit(1);
   }
 
-  console.log();
+  // eslint-disable-next-line no-console
+  console.info();
 
   // Initial build
   await buildAll();
 
   // Handle cleanup
   process.on('SIGINT', () => {
-    console.log('\n\n👋 Stopping CSS watch...');
+    // eslint-disable-next-line no-console
+    console.info('\n\n👋 Stopping CSS watch...');
     watchers.forEach((w) => w.close());
     process.exit(0);
   });
