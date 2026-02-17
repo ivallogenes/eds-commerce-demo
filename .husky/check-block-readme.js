@@ -5,9 +5,9 @@
  * This script is designed to be run as a pre-commit hook via husky
  */
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 // Colors for console output
 const colors = {
@@ -127,8 +127,8 @@ function main() {
   return 0; // Allow the commit
 }
 
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   process.exit(main());
 }
 
-module.exports = { main, checkBlockChanges, checkReadmeExists };
+export { main, checkBlockChanges, checkReadmeExists };

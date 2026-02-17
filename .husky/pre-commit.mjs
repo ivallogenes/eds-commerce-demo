@@ -19,3 +19,17 @@ if (modifiedPartials.length > 0) {
     console.log(output);
     await run('git add component-models.json component-definition.json component-filters.json');
 }
+
+// lint only staged JavaScript files
+const jsFiles = modifiedFiles.filter((file) => file.endsWith('.js') && !file.includes('__dropins__'));
+if (jsFiles.length > 0) {
+    console.log(`Linting ${jsFiles.length} JavaScript files...`);
+    await run(`npx eslint ${jsFiles.join(' ')}`);
+}
+
+// lint only staged CSS files  
+const cssFiles = modifiedFiles.filter((file) => file.endsWith('.css'));
+if (cssFiles.length > 0) {
+    console.log(`Linting ${cssFiles.length} CSS files...`);
+    await run(`npx stylelint ${cssFiles.join(' ')}`);
+}

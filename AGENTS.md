@@ -148,10 +148,29 @@ npm run postinstall                          # REQUIRED: Copies to scripts/__dro
 
 **For detailed JavaScript guidelines:** Use the **building-blocks** skill which includes comprehensive decoration patterns and best practices.
 
-### CSS
+## CSS Development with PostCSS
+
+This project uses PostCSS to enable modern CSS features like nesting while maintaining EDS performance.
+
 - Mobile-first responsive design (breakpoints: 600px/900px/1200px)
 - All selectors scoped to blocks: `.{blockName} .selector`
 - Follow Stylelint standard configuration
+
+**Quick Start:**
+
+```bash
+# Watch mode (recommended for development)
+npm run watch:css    # Auto-compiles on save
+
+# Or build once
+npm run build:css    # Compile all CSS files before committing
+```
+
+**Workflow:**
+
+1. Edit source files in `styles/source/` or `blocks/**/source/`
+2. PostCSS auto-compiles to standard CSS
+3. Commit both source and compiled files
 
 **For detailed CSS guidelines:** Use the **building-blocks** skill which includes comprehensive styling patterns and best practices.
 

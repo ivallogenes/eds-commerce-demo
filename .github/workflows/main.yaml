@@ -6,9 +6,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
-    - name: Use Node.js 20
+      with:
+        fetch-depth: 0  # Needed to get all git history for changed files detection
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v45
+      with:
+        files_yaml: |
+          js:
+            - '**/*.js'
+          css:
+            - '**/*.css'
+
+    - name: Use Node.js 22
       uses: actions/setup-node@v6
       with:
-        node-version: 24
+        node-version: 22
+
     - run: npm ci
-    - run: npm run lint
+
+    - name: Lint JavaScript files
+      if: steps.changed-files.outputs.js_any_changed == 'true'
+      run: npx eslint ${{ steps.changed-files.outputs.js_all_changed_files }}
+
+    - name: Lint CSS files
+      if: steps.changed-files.outputs.css_any_changed == 'true'
+      run: npx stylelint ${{ steps.changed-files.outputs.css_all_changed_files }}
