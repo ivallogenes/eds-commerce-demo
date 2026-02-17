@@ -21,6 +21,15 @@
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ],
+    "*.css": [
+      "stylelint"
+    ],
+    "scripts/__dropins__/**": []
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hlxsites/aem-boilerplate-commerce.git"
@@ -48,6 +57,7 @@
     "postcss-nesting": "^12.0.2",
     "postcss-preset-env": "^9.3.0",
     "stylelint": "17.0.0",
+    "lint-staged": "^15.2.0",
     "stylelint-config-standard": "40.0.0"
   },
   "dependencies": {
