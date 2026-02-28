@@ -12,7 +12,8 @@ header .nav-wrapper {
   width: 100%;
   z-index: 3;
   position: fixed;
-  border-bottom: 1px solid var(--color-neutral-300);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 header nav {
@@ -147,15 +148,18 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 
 /* brand */
 header nav .nav-brand {
-  min-width: 128px;
+  min-width: 111px;
 }
 
 header nav .nav-brand a {
   grid-area: brand;
-  flex-basis: 128px;
-  font: var(--type-headline-1-font);
-  letter-spacing: var(--type-headline-1-letter-spacing);
-  font-weight: bold;
+  flex-basis: 111px;
+  font-family: var(--type-base-font-family);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2.8rem;
+  letter-spacing: 0;
+  color: #1a1a1a;
 }
 
 li.nav-drop img {
@@ -195,6 +199,16 @@ header nav .nav-sections ul > li,
 header nav .nav-sections ul > li > a {
   font: var(--type-body-2-strong-font);
   letter-spacing: var(--type-body-2-strong-letter-spacing);
+}
+
+@media (min-width: 900px) {
+  header nav .nav-sections ul > li,
+  header nav .nav-sections ul > li > a {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2.25rem;
+    color: #1a1a1a;
+  }
 }
 
 header nav .nav-brand a:hover {
@@ -240,8 +254,10 @@ header nav .nav-sections ul > li:empty {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 8px;
     margin: 0;
+    align-items: center;
+    justify-content: center;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li ul {
@@ -339,28 +355,30 @@ header nav .nav-tools {
 }
 
 header nav .nav-tools-wrapper > button {
-  color: var(--color-brand-700);
+  color: #1a1a1a;
   background: transparent;
   padding: 10px;
   border: unset;
   cursor: pointer;
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
+  border-radius: 4px;
 }
 
 header nav .nav-tools button.nav-cart-button {
   background-image: url('../../icons/cart.svg');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 16px 16px;
   position: relative;
 }
 
 header nav .nav-tools button.nav-cart-button[data-count]::after {
   content: attr(data-count);
   position: absolute;
-  top: 0;
-  right: -2px;
-  background-color: var(--color-brand-700);
+  top: -2px;
+  right: -4px;
+  background-color: #53a257;
   color: var(--color-neutral-100);
   border-radius: 50%;
   width: 1.75em;
@@ -375,6 +393,7 @@ header nav .nav-tools button.nav-wishlist-button {
   background-image: url('../../icons/heart.svg');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 16px 16px;
   position: relative;
 }
 
@@ -383,6 +402,7 @@ header nav .nav-tools button.nav-search-button {
   background-image: url('../../icons/search.svg');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 16px 16px;
 }
 
 header .nav-search-panel {
@@ -509,7 +529,11 @@ header .nav-search-input .search_autocomplete .popover-container {
   justify-content: center;
   align-items: center;
   width: auto;
-  min-width: 40px;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #1a1a1a;
 }
 
 .dropdown-wrapper.nav-tools-wrapper .nav-auth-menu-panel {

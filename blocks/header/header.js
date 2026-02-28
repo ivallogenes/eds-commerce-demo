@@ -528,4 +528,11 @@ export default async function decorate(block) {
     () => !isDesktop.matches && toggleMenu(nav, navSections, false),
   );
   renderAuthDropdown(navTools);
+
+  // Reorder tools to match design: Search → Wishlist → Auth → Cart
+  ['.search-wrapper', '.wishlist-wrapper', '.dropdown-wrapper', '.minicart-wrapper']
+    .forEach((selector) => {
+      const el = navTools.querySelector(selector);
+      if (el) navTools.append(el);
+    });
 }
