@@ -1,11 +1,106 @@
 /* stylelint-disable no-empty-source */
 
+:root {
+  --dropin-in-line-alert--warning-background-color: #2196A9;
+  --dropin-in-line-alert--error-background-color: #F44336;
+  --dropin-in-line-alert--success-background-color: #00A63E;
+  --dropin-in-line-alert--info-background-color: #2196A9;
+  --dropin-in-line-alert--warning-border-color: #2196A9;
+  --dropin-in-line-alert--error-border-color: #F44336;
+  --dropin-in-line-alert--success-border-color: #00A63E;
+  --dropin-in-line-alert--info-border-color: #2196A9;
+  --dropin-in-line-alert--warning-color: #fff;
+  --dropin-in-line-alert--error-color: #fff;
+  --dropin-in-line-alert--success-color: #fff;
+  --dropin-in-line-alert--info-color: #fff;
+  --dropin-in-line-alert-border-radius: 6px;
+  --dropin-in-line-alert-padding: 12px 32px;
+  --dropin-in-line-alert-gap: 8px;
+  --dropin-in-line-alert-font-size: 15px;
+  --dropin-in-line-alert-font-weight: 400;
+  --dropin-in-line-alert-title-font-weight: 500;
+  --dropin-in-line-alert-icon-size: 20px;
+}
+
+.dropin-in-line-alert {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
+  padding: 12px 32px;
+  padding: var(--dropin-in-line-alert-padding);
+  border-radius: 6px;
+  border-radius: var(--dropin-in-line-alert-border-radius);
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-size: var(--dropin-in-line-alert-font-size);
+  gap: 8px;
+  gap: var(--dropin-in-line-alert-gap);
+}
+
+.dropin-in-line-alert.dropin-in-line-alert--warning {
+  background-color: #2196A9;
+  background-color: var(--dropin-in-line-alert--warning-background-color);
+  border-color: #2196A9;
+  border-color: var(--dropin-in-line-alert--warning-border-color);
+  color: #fff;
+  color: var(--dropin-in-line-alert--warning-color);
+}
+
+.dropin-in-line-alert.dropin-in-line-alert--error {
+  background-color: #F44336;
+  background-color: var(--dropin-in-line-alert--error-background-color);
+  border-color: #F44336;
+  border-color: var(--dropin-in-line-alert--error-border-color);
+  color: #fff;
+  color: var(--dropin-in-line-alert--error-color);
+}
+
+.dropin-in-line-alert.dropin-in-line-alert--success {
+  background-color: #00A63E;
+  background-color: var(--dropin-in-line-alert--success-background-color);
+  border-color: #00A63E;
+  border-color: var(--dropin-in-line-alert--success-border-color);
+  color: #fff;
+  color: var(--dropin-in-line-alert--success-color);
+}
+
+.dropin-in-line-alert__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  gap: var(--dropin-in-line-alert-gap);
+}
+
+.dropin-in-line-alert__title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropin-in-line-alert__icon {
+  flex-shrink: 0;
+  width: 20px;
+  width: var(--dropin-in-line-alert-icon-size);
+  height: 20px;
+  height: var(--dropin-in-line-alert-icon-size);
+  color: inherit;
+}
+
+.dropin-in-line-alert__title {
+  font-weight: 500;
+  font-weight: var(--dropin-in-line-alert-title-font-weight);
+  line-height: 1.6;
+  color: #fff;
+  color: var(--dropin-in-line-alert--warning-color);
+}
+
 :root,
 .dropin-design {
-  --color-brand-300: #6d6d6d;
-  --color-brand-500: #454545;
-  --color-brand-600: #383838;
-  --color-brand-700: #2b2b2b;
+  --color-brand-300: #5AC35F;
+  --color-brand-500: #53A257;
+  --color-brand-600: #3A7F3E;
+  --color-brand-700: #2B5D2D;
   --color-neutral-50: #fff;
   --color-neutral-100: #fafafa;
   --color-neutral-200: #f5f5f5;
@@ -50,26 +145,27 @@
   --grid-5-columns: 12;
   --grid-5-margins: 0;
   --grid-5-gutters: 24px;
-  --shape-border-radius-1: 3px;
-  --shape-border-radius-2: 8px;
-  --shape-border-radius-3: 24px;
+  --shape-border-radius-1: 2px;
+  --shape-border-radius-2: 4px;
+  --shape-border-radius-3: 6px;
+  --shape-border-radius-4: 10px;
   --shape-border-width-1: 1px;
   --shape-border-width-2: 1.5px;
   --shape-border-width-3: 2px;
   --shape-border-width-4: 4px;
-  --shape-shadow-1: 0 0 16px 0 rgb(0 0 0 / 16%);
-  --shape-shadow-2: 0 2px 16px 0 rgb(0 0 0 / 16%);
-  --shape-shadow-3: 0 2px 3px 0 rgb(0 0 0 / 16%);
+  --shape-shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  --shape-shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -2px rgba(0, 0, 0, 0.10);
+  --shape-shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
   --shape-icon-stroke-1: 1px;
   --shape-icon-stroke-2: 1.5px;
   --shape-icon-stroke-3: 2px;
   --shape-icon-stroke-4: 4px;
   --spacing-xxsmall: 4px;
   --spacing-xsmall: 8px;
-  --spacing-small: 16px;
-  --spacing-medium: 24px;
-  --spacing-big: 32px;
-  --spacing-xbig: 40px;
+  --spacing-small: 12px;
+  --spacing-medium: 16px;
+  --spacing-big: 24px;
+  --spacing-xbig: 32px;
   --spacing-xxbig: 48px;
   --spacing-large: 64px;
   --spacing-xlarge: 72px;
@@ -78,19 +174,19 @@
   --spacing-xhuge: 144px;
   --spacing-xxhuge: 192px;
   --type-base-font-family: adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
-  --type-display-1-font: normal normal 300 6rem/7.2rem var(--type-base-font-family);
+  --type-display-1-font: normal normal 400 6rem/7.2rem var(--type-base-font-family);
   --type-display-1-letter-spacing: 0.04em;
-  --type-display-2-font: normal normal 300 4.8rem/5.6rem var(--type-base-font-family);
+  --type-display-2-font: normal normal 400 4.8rem/5.6rem var(--type-base-font-family);
   --type-display-2-letter-spacing: 0.04em;
-  --type-display-3-font: normal normal 300 3.4rem/4rem var(--type-base-font-family);
+  --type-display-3-font: normal normal 400 3.4rem/4rem var(--type-base-font-family);
   --type-display-3-letter-spacing: 0.04em;
   --type-headline-1-font: normal normal 400 2.4rem/3.2rem var(--type-base-font-family);
   --type-headline-1-letter-spacing: 0.04em;
-  --type-headline-2-default-font: normal normal 300 2rem/2.4rem var(--type-base-font-family);
+  --type-headline-2-default-font: normal normal 500 1.6rem/2.4rem var(--type-base-font-family);
   --type-headline-2-default-letter-spacing: 0.04em;
   --type-headline-2-strong-font: normal normal 700 2rem/2.4rem var(--type-base-font-family);
   --type-headline-2-strong-letter-spacing: 0.04em;
-  --type-body-1-default-font: normal normal 300 1.6rem/2.4rem var(--type-base-font-family);
+  --type-body-1-default-font: normal normal 400 1.6rem/2.4rem var(--type-base-font-family);
   --type-body-1-default-letter-spacing: 0.04em;
   --type-body-1-strong-font: normal normal 700 1.6rem/2.4rem var(--type-base-font-family);
   --type-body-1-strong-letter-spacing: 0.04em;
@@ -103,15 +199,15 @@
   --type-body-2-emphasized-font: normal normal 700 1.4rem/2rem var(--type-base-font-family);
   --type-body-2-emphasized-letter-spacing: 0.04em;
   --type-button-1-font: normal normal 400 2rem/2.6rem var(--type-base-font-family);
-  --type-button-1-letter-spacing: 0.08em;
+  --type-button-1-letter-spacing: 0.06em;
   --type-button-2-font: normal normal 400 1.6rem/2.4rem var(--type-base-font-family);
-  --type-button-2-letter-spacing: 0.08em;
+  --type-button-2-letter-spacing: var(--type-button-1-letter-spacing);
   --type-details-caption-1-font: normal normal 400 1.2rem/1.6rem var(--type-base-font-family);
-  --type-details-caption-1-letter-spacing: 0.08em;
+  --type-details-caption-1-letter-spacing: var(--type-button-1-letter-spacing);
   --type-details-caption-2-font: normal normal 300 1.2rem/1.6rem var(--type-base-font-family);
-  --type-details-caption-2-letter-spacing: 0.08em;
+  --type-details-caption-2-letter-spacing: var(--type-button-1-letter-spacing);
   --type-details-overline-font: normal normal 400 1.2rem/2rem var(--type-base-font-family);
-  --type-details-overline-letter-spacing: 0.16em;
+  --type-details-overline-letter-spacing: var(--type-button-1-letter-spacing);
   --type-fixed-font-family: adobe-clean, "Roboto Mono", menlo, consolas, "Liberation Mono", monospace, system-ui, sans-serif;
   --background-color: var(--color-neutral-50);
   --nav-height: 6.4rem;
@@ -133,7 +229,7 @@ html {
 }
 
 body {
-  font: normal normal 300 1.6rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 400 1.6rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-body-1-default-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-body-1-default-letter-spacing);
@@ -188,21 +284,21 @@ h6 {
 }
 
 h1 {
-  font: normal normal 300 6rem/7.2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 400 6rem/7.2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-display-1-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-display-1-letter-spacing);
 }
 
 h2 {
-  font: normal normal 300 4.8rem/5.6rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 400 4.8rem/5.6rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-display-2-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-display-2-letter-spacing);
 }
 
 h3 {
-  font: normal normal 300 3.4rem/4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 400 3.4rem/4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-display-3-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-display-3-letter-spacing);
@@ -223,7 +319,7 @@ h5 {
 }
 
 h6 {
-  font: normal normal 300 2rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 500 1.6rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-headline-2-default-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-headline-2-default-letter-spacing);
@@ -271,7 +367,7 @@ main pre {
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: 32px 12px;
   margin: var(--spacing-xbig) var(--spacing-small);
 }
 
@@ -294,7 +390,7 @@ a:not(.dropin-design a) {
 }
 
 a:not(.dropin-design a):hover {
-    color: #383838;
+    color: #3A7F3E;
     color: var(--color-brand-600);
     text-decoration: underline;
   }
@@ -303,23 +399,23 @@ main a.button:-moz-any-link {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
-  margin: 16px 0;
+  margin: 12px 0;
   margin: var(--spacing-small) 0;
   border: 2px solid transparent;
   border: var(--shape-border-width-3) solid transparent;
-  border-radius: 24px;
+  border-radius: 6px;
   border-radius: var(--shape-border-radius-3);
   padding: 0.5em 1.2em;
   font: normal normal 400 1.6rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-button-2-font);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   letter-spacing: var(--type-button-2-letter-spacing);
   font-style: normal;
   font-weight: 500;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: #454545;
+  background-color: #53A257;
   background-color: var(--color-brand-500);
   color: #fff;
   color: var(--color-neutral-50);
@@ -334,23 +430,23 @@ button.button {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
-  margin: 16px 0;
+  margin: 12px 0;
   margin: var(--spacing-small) 0;
   border: 2px solid transparent;
   border: var(--shape-border-width-3) solid transparent;
-  border-radius: 24px;
+  border-radius: 6px;
   border-radius: var(--shape-border-radius-3);
   padding: 0.5em 1.2em;
   font: normal normal 400 1.6rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-button-2-font);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   letter-spacing: var(--type-button-2-letter-spacing);
   font-style: normal;
   font-weight: 500;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: #454545;
+  background-color: #53A257;
   background-color: var(--color-brand-500);
   color: #fff;
   color: var(--color-neutral-50);
@@ -361,14 +457,14 @@ button.button {
 }
 
 :is(main a.button:-moz-any-link,button.button):hover, :is(main a.button:-moz-any-link,button.button):focus {
-    background-color: #383838;
+    background-color: #3A7F3E;
     background-color: var(--color-brand-600);
     cursor: pointer;
   }
 
 :is(main a.button:any-link,button.button):hover,
   :is(main a.button:any-link,button.button):focus {
-    background-color: #383838;
+    background-color: #3A7F3E;
     background-color: var(--color-brand-600);
     cursor: pointer;
   }
@@ -401,7 +497,7 @@ button.button {
     background-color: initial;
     border: 2px solid currentcolor;
     border: var(--shape-border-width-3) solid currentcolor;
-    color: #454545;
+    color: #53A257;
     color: var(--color-brand-500);
   }
 
@@ -410,17 +506,17 @@ button.button {
     background-color: initial;
     border: 2px solid currentcolor;
     border: var(--shape-border-width-3) solid currentcolor;
-    color: #454545;
+    color: #53A257;
     color: var(--color-brand-500);
   }
 
 .secondary:is(main a.button:-moz-any-link,button.button):hover {
-      color: #383838;
+      color: #3A7F3E;
       color: var(--color-brand-600);
     }
 
 .secondary:is(main a.button:any-link,button.button):hover {
-      color: #383838;
+      color: #3A7F3E;
       color: var(--color-brand-600);
     }
 
@@ -464,7 +560,7 @@ main img {
   }
 
 main > .section {
-  margin: 40px 0;
+  margin: 32px 0;
   margin: var(--spacing-xbig) 0;
 }
 
@@ -475,7 +571,7 @@ main > .section:empty {
 main > .section > div {
     max-width: 1200px;
     margin: auto;
-    padding: 0 24px;
+    padding: 0 16px;
     padding: 0 var(--spacing-medium);
   }
 
@@ -488,7 +584,7 @@ main > .section.light,
     background-color: #fafafa;
     background-color: var(--color-neutral-100);
     margin: 0;
-    padding: 40px 0;
+    padding: 32px 0;
     padding: var(--spacing-xbig) 0;
   }
 
@@ -503,22 +599,22 @@ main > .section[data-padding="small"] {
   }
 
 main > .section[data-padding="medium"] {
-    padding: 16px 0;
+    padding: 12px 0;
     padding: var(--spacing-small) 0;
   }
 
 main > .section[data-padding="large"] {
-    padding: 24px 0;
+    padding: 16px 0;
     padding: var(--spacing-medium) 0;
   }
 
 main > .section[data-padding="big"] {
-    padding: 32px 0;
+    padding: 24px 0;
     padding: var(--spacing-big) 0;
   }
 
 main > .section[data-padding="xbig"] {
-    padding: 40px 0;
+    padding: 32px 0;
     padding: var(--spacing-xbig) 0;
   }
 
@@ -548,22 +644,22 @@ main > .section[data-margin="small"] {
   }
 
 main > .section[data-margin="medium"] {
-    margin: 16px 0;
+    margin: 12px 0;
     margin: var(--spacing-small) 0;
   }
 
 main > .section[data-margin="large"] {
-    margin: 24px 0;
+    margin: 16px 0;
     margin: var(--spacing-medium) 0;
   }
 
 main > .section[data-margin="big"] {
-    margin: 32px 0;
+    margin: 24px 0;
     margin: var(--spacing-big) 0;
   }
 
 main > .section[data-margin="xbig"] {
-    margin: 40px 0;
+    margin: 32px 0;
     margin: var(--spacing-xbig) 0;
   }
 
@@ -589,7 +685,7 @@ main > .section[data-margin="xxhuge"] {
 
 @media (min-width: 900px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 24px;
     padding: 0 var(--spacing-big);
   }
 }
@@ -608,7 +704,7 @@ body.columns main {
   width: 100%;
   max-width: 1264px;
   margin: 0 auto;
-  padding: 64px 16px;
+  padding: 64px 12px;
   padding: var(--spacing-large) var(--spacing-small);
   box-sizing: border-box;
   gap: 24px;
@@ -645,7 +741,7 @@ body.columns main > .section:empty {
 
 @media (min-width: 600px) {
   body.columns main {
-    padding: 64px 32px;
+    padding: 64px 24px;
     padding: var(--spacing-large) var(--spacing-big);
   }
 }
