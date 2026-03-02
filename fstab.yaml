@@ -1,0 +1,10 @@
+mountpoints:
+  /:
+    url: https://content.da.live/ivallogenes/eds-commerce-demo/
+    type: markup
+
+folders:
+  /products/: /products/default
+  /apparel: /categories/default
+
+  # TODO: Use 'content overlay' instead of folder mappin.
