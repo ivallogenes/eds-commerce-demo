@@ -1,0 +1,259 @@
+.section.banner-container {
+  margin: 0;
+}
+
+.banner-container {
+  max-width: none;
+  padding: 0;
+}
+
+.banner-container .banner-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+main .banner {
+  padding: var(--spacing-huge) var(--spacing-medium);
+  padding-top: var(--spacing-xxbig);
+  background-image: linear-gradient(155.67deg, rgb(83 162 87 / 10%) 0%, rgb(232 245 233 / 20%) 50%, rgb(83 162 87 / 5%) 100%);
+}
+
+main .banner .banner__inner {
+    display: grid;
+    grid-gap: var(--spacing-xxbig);
+    gap: var(--spacing-xxbig);
+    align-items: center;
+    max-width: 124rem;
+    margin: 0 auto;
+  }
+
+main .banner .banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-big);
+    color: #1a1a1a;
+    text-align: left;
+  }
+
+main .banner .banner__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0.4rem 1.6rem;
+    border-radius: 999px;
+    background-color: rgb(83 162 87 / 10%);
+    color: var(--color-brand-500);
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+  }
+
+main .banner .banner__heading {
+    max-width: 64rem;
+    margin: 0;
+    color: #1a1a1a;
+    font: var(--type-display-3-font);
+    letter-spacing: var(--type-display-3-letter-spacing);
+    line-height: 1.1;
+  }
+
+main .banner .banner__description {
+    max-width: 64rem;
+    margin: 0;
+    color: #757575;
+    font-size: 1.8rem;
+    line-height: 1.56;
+  }
+
+main .banner .banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-medium);
+  }
+
+main .banner .banner__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 4rem;
+    padding: 0 2.4rem;
+    border: var(--shape-border-width-1) solid transparent;
+    border-radius: var(--shape-border-radius-2);
+    font: var(--type-body-1-strong-font);
+    letter-spacing: var(--type-body-1-strong-letter-spacing);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+main .banner .banner__button--primary {
+    background-color: var(--color-brand-500);
+    color: var(--color-neutral-50);
+  }
+
+main .banner .banner__button--primary:hover,
+    main .banner .banner__button--primary:focus-visible {
+      background-color: var(--color-button-hover);
+      color: var(--color-neutral-50);
+      text-decoration: none;
+    }
+
+main .banner .banner__button--secondary {
+    border-color: var(--color-neutral-400);
+    background-color: var(--color-neutral-50);
+    color: #1a1a1a;
+  }
+
+main .banner .banner__button--secondary:hover,
+    main .banner .banner__button--secondary:focus-visible {
+      border-color: var(--color-neutral-600);
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+main .banner .banner__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-medium);
+  }
+
+main .banner .banner__metric {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xxsmall);
+  }
+
+main .banner .banner__metric-value {
+    margin: 0;
+    color: #1a1a1a;
+    font: var(--type-headline-2-strong-font);
+    letter-spacing: var(--type-headline-2-strong-letter-spacing);
+  }
+
+main .banner .banner__metric-label {
+    margin: 0;
+    color: #757575;
+    font: var(--type-body-2-default-font);
+    letter-spacing: var(--type-body-2-default-letter-spacing);
+  }
+
+main .banner .banner__metric-divider {
+    display: none;
+    inline-size: 1px;
+    block-size: 4.8rem;
+    background-color: var(--color-neutral-400);
+  }
+
+main .banner .banner__metric-stars {
+    margin: 0;
+    color: #f0b100;
+    font-size: 1.6rem;
+    letter-spacing: 0.2rem;
+    line-height: 1;
+  }
+
+main .banner .banner__media {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-width: 0;
+  }
+
+main .banner .banner__image-frame {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.6rem;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
+    background-color: var(--color-neutral-50);
+  }
+
+main .banner .banner__image-frame picture,
+    main .banner .banner__image-frame img {
+      display: block;
+      width: 100%;
+    }
+
+main .banner .banner__image-frame img {
+      aspect-ratio: 1 / 1;
+      -o-object-fit: cover;
+         object-fit: cover;
+    }
+
+main .banner .banner__trend-card {
+    position: absolute;
+    left: -2.4rem;
+    bottom: -2.4rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    min-width: 16.8rem;
+    padding: var(--spacing-medium);
+    border-radius: var(--shape-border-radius-3);
+    background-color: var(--color-neutral-50);
+    box-shadow: var(--shape-shadow-3);
+  }
+
+main .banner .banner__trend-icon {
+    flex-shrink: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--color-brand-500);
+  }
+
+main .banner .banner__trend-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+main .banner .banner__trend-eyebrow,
+  main .banner .banner__trend-title {
+    margin: 0;
+  }
+
+main .banner .banner__trend-eyebrow {
+    color: #757575;
+    font: var(--type-body-2-default-font);
+    letter-spacing: var(--type-body-2-default-letter-spacing);
+  }
+
+main .banner .banner__trend-title {
+    color: #1a1a1a;
+    font: var(--type-body-1-strong-font);
+    letter-spacing: var(--type-body-1-strong-letter-spacing);
+  }
+
+@media (min-width: 600px) {
+    main .banner .banner__metrics {
+      gap: var(--spacing-big);
+    }
+
+    main .banner .banner__metric-divider {
+      display: block;
+    }
+  }
+
+@media (min-width: 900px) {
+
+main .banner {
+    padding-top: var(--spacing-huge);
+}
+
+    main .banner .banner__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 72.8rem);
+      gap: 4.8rem;
+    }
+
+    main .banner .banner__heading {
+      max-width: 63.9rem;
+      font: var(--type-display-1-font);
+      line-height: 1;
+    }
+
+    main .banner .banner__description {
+      max-width: 64.2rem;
+    }
+  }
