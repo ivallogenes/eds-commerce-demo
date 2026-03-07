@@ -33,7 +33,7 @@ function renderSignIn(element) {
   })(element);
 }
 
-export function renderAuthDropdown(navTools) {
+export function renderAuthDropdown(navTools, overlay, onPanelStateChange = () => {}) {
   const dropdownElement = document.createRange().createContextualFragment(`
  <div class="dropdown-wrapper nav-tools-wrapper">
     <button type="button" class="nav-dropdown-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="login-modal"></button>
@@ -69,6 +69,7 @@ export function renderAuthDropdown(navTools) {
     authDropDownPanel.setAttribute('aria-labelledby', 'modal-title');
     authDropDownPanel.setAttribute('aria-describedby', 'modal-description');
     authDropDownPanel.focus();
+    onPanelStateChange(show, authDropDownPanel, overlay);
   }
 
   loginButton.addEventListener('click', () => toggleDropDownAuthMenu());

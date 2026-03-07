@@ -18,6 +18,26 @@ const overlay = document.createElement('div');
 overlay.classList.add('overlay');
 document.querySelector('header').insertAdjacentElement('afterbegin', overlay);
 
+function syncOverlayVisibility() {
+  const nav = document.getElementById('nav');
+  const navSections = nav?.querySelector('.nav-sections');
+  const hasExpandedDesktopSection = isDesktop.matches
+    && !!navSections?.querySelector('[aria-expanded="true"]');
+  const isMobileNavActive = !isDesktop.matches
+    && document.querySelector('.nav-wrapper')?.classList.contains('active');
+  const isSearchOpen = document.querySelector('.nav-search-panel')
+    ?.classList.contains('nav-tools-panel--show');
+  const isMiniCartOpen = document.querySelector('.minicart-panel')
+    ?.classList.contains('nav-tools-panel--show');
+  const isAuthMenuOpen = document.querySelector('.nav-auth-menu-panel')
+    ?.classList.contains('nav-tools-panel--show');
+
+  overlay.classList.toggle(
+    'show',
+    hasExpandedDesktopSection || isMobileNavActive || isSearchOpen || isMiniCartOpen || isAuthMenuOpen,
+  );
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -25,14 +45,14 @@ function closeOnEscape(e) {
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
       toggleAllNavSections(navSections);
-      overlay.classList.remove('show');
+      syncOverlayVisibility();
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
       toggleMenu(nav, navSections);
-      overlay.classList.remove('show');
       nav.querySelector('button').focus();
       const navWrapper = document.querySelector('.nav-wrapper');
       navWrapper.classList.remove('active');
+      syncOverlayVisibility();
     }
   }
 }
@@ -44,9 +64,10 @@ function closeOnFocusLost(e) {
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
       toggleAllNavSections(navSections, false);
-      overlay.classList.remove('show');
+      syncOverlayVisibility();
     } else if (!isDesktop.matches) {
       toggleMenu(nav, navSections, true);
+      syncOverlayVisibility();
     }
   }
 }
@@ -198,11 +219,11 @@ export default async function decorate(block) {
           toggleAllNavSections(navSections);
           if (isDesktop.matches) {
             if (!navSection.classList.contains('nav-drop')) {
-              overlay.classList.remove('show');
+              syncOverlayVisibility();
               return;
             }
             navSection.setAttribute('aria-expanded', 'true');
-            overlay.classList.add('show');
+            syncOverlayVisibility();
           }
         });
       });
@@ -298,6 +319,14 @@ export default async function decorate(block) {
     panel.classList.toggle('nav-tools-panel--show', show);
   }
 
+  function closeOtherNavToolPanels(activePanel) {
+    navTools.querySelectorAll('.nav-tools-panel--show').forEach((panel) => {
+      if (panel !== activePanel) {
+        panel.classList.remove('nav-tools-panel--show');
+      }
+    });
+  }
+
   // Lazy loading for mini cart fragment
   async function loadMiniCartFragment() {
     await withLoadingState(minicartPanel, cartButton, async () => {
@@ -316,6 +345,7 @@ export default async function decorate(block) {
     }
 
     togglePanel(minicartPanel, state);
+    syncOverlayVisibility();
   }
 
   cartButton.addEventListener('click', () => toggleMiniCart(!minicartPanel.classList.contains('nav-tools-panel--show')));
@@ -354,6 +384,8 @@ export default async function decorate(block) {
     const pageSize = 4;
 
     if (state) {
+      closeOtherNavToolPanels(searchPanel);
+
       await withLoadingState(searchPanel, searchButton, async () => {
         await import('../../scripts/initializers/search.js');
 
@@ -447,23 +479,32 @@ export default async function decorate(block) {
           },
         })(searchForm);
       });
+      togglePanel(searchPanel, state);
+      searchForm?.querySelector('input')?.focus();
+    } else {
+      togglePanel(searchPanel, state);
     }
 
-    togglePanel(searchPanel, state);
-    if (state) searchForm?.querySelector('input')?.focus();
+    syncOverlayVisibility();
   }
 
-  searchButton.addEventListener('click', () => toggleSearch(!searchPanel.classList.contains('nav-tools-panel--show')));
+  searchButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleSearch(!searchPanel.classList.contains('nav-tools-panel--show'));
+  });
 
   navTools.querySelector('.nav-search-button').addEventListener('click', () => {
     if (isDesktop.matches) {
       toggleAllNavSections(navSections);
-      overlay.classList.remove('show');
     }
   });
 
   // Close panels when clicking outside
   document.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-tools-panel')) {
+      return;
+    }
+
     // Check if undo is enabled for mini cart
     const miniCartElement = document.querySelector(
       '[data-block-name="commerce-mini-cart"]',
@@ -488,6 +529,18 @@ export default async function decorate(block) {
     }
   });
 
+  // Close panels when clicking on overlay
+  overlay.addEventListener('click', () => {
+    toggleSearch(false);
+    toggleMiniCart(false);
+    // Close auth menu if open
+    const authMenuPanel = document.querySelector('.nav-auth-menu-panel');
+    if (authMenuPanel?.classList.contains('nav-tools-panel--show')) {
+      authMenuPanel.classList.remove('nav-tools-panel--show');
+    }
+    syncOverlayVisibility();
+  });
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
@@ -496,13 +549,20 @@ export default async function decorate(block) {
   navWrapper.addEventListener('mouseout', (e) => {
     if (isDesktop.matches && !nav.contains(e.relatedTarget)) {
       toggleAllNavSections(navSections);
-      overlay.classList.remove('show');
+      syncOverlayVisibility();
     }
   });
 
   window.addEventListener('resize', () => {
     navWrapper.classList.remove('active');
-    overlay.classList.remove('show');
+    toggleSearch(false);
+    toggleMiniCart(false);
+    // Close auth menu if open
+    const authMenuPanel = document.querySelector('.nav-auth-menu-panel');
+    if (authMenuPanel) {
+      authMenuPanel.classList.remove('nav-tools-panel--show');
+    }
+    syncOverlayVisibility();
     toggleMenu(nav, navSections, false);
   });
 
@@ -513,9 +573,13 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => {
-    navWrapper.classList.toggle('active');
-    overlay.classList.toggle('show');
+    const isActive = navWrapper.classList.toggle('active');
     toggleMenu(nav, navSections);
+
+    if (isActive) {
+    }
+
+    syncOverlayVisibility();
   });
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
@@ -527,7 +591,7 @@ export default async function decorate(block) {
     navSections,
     () => !isDesktop.matches && toggleMenu(nav, navSections, false),
   );
-  renderAuthDropdown(navTools);
+  renderAuthDropdown(navTools, overlay, syncOverlayVisibility);
 
   // Reorder tools to match design: Search → Wishlist → Auth → Cart
   ['.search-wrapper', '.wishlist-wrapper', '.dropdown-wrapper', '.minicart-wrapper']

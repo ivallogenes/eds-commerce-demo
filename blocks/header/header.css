@@ -13,7 +13,13 @@ header .nav-wrapper {
   z-index: 3;
   position: fixed;
   border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shape-shadow-2);
+}
+
+header .header {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 header nav {
@@ -25,7 +31,7 @@ header nav {
   align-items: center;
   gap: 0 16px;
   margin: auto;
-  max-width: 1248px;
+  max-width: var(--layout-content-max-width);
   height: var(--nav-height);
   padding: 0 16px;
   font-family: var(--type-base-font-family);
@@ -49,7 +55,7 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
+    max-width: var(--layout-content-max-width);
     padding: 0 32px;
   }
 
@@ -70,6 +76,7 @@ header nav .nav-hamburger {
   height: 22px;
   display: flex;
   align-items: center;
+  padding-right: 12px;
 }
 
 header nav .nav-hamburger button {
@@ -146,14 +153,10 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand */
-header nav .nav-brand {
-  min-width: 111px;
-}
-
+/* Header logo section */
 header nav .nav-brand a {
   grid-area: brand;
-  flex-basis: 111px;
+  flex-basis: auto;
   font-family: var(--type-base-font-family);
   font-size: 2rem;
   font-weight: 600;
@@ -162,16 +165,16 @@ header nav .nav-brand a {
   color: #1a1a1a;
 }
 
+header nav .nav-brand img {
+  width: 65px;
+  height: auto;
+}
+
 li.nav-drop img {
   max-width: var(--desktop-item-panel-max-width);
   width: 100%;
   height: auto;
   object-fit: contain;
-}
-
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
 }
 
 /* sections */
@@ -220,7 +223,7 @@ header nav .nav-sections ul > li ul {
 }
 
 header nav .nav-sections ul > li ul > li {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 header nav .nav-sections ul > li:empty {
@@ -245,11 +248,17 @@ header nav .nav-sections ul > li:empty {
   header nav .nav-sections .default-content-wrapper > ul > li,
   header nav .nav-sections .nav-drop {
     border-radius: 4px;
-    padding: 0 var(--spacing-small);
+    padding: var(--spacing-small);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li a {
     text-decoration: none;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li a:hover {
+    color: var(--color-neutral-800);
   }
 
   header nav .nav-sections ul {
@@ -263,6 +272,8 @@ header nav .nav-sections ul > li:empty {
   header nav .nav-sections .default-content-wrapper > ul > li ul {
     display: none;
     position: relative;
+    align-items: start;
+    justify-content: start;
   }
 
   header nav .nav-sections .nav-drop[aria-expanded='true'] ul {
@@ -286,6 +297,31 @@ header nav .nav-sections ul > li:empty {
     position: absolute;
     top: var(--spacing-large);
     width: 100%;
+  }
+
+  header nav .nav-sections .nav-drop .submenu-wrapper ul > li {
+    position: relative;
+    display: block;
+  }
+
+  header nav .nav-sections .nav-drop .submenu-wrapper ul > li::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      left: -2px;
+      height: 100%;
+      background-color: var(--color-brand-500);
+      transition: transform 0.3s ease;
+  }
+
+  header nav .nav-sections .nav-drop .submenu-wrapper ul > li:hover::before {
+    width: 2px;
+    left: 0;
+  }
+
+  header nav .nav-sections .nav-drop .submenu-wrapper ul > li:hover a {
+    padding-left: 6px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li .submenu-header {
@@ -386,8 +422,8 @@ header nav .nav-tools button.nav-cart-button[data-count]::after {
   background-color: #53a257;
   color: var(--color-neutral-100);
   border-radius: 50%;
-  width: 1.75em;
-  height: 1.75em;
+  width: 1.65em;
+  height: 1.65em;
   display: flex;
   align-items: center;
   font-size: 0.8em;
@@ -789,7 +825,7 @@ li
 }
 
 .product-discovery--search-bar-results__outer-container .product-discovery--search-bar-results__grid {
-  box-shadow: 2px 2px 2px lightgray;
+  box-shadow: var(--shape-shadow-2);
   border: 1px solid lightgray;
 }
 
