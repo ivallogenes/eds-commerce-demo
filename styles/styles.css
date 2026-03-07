@@ -174,13 +174,13 @@
   --spacing-xhuge: 144px;
   --spacing-xxhuge: 192px;
   --type-base-font-family: adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
-  --type-display-1-font: normal normal 400 6rem/7.2rem var(--type-base-font-family);
+  --type-display-1-font: normal normal 700 6rem/7.2rem var(--type-base-font-family);
   --type-display-1-letter-spacing: 0.04em;
-  --type-display-2-font: normal normal 400 4.8rem/5.6rem var(--type-base-font-family);
+  --type-display-2-font: normal normal 700 4.8rem/5.6rem var(--type-base-font-family);
   --type-display-2-letter-spacing: 0.04em;
-  --type-display-3-font: normal normal 400 3.4rem/4rem var(--type-base-font-family);
+  --type-display-3-font: normal normal 500 3.4rem/4rem var(--type-base-font-family);
   --type-display-3-letter-spacing: 0.04em;
-  --type-headline-1-font: normal normal 400 2.4rem/3.2rem var(--type-base-font-family);
+  --type-headline-1-font: normal normal 500 2.4rem/3.2rem var(--type-base-font-family);
   --type-headline-1-letter-spacing: 0.04em;
   --type-headline-2-default-font: normal normal 500 1.6rem/2.4rem var(--type-base-font-family);
   --type-headline-2-default-letter-spacing: 0.04em;
@@ -287,28 +287,28 @@ h6 {
 }
 
 h1 {
-  font: normal normal 400 6rem/7.2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 700 6rem/7.2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-display-1-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-display-1-letter-spacing);
 }
 
 h2 {
-  font: normal normal 400 4.8rem/5.6rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 700 4.8rem/5.6rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-display-2-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-display-2-letter-spacing);
 }
 
 h3 {
-  font: normal normal 400 3.4rem/4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 500 3.4rem/4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-display-3-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-display-3-letter-spacing);
 }
 
 h4 {
-  font: normal normal 400 2.4rem/3.2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: normal normal 500 2.4rem/3.2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-headline-1-font);
   letter-spacing: 0.04em;
   letter-spacing: var(--type-headline-1-letter-spacing);
