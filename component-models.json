@@ -229,7 +229,7 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "columns-two",
     "fields": [
       {
         "component": "number",
@@ -237,6 +237,38 @@
         "name": "columns",
         "label": "Number of Columns",
         "value": 2,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-three",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 3,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-four",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 4,
         "validation": {
           "numberMin": 1,
           "numberMax": 6

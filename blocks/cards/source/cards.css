@@ -1,47 +1,49 @@
-
-  .cards-container .cards-wrapper {
+.cards-container {
+  .cards-wrapper {
     margin-top: var(--spacing-xbig);
-  }
 
-.cards-container .cards-wrapper .cards > ul {
+    .cards > ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-      grid-gap: var(--spacing-medium);
       gap: var(--spacing-medium);
-    }
 
-.cards-container .cards-wrapper .cards > ul > li {
+      > li {
         border: var(--border-default);
         border-radius: var(--shape-border-radius-4);
         background-color: var(--background-color);
         overflow: hidden;
         transition: all 0.2s ease-out;
-      }
 
-.cards-container .cards-wrapper .cards > ul > li:hover {
+        &:hover {
           box-shadow: var(--shape-shadow-3);
         }
+      }
+    }
 
-.cards-container .cards-wrapper .cards .cards-card-body {
+    .cards .cards-card-body {
       margin: var(--spacing-small);
     }
 
-.cards-container .cards-wrapper .cards .cards-card-image {
+    .cards .cards-card-image {
       line-height: 0;
     }
 
-.cards-container .cards-wrapper .cards > ul > li img {
+    .cards > ul > li img {
       width: 100%;
       aspect-ratio: 4 / 3;
-      -o-object-fit: cover;
-         object-fit: cover;
+      object-fit: cover;
     }
+  }
+}
 
+/* Desktop only styles */
 @media (min-width: 900px) {
-    .cards-container .cards-wrapper {
+  .cards-container {
+    .cards-wrapper {
 
     }
+  }
 }

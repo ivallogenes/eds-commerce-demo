@@ -1,15 +1,43 @@
 {
   "definitions": [
     {
-      "title": "Columns",
-      "id": "columns",
-      "model": "columns",
+      "title": "Two columns",
+      "id": "columns-two",
+      "model": "columns-two",
       "filter": "columns",
       "plugins": {
         "da": {
           "name": "columns",
           "rows": 1,
           "columns": 2,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Three columns",
+      "id": "columns-three",
+      "model": "columns-three",
+      "filter": "columns",
+      "plugins": {
+        "da": {
+          "name": "columns",
+          "rows": 1,
+          "columns": 3,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Four columns",
+      "id": "columns-four",
+      "model": "columns-four",
+      "filter": "columns",
+      "plugins": {
+        "da": {
+          "name": "columns",
+          "rows": 1,
+          "columns": 4,
           "behaviour": "columns"
         }
       }
@@ -41,7 +69,7 @@
   ],
   "models": [
     {
-      "id": "columns",
+      "id": "columns-two",
       "fields": [
         {
           "component": "number",
@@ -49,6 +77,38 @@
           "name": "columns",
           "label": "Number of Columns",
           "value": 2,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "columns-three",
+      "fields": [
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 3,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "columns-four",
+      "fields": [
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 4,
           "validation": {
             "numberMin": 1,
             "numberMax": 6

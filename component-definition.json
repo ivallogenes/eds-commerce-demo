@@ -157,15 +157,43 @@
           }
         },
         {
-          "title": "Columns",
-          "id": "columns",
-          "model": "columns",
+          "title": "Two columns",
+          "id": "columns-two",
+          "model": "columns-two",
           "filter": "columns",
           "plugins": {
             "da": {
               "name": "columns",
               "rows": 1,
               "columns": 2,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Three columns",
+          "id": "columns-three",
+          "model": "columns-three",
+          "filter": "columns",
+          "plugins": {
+            "da": {
+              "name": "columns",
+              "rows": 1,
+              "columns": 3,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Four columns",
+          "id": "columns-four",
+          "model": "columns-four",
+          "filter": "columns",
+          "plugins": {
+            "da": {
+              "name": "columns",
+              "rows": 1,
+              "columns": 4,
               "behaviour": "columns"
             }
           }
