@@ -1,6 +1,8 @@
-# Edge Delivery Services + Adobe Commerce Boilerplate
+# Edge Delivery Services + Adobe Commerce Demo Storefront
 
-This project boilerplate is for Edge Delivery Services projects that integrate with Adobe Commerce.
+Adobe Edge Delivery Services demo project that integrates with Adobe Commerce.
+
+This project uses the Document Authoring (DA) tool as the content management system.
 
 ### Live Site: [https://main--eds-commerce-demo--ivallogenes.aem.live](https://main--eds-commerce-demo--ivallogenes.aem.live)
 
