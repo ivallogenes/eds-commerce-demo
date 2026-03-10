@@ -5,7 +5,7 @@
  * These styles will be included in the critical CSS and loaded with the initial page load
  * For non-critical styles that can be loaded post LCP, add them to lazy-styles.css
  */
-@import url('./alerts-overrides.css');
+/* @import url('./custom.css'); */
 
 /* Design Tokens */
 :root,
@@ -92,7 +92,7 @@
   --type-display-1-letter-spacing: 0.04em;
   --type-display-2-font: normal normal 700 4.8rem/5.6rem var(--type-base-font-family);
   --type-display-2-letter-spacing: 0.04em;
-  --type-display-3-font: normal normal 500 3.4rem/4rem var(--type-base-font-family);
+  --type-display-3-font: normal normal 700 3.4rem/4rem var(--type-base-font-family);
   --type-display-3-letter-spacing: 0.04em;
   --type-headline-1-font: normal normal 500 2.4rem/3.2rem var(--type-base-font-family);
   --type-headline-1-letter-spacing: 0.04em;
@@ -386,7 +386,7 @@ main img {
 
 /* Sections */
 main > .section {
-  margin: var(--spacing-xbig) 0;
+  margin: var(--spacing-xbig) auto;
 
   &:empty {
     display: none;

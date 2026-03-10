@@ -1,0 +1,61 @@
+.shipping-infos {
+    --icon-background: rgba(83, 162, 87, 0.10);
+}
+
+.section.shipping-infos {
+    max-width: var(--layout-content-max-width);
+    padding: var(--spacing-xbig) 0;
+
+    .columns-wrapper {
+        .columns-4-cols {
+            > div {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-big);
+
+                > div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--spacing-small);
+
+                    img {
+                        width: 48px;
+                        background: var(--icon-background);
+                        padding: 24px;
+                        border-radius: 50%;
+                    }
+
+                    > p {
+                        margin-top: 0;
+                        margin-bottom: 0;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Desktop only styles */
+@media (width >= 900px) {
+    .section.shipping-infos {
+        padding: var(--spacing-xxbig) 0;
+
+        .columns-wrapper {
+            .columns-4-cols {
+                > div {
+                    display: flex;
+
+                    > div {
+                        gap: var(--spacing-medium);
+
+                        img {
+                            width: 64px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

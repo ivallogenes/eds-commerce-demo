@@ -4,6 +4,10 @@ This project boilerplate is for Edge Delivery Services projects that integrate w
 
 ### Live Site: [https://main--eds-commerce-demo--ivallogenes.aem.live](https://main--eds-commerce-demo--ivallogenes.aem.live)
 
+### Figma Design mockups: [https://www.figma.com/design/hl9x14ZQFTGKn7rEyUwLyQ/EDS-for-Commerce-Demo](https://www.figma.com/design/hl9x14ZQFTGKn7rEyUwLyQ/EDS-for-Commerce-Demo)
+
+### Icons from [Lucide](https://lucide.dev/)
+
 ## Documentation
 
 Before using the boilerplate, we recommend you to go through the documentation on <https://experienceleague.adobe.com/developer/commerce/storefront/> and more specifically:

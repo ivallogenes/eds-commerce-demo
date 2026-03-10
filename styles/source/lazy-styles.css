@@ -13,3 +13,5 @@
 /* Add global styles that can be loaded post LCP here */
 
 /* Example: Additional utility classes, animations, etc. */
+@import url('./_alerts-overrides.css');
+@import url('./_shipping-infos.css');
