@@ -223,6 +223,17 @@
           }
         },
         {
+          "title": "Contact Form",
+          "id": "contact-form",
+          "model": "contact-form",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 1
+            }
+          }
+        },
+        {
           "title": "Fragment",
           "id": "fragment",
           "model": "fragment",
@@ -240,6 +251,17 @@
                   "selector": "div>div>p>a"
                 }
               ]
+            }
+          }
+        },
+        {
+          "title": "Newsletter Signup",
+          "id": "newsletter-subscribe",
+          "model": "newsletter-subscribe",
+          "plugins": {
+            "da": {
+              "rows": 1,
+              "columns": 1
             }
           }
         },

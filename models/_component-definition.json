@@ -38,7 +38,13 @@
           "...": "../blocks/columns/_*.json#/definitions"
         },
         {
+          "...": "../blocks/contact-form/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/fragment/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/newsletter-subscribe/_*.json#/definitions"
         },
         {
           "...": "../blocks/hero/_*.json#/definitions"
