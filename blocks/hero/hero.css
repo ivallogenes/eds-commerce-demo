@@ -10,9 +10,7 @@
 }
 
 .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 48px;
   color: var(--background-color);
 }
 
@@ -30,8 +28,22 @@
   height: 100%;
 }
 
+.simple-white .hero p {
+  color: white;
+  font-size: 18px;
+}
+
 @media (min-width: 900px) {
   .hero {
     padding: 40px 32px;
+  }
+
+  .hero h1 {
+    font-size: 60px;
+  }
+
+  .simple-white .hero p {
+    text-align: left;
+    max-width: 50%;
   }
 }

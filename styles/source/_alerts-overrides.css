@@ -77,7 +77,9 @@
   gap: 8px;
 }
 
-/* Icon sizing */
+/* Icon */
+/* TODO: replace default system message icons with the new design system
+and standartize all messages across the app (cart, contact form, etc.) */
 .dropin-in-line-alert__icon {
   flex-shrink: 0;
   width: var(--dropin-in-line-alert-icon-size);
