@@ -41,6 +41,9 @@
           "...": "../blocks/contact-form/_*.json#/definitions"
         },
         {
+          "...": "../blocks/store-locator/_*.json#/definitions"
+        },
+        {
           "...": "../blocks/fragment/_*.json#/definitions"
         },
         {

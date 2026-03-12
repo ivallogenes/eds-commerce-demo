@@ -335,6 +335,18 @@
     ]
   },
   {
+    "id": "store-locator",
+    "fields": [
+      {
+        "component": "text",
+        "name": "address",
+        "label": "Address",
+        "required": true,
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "targeted-block",
     "fields": [
       {

@@ -234,6 +234,16 @@
           }
         },
         {
+          "title": "Store Locator",
+          "id": "store-locator",
+          "model": "store-locator",
+          "plugins": {
+            "da": {
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
           "title": "Fragment",
           "id": "fragment",
           "model": "fragment",
