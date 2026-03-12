@@ -1,0 +1,29 @@
+{
+  "definitions": [
+    {
+      "title": "Store Locator",
+      "id": "store-locator",
+      "model": "store-locator",
+      "plugins": {
+        "da": {
+          "type": "key-value-block"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "store-locator",
+      "fields": [
+        {
+          "component": "text",
+          "name": "address",
+          "label": "Address",
+          "required": true,
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

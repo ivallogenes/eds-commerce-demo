@@ -1,0 +1,59 @@
+main .store-locator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-big);
+  inline-size: 100%;
+}
+
+main .store-locator .store-locator__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-big);
+}
+
+main .store-locator .store-locator__heading {
+  margin: 0;
+  color: var(--color-neutral-900);
+  font: var(--type-display-3-font);
+  letter-spacing: var(--type-display-3-letter-spacing);
+}
+
+main .store-locator .store-locator__map-shell {
+  overflow: hidden;
+  border: var(--border-default);
+  border-radius: var(--shape-border-radius-3);
+  background-color: var(--color-neutral-200);
+}
+
+main .store-locator .store-locator__map-canvas {
+  display: flex;
+  min-block-size: 32rem;
+}
+
+main .store-locator .store-locator__map-frame {
+  inline-size: 100%;
+  min-block-size: 32rem;
+  border: 0;
+}
+
+main .store-locator .store-locator__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: 32rem;
+  margin: 0;
+  padding: var(--spacing-big);
+  color: var(--color-neutral-700);
+  font: var(--type-body-1-default-font);
+  letter-spacing: var(--type-body-1-default-letter-spacing);
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  main .store-locator .store-locator__map-canvas,
+  main .store-locator .store-locator__map-frame,
+  main .store-locator .store-locator__fallback {
+    min-block-size: 40.8rem;
+  }
+}
