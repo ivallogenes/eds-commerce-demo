@@ -34,6 +34,10 @@
                         text-align: center;
                     }
 
+.section.shipping-infos .columns-wrapper .columns-4-cols > div > div > p a, .section.shipping-infos .columns-wrapper .columns-3-cols > div > div > p a {
+                            color: var(--color-brand-500);
+                        }
+
 .section.shipping-infos.contact-page-top .columns-wrapper .columns-3-cols > div > div {
             gap: var(--spacing-xxsmall);
             border: var(--border-default);

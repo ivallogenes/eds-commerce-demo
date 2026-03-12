@@ -1,14 +1,34 @@
-.accordion details {
-    border: 1px solid #dadada;
+.section.accordion-container {
+    max-width: 860px;
+    margin: var(--spacing-xlarge) auto;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.accordion details + details {
-    margin-top: 24px;
+.section.accordion-container .default-content-wrapper {
+    text-align: center;
+}
+
+.accordion.block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.accordion details {
+    border: var(--border-default);
+    border-radius: var(--shape-border-radius-2);
+    box-shadow: var(--shape-shadow-1);
 }
 
 .accordion details p {
-    margin-bottom: 0.8em;
+    margin: 0;
+    padding: var(--spacing-small) 0;
+    font-weight: 500;
+}
+
+.accordion details summary p + p {
+    padding-top: 0;
 }
 
 .accordion details summary {
@@ -18,16 +38,17 @@
     cursor: pointer;
     list-style: none;
     overflow: auto;
+    background-color: rgba(245, 245, 245, 0.3);
     transition: background-color 0.2s;
 }
 
 .accordion details[open] summary {
-    background-color: var(--light-color);
+    background-color: rgba(245, 245, 245, 0.3);
 }
 
 .accordion details summary:focus,
 .accordion details summary:hover {
-    background-color: var(--light-color);
+    background-color: rgba(83, 162, 87, 0.10);
 }
 
 .accordion details summary::-webkit-details-marker {
@@ -56,6 +77,15 @@
 }
 
 .accordion details[open] .accordion-item-body {
-    border-top: 1px solid #dadada;
+    border-top: var(--border-default);
     background-color: var(--background-color);
+    border-radius: 0 0 var(--shape-border-radius-2) var(--shape-border-radius-2);
+}
+
+.accordion details[open] .accordion-item-body p {
+    font-weight: 400;
+}
+
+.accordion details[open] .accordion-item-body a {
+    color: var(--color-brand-500);
 }
