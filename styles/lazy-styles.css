@@ -99,7 +99,7 @@
 
 .section.shipping-infos {
     max-width: var(--layout-content-max-width);
-    padding: var(--spacing-xbig) 0;
+    padding: 0;
 }
 
 .section.shipping-infos .columns-wrapper .columns-4-cols > div, .section.shipping-infos .columns-wrapper .columns-3-cols > div {

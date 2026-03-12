@@ -387,7 +387,7 @@ main img {
 
 /* Sections */
 main > .section {
-  margin: var(--spacing-xbig) auto;
+  margin: var(--spacing-xxbig) auto;
 
   &:empty {
     display: none;
@@ -408,7 +408,7 @@ main > .section {
   &.highlight {
     background-color: var(--color-neutral-100);
     margin: 0;
-    padding: var(--spacing-xbig) 0;
+    padding: var(--spacing-xxbig) 0;
   }
 
   /* Padding variants */
@@ -488,6 +488,10 @@ main > .section {
   &[data-margin="xxhuge"] {
     margin: var(--spacing-xxhuge) 0;
   }
+}
+
+main > .section > div {
+  margin: 0 auto;
 }
 
 @media (min-width: 900px) {

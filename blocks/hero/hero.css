@@ -38,6 +38,11 @@
     padding: 40px 32px;
   }
 
+  .hero > div > div {
+    max-width: var(--layout-content-max-width);
+    margin: 0 auto;
+  }
+
   .hero h1 {
     font-size: 60px;
   }
