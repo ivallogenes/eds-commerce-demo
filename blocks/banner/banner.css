@@ -257,3 +257,173 @@ main .banner {
       max-width: 64.2rem;
     }
   }
+
+main .banner.variant-2 {
+  padding-top: 9.6rem;
+  border-bottom: 0.67px solid var(--color-neutral-300);
+  background-image: linear-gradient(162deg, rgb(83 162 87 / 5%) 0%, rgb(255 255 255) 50%, rgb(83 162 87 / 10%) 100%);
+}
+
+main .banner.variant-2 .banner__inner {
+    gap: 4.8rem;
+    align-items: start;
+  }
+
+main .banner.variant-2 .banner__content {
+    gap: 2.4rem;
+    padding-top: 0.4rem;
+  }
+
+main .banner.variant-2 .banner__eyebrow {
+    padding: 0.8rem 1.6rem;
+    border-radius: 999px;
+    font: var(--type-body-2-default-font);
+    letter-spacing: var(--type-body-2-default-letter-spacing);
+  }
+
+main .banner.variant-2 .banner__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-right: 0.8rem;
+      background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6.62467 10.3333C6.56515 10.1026 6.44489 9.89206 6.27641 9.72358C6.10793 9.5551 5.89738 9.43485 5.66667 9.37533L1.57667 8.32066C1.50689 8.30085 1.44547 8.25883 1.40174 8.20096C1.35801 8.14309 1.33435 8.07253 1.33435 7.99999C1.33435 7.92746 1.35801 7.8569 1.40174 7.79903C1.44547 7.74116 1.50689 7.69913 1.57667 7.67933L5.66667 6.62399C5.8973 6.56453 6.1078 6.44438 6.27627 6.27602C6.44474 6.10766 6.56504 5.89725 6.62467 5.66666L7.67933 1.57666C7.69894 1.50661 7.74092 1.44489 7.79888 1.40092C7.85684 1.35696 7.92759 1.33316 8.00033 1.33316C8.07308 1.33316 8.14383 1.35696 8.20179 1.40092C8.25974 1.44489 8.30173 1.50661 8.32133 1.57666L9.37533 5.66666C9.43485 5.89737 9.55511 6.10792 9.72359 6.27641C9.89207 6.44489 10.1026 6.56514 10.3333 6.62466L14.4233 7.67866C14.4937 7.69806 14.5557 7.74 14.5999 7.79804C14.6441 7.85609 14.668 7.92703 14.668 7.99999C14.668 8.07295 14.6441 8.1439 14.5999 8.20194C14.5557 8.25999 14.4937 8.30193 14.4233 8.32133L10.3333 9.37533C10.1026 9.43485 9.89207 9.5551 9.72359 9.72358C9.55511 9.89206 9.43485 10.1026 9.37533 10.3333L8.32067 14.4233C8.30106 14.4934 8.25908 14.5551 8.20112 14.5991C8.14316 14.643 8.07241 14.6668 7.99967 14.6668C7.92692 14.6668 7.85617 14.643 7.79821 14.5991C7.74026 14.5551 7.69827 14.4934 7.67867 14.4233L6.62467 10.3333Z' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.3333 2V4.66667' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.6667 3.33334H12' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.66666 11.3333V12.6667' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.33333 12H2' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      vertical-align: middle;
+    }
+
+main .banner.variant-2 .banner__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 58rem;
+    font: var(--type-display-3-font);
+    letter-spacing: var(--type-display-3-letter-spacing);
+    line-height: 1.02;
+  }
+
+main .banner.variant-2 .banner__heading-line {
+    display: block;
+  }
+
+main .banner.variant-2 .banner__heading-line--accent {
+    color: var(--color-brand-500);
+  }
+
+main .banner.variant-2 .banner__description {
+    max-width: 42rem;
+    color: #757575;
+    font: var(--type-body-1-default-font);
+    letter-spacing: var(--type-body-1-default-letter-spacing);
+  }
+
+main .banner.variant-2 .banner__actions {
+    gap: 1.6rem;
+  }
+
+main .banner.variant-2 .banner__button {
+    min-block-size: 4rem;
+    padding: 0 2.4rem;
+    border-radius: 0.4rem;
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+  }
+
+main .banner.variant-2 .banner__button--primary {
+    gap: 0.8rem;
+  }
+
+main .banner.variant-2 .banner__button--primary::after {
+      content: '';
+      display: inline-block;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.33334 8H12.6667' stroke='white' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 3.33331L12.6667 7.99998L8 12.6666' stroke='white' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      flex-shrink: 0;
+    }
+
+main .banner.variant-2 .banner__metrics {
+    gap: 3.2rem;
+    width: 100%;
+    padding-top: 2.4rem;
+    border-top: 0.67px solid var(--color-neutral-300);
+  }
+
+main .banner.variant-2 .banner__metric {
+    gap: 0;
+  }
+
+main .banner.variant-2 .banner__metric-value {
+    font-size: 3rem;
+    line-height: 1.33;
+    letter-spacing: 0;
+  }
+
+main .banner.variant-2 .banner__metric-label {
+    color: #757575;
+    font: var(--type-body-2-default-font);
+    letter-spacing: var(--type-body-2-default-letter-spacing);
+  }
+
+main .banner.variant-2 .banner__metric-divider,
+  main .banner.variant-2 .banner__metric-stars,
+  main .banner.variant-2 .banner__trend-card {
+    display: none;
+  }
+
+main .banner.variant-2 .banner__media {
+    align-items: stretch;
+  }
+
+main .banner.variant-2 .banner__image-frame {
+    position: relative;
+    border-radius: 1.6rem;
+  }
+
+main .banner.variant-2 .banner__image-frame img {
+    aspect-ratio: 1.456 / 1;
+  }
+
+main .banner.variant-2 .banner__badge {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0.6rem;
+    background-color: var(--color-brand-500);
+    color: var(--color-neutral-50);
+    box-shadow: 0 10px 15px 0 rgb(0 0 0 / 10%), 0 4px 6px 0 rgb(0 0 0 / 10%);
+    font: var(--type-body-1-strong-font);
+    letter-spacing: var(--type-body-1-strong-letter-spacing);
+    line-height: 1.5;
+  }
+
+@media (max-width: 899.98px) {
+
+main .banner.variant-2 {
+    padding-top: var(--spacing-xxbig);
+}
+
+    main .banner.variant-2 .banner__heading {
+      font-size: 4.2rem;
+      line-height: 1.05;
+    }
+
+    main .banner.variant-2 .banner__description {
+      max-width: none;
+    }
+
+    main .banner.variant-2 .banner__metrics {
+      gap: 2.4rem;
+    }
+  }
+
+@media (min-width: 900px) {
+    main .banner.variant-2 .banner__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    }
+
+    main .banner.variant-2 .banner__heading {
+      font-size: 6rem;
+      line-height: 1.25;
+    }
+  }
