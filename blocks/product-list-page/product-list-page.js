@@ -107,7 +107,6 @@ export default async function decorate(block) {
       })(button);
       return button;
     }
-    console.log('product-list-page.js: getAddToCartButton() func init');
     const button = document.createElement('div');
     UI.render(Button, {
       children: labels.Global?.AddProductToCart,
@@ -133,7 +132,7 @@ export default async function decorate(block) {
     // View Facets Button
     UI.render(Button, {
       children: labels.Global?.Filters,
-      icon: Icon({ source: 'Burger' }),
+      icon: h(Icon, { source: 'Burger' }),
       variant: 'secondary',
       onClick: () => {
         $facets.classList.toggle('search__facets--visible');

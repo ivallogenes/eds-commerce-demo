@@ -61,3 +61,9 @@ No events are emitted by this block. -->
 - **Configuration Errors**: If `readBlockConfig()` fails, uses default configuration values
 - **Render Errors**: If container rendering fails, the block content remains empty
 - **Fallback Behavior**: Always falls back to default configuration values for missing or invalid settings
+
+## Implementation Notes
+
+- The block overrides the drop-in `EmptyCart` slot locally instead of patching `scripts/__dropins__/storefront-cart/*`.
+- This avoids a vendor SVG `clipPath` id collision that can hide product-card cart icons after the empty mini cart is opened and closed.
+- Keeping the fix in the block preserves the next `postinstall` sync for copied drop-ins and limits the workaround to the affected empty-cart renderer only.

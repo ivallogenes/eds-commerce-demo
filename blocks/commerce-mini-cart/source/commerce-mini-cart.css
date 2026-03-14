@@ -104,9 +104,22 @@ header nav .minicart-panel {
         }
     }
 
-    .cart-mini-cart .cart-empty-cart {
+    .cart-mini-cart .cart-empty-cart .dropin-card {
+        display: flex;
+        flex-direction: column;
         height: 100%;
         min-height: 620px;
+
+        .dropin-illustrated-message__icon {
+            width: 125px;
+            height: 125px;
+            stroke-width: 2;
+            color: var(--color-neutral-800);
+        }
+
+        .dropin-illustrated-message__heading {
+            margin-bottom: var(--spacing-medium);
+        }
     }
 
     /* Product list section */

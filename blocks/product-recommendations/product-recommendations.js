@@ -5,6 +5,7 @@ import { getConfigValue } from '@dropins/tools/lib/aem/configs.js';
 // Dropin Components
 import { Button, Icon, provider as UI } from '@dropins/tools/components.js';
 import { tryRenderAemAssetsImage } from '@dropins/tools/lib/aem/assets.js';
+import { h } from '@dropins/tools/preact.js';
 
 // Cart Dropin
 import * as cartApi from '@dropins/storefront-cart/api.js';
@@ -160,7 +161,7 @@ export default async function decorate(block) {
                 // Add to Cart Button
                 UI.render(Button, {
                   children: labels.Global?.AddProductToCart,
-                  icon: Icon({ source: 'Cart' }),
+                  icon: h(Icon, { source: 'Cart' }),
                   onClick: (event) => {
                     cartApi.addProductsToCart([
                       { sku: ctx.item.sku, quantity: 1 },
