@@ -13,6 +13,7 @@ The Commerce Mini Cart block provides a compact cart interface with product mana
 | `start-shopping-url` | string | `''` | URL for "Start Shopping" button when cart is empty | No | Sets destination for empty cart CTA |
 | `cart-url` | string | `''` | URL for cart page navigation | No | Sets destination for cart navigation |
 | `checkout-url` | string | `''` | URL for checkout navigation | No | Sets destination for checkout action |
+| `enable-item-quantity-update` | string | `'true'` | Enables the built-in increment/decrement quantity control for mini-cart items | No | Shows/hides the drop-in quantity stepper above each item footer |
 | `enable-updating-product` | string | `'false'` | Enables product editing via mini-PDP modal | No | Shows/hides edit buttons for configurable products |
 | `undo-remove-item` | string | `'false'` | Enables undo functionality when removing items | No | Shows/hides undo option after item removal |
 
@@ -47,10 +48,11 @@ No events are emitted by this block. -->
 ### User Interaction Flows
 
 1. **Cart Display**: Block renders mini cart with product thumbnails and basic information
-2. **Product Editing**: Clicking edit button opens mini-PDP modal for configurable product updates
-3. **Cart Updates**: Real-time notifications show when products are added or updated
-4. **Navigation**: Users can navigate to cart page, checkout, or start shopping
-5. **Undo Operations**: When enabled, users can undo item removal operations
+2. **Quantity Updates**: Users can increment, decrement, or type a new quantity directly in the mini cart when quantity updates are enabled
+3. **Product Editing**: Clicking edit button opens mini-PDP modal for configurable product updates
+4. **Cart Updates**: Real-time notifications show when products are added or updated
+5. **Navigation**: Users can navigate to cart page, checkout, or start shopping
+6. **Undo Operations**: When enabled, users can undo item removal operations
 
 ### Error Handling
 

@@ -6,6 +6,7 @@ import Pagination from '@dropins/storefront-product-discovery/containers/Paginat
 import { render as provider } from '@dropins/storefront-product-discovery/render.js';
 import { Button, Icon, provider as UI } from '@dropins/tools/components.js';
 import { search } from '@dropins/storefront-product-discovery/api.js';
+import { h } from '@dropins/tools/preact.js';
 // Wishlist Dropin
 import { WishlistToggle } from '@dropins/storefront-wishlist/containers/WishlistToggle.js';
 import { render as wishlistRender } from '@dropins/storefront-wishlist/render.js';
@@ -100,16 +101,17 @@ export default async function decorate(block) {
       const button = document.createElement('div');
       UI.render(Button, {
         children: labels.Global?.AddProductToCart,
-        icon: Icon({ source: 'Cart' }),
+        icon: h(Icon, { source: 'Cart' }),
         href: getProductLink(product.urlKey, product.sku),
         variant: 'primary',
       })(button);
       return button;
     }
+    console.log('product-list-page.js: getAddToCartButton() func init');
     const button = document.createElement('div');
     UI.render(Button, {
       children: labels.Global?.AddProductToCart,
-      icon: Icon({ source: 'Cart' }),
+      icon: h(Icon, { source: 'Cart' }),
       onClick: () => cartApi.addProductsToCart([{ sku: product.sku, quantity: 1 }]),
       variant: 'primary',
     })(button);

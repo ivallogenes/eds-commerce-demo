@@ -36,7 +36,7 @@
   --color-warning-800: #cc7a2e;
   --color-alert-200: #ffebeb;
   --color-alert-500: #db7070;
-  --color-alert-800: #c35050;
+  --color-alert-800: #F44336;
   --color-button-active: var(--color-brand-700);
   --color-button-focus: var(--color-neutral-400);
   --color-button-hover: var(--color-brand-600);
@@ -148,6 +148,7 @@ body {
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -342,6 +343,29 @@ button.button {
       color: var(--color-brand-600);
     }
   }
+}
+
+a.dropin-button--tertiary {
+  border: 1px solid var(--color-brand-500);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.dropin-iconButton--tertiary {
+  color: var(--color-alert-800);
+  min-height: var(--spacing-medium);
+  min-width: var(--spacing-medium);
+}
+
+.dropin-iconButton--tertiary:hover {
+  color: var(--color-alert-500);
+}
+
+.dropin-button-icon {
+  width: 18px;
+  height: 18px;
 }
 
 main input:hover {

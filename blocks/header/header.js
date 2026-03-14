@@ -9,6 +9,8 @@ import { fetchPlaceholders, getProductLink, rootLink } from '../../scripts/comme
 import renderAuthCombine from './renderAuthCombine.js';
 import { renderAuthDropdown } from './renderAuthDropdown.js';
 
+const MINI_CART_CLOSE_EVENT = 'commerce-mini-cart:close';
+
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
@@ -349,6 +351,10 @@ export default async function decorate(block) {
   }
 
   cartButton.addEventListener('click', () => toggleMiniCart(!minicartPanel.classList.contains('nav-tools-panel--show')));
+
+  document.addEventListener(MINI_CART_CLOSE_EVENT, () => {
+    toggleMiniCart(false);
+  });
 
   // Cart Item Counter
   events.on('cart/data', (data) => {

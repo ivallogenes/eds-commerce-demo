@@ -19,11 +19,14 @@ import '../../scripts/initializers/cart.js';
 import { readBlockConfig } from '../../scripts/aem.js';
 import { fetchPlaceholders, rootLink, getProductLink } from '../../scripts/commerce.js';
 
+const MINI_CART_CLOSE_EVENT = 'commerce-mini-cart:close';
+
 export default async function decorate(block) {
   const {
     'start-shopping-url': startShoppingURL = '',
     'cart-url': cartURL = '',
     'checkout-url': checkoutURL = '',
+    'enable-item-quantity-update': enableUpdateItemQuantity = 'true',
     'enable-updating-product': enableUpdatingProduct = 'false',
     'undo-remove-item': undo = 'false',
   } = readBlockConfig(block);
@@ -35,6 +38,8 @@ export default async function decorate(block) {
     ADDED: placeholders?.Global?.MiniCartAddedMessage,
     UPDATED: placeholders?.Global?.MiniCartUpdatedMessage,
   };
+
+  const closeMiniCartLabel = placeholders?.Global?.Close || 'Close mini cart';
 
   // Modal state
   let currentModal = null;
@@ -166,9 +171,41 @@ export default async function decorate(block) {
     routeCart: cartURL ? () => rootLink(cartURL) : undefined,
     routeCheckout: checkoutURL ? () => rootLink(checkoutURL) : undefined,
     routeProduct: createProductLink,
+    enableQuantityUpdate: enableUpdateItemQuantity === 'true',
     undo: undo === 'true',
-
     slots: {
+      Heading: (ctx) => {
+        const miniCartTitle = 'Shopping Cart';
+        const miniCartSubtitle = 'Free shipping on orders over $50';
+
+        const fragment = document.createRange().createContextualFragment(`
+          <section class="mini-cart-heading">
+            <div class="mini-cart-heading__copy">
+              <p class="mini-cart-heading__title"></p>
+              <p class="mini-cart-heading__subtitle"></p>
+            </div>
+            <button type="button" class="commerce-mini-cart__close-button" aria-label="${closeMiniCartLabel}">
+              <span class="commerce-mini-cart__close-icon" aria-hidden="true"></span>
+            </button>
+          </section>
+        `);
+
+        const root = fragment.firstElementChild;
+        const title = root.querySelector('.mini-cart-heading__title');
+        const subtitle = root.querySelector('.mini-cart-heading__subtitle');
+        const closeButton = root.querySelector('.commerce-mini-cart__close-button');
+
+        title.textContent = ctx.count ? `${miniCartTitle} (${ctx.count})` : '';
+        subtitle.textContent = ctx.count ? `${miniCartSubtitle}` : '';
+
+        closeButton?.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          document.dispatchEvent(new CustomEvent(MINI_CART_CLOSE_EVENT));
+        });
+
+        ctx.replaceWith(root);
+      },
       Thumbnail: (ctx) => {
         const { item, defaultImageProps } = ctx;
         const anchorWrapper = document.createElement('a');
