@@ -310,15 +310,20 @@ function buildVariant2Badge(text) {
 }
 
 /**
- * Decorates banner variant 2.
+ * Decorates the editorial banner variants.
  * @param {Element} block The block element.
+ * @param {{ mediaFirst?: boolean }} options Decoration options.
  */
-function decorateVariant2(block) {
+function decorateEditorialVariant(block, options = {}) {
+  const { mediaFirst = false } = options;
   const rows = getRows(block);
   const [row] = rows;
   const settings = getAuthoredSettings(rows);
   const columns = row ? [...row.children] : [];
-  const [contentColumn, mediaColumn] = columns;
+  const [firstColumn, secondColumn] = columns;
+  const [contentColumn, mediaColumn] = mediaFirst
+    ? [secondColumn, firstColumn]
+    : [firstColumn, secondColumn];
 
   if (!contentColumn || !mediaColumn) {
     return;
@@ -335,8 +340,9 @@ function decorateVariant2(block) {
 
   const layout = document.createRange().createContextualFragment(`
     <div class="banner__inner">
-      <div class="banner__content"></div>
-      <div class="banner__media"></div>
+      ${mediaFirst
+    ? '<div class="banner__media"></div><div class="banner__content"></div>'
+    : '<div class="banner__content"></div><div class="banner__media"></div>'}
     </div>
   `);
 
@@ -389,6 +395,22 @@ function decorateVariant2(block) {
 }
 
 /**
+ * Decorates banner variant 2.
+ * @param {Element} block The block element.
+ */
+function decorateVariant2(block) {
+  decorateEditorialVariant(block);
+}
+
+/**
+ * Decorates banner variant 3.
+ * @param {Element} block The block element.
+ */
+function decorateVariant3(block) {
+  decorateEditorialVariant(block, { mediaFirst: true });
+}
+
+/**
  * Decorates the banner block.
  * @param {Element} block The block element.
  */
@@ -397,6 +419,9 @@ export default function decorate(block) {
   block.dataset.variant = variant;
 
   switch (variant) {
+    case 'variant-3':
+      decorateVariant3(block);
+      break;
     case 'variant-2':
       decorateVariant2(block);
       break;

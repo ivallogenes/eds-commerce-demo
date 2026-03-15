@@ -253,8 +253,9 @@ main .banner {
   }
 }
 
-/* Banner Variant 2 styles */
-main .banner.variant-2 {
+/* Banner Variant 2 and 3 styles */
+main .banner.variant-2,
+main .banner.variant-3 {
   padding-top: 9.6rem;
   border-bottom: 0.67px solid var(--color-neutral-300);
   background-image: linear-gradient(162deg, rgb(83 162 87 / 5%) 0%, rgb(255 255 255) 50%, rgb(83 162 87 / 10%) 100%);
@@ -410,13 +411,26 @@ main .banner.variant-2 {
   }
 
   @media (width >= 900px) {
-    .banner__inner {
+    &.variant-2 .banner__inner {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    }
+
+    &.variant-3 .banner__inner {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
     }
 
     .banner__heading {
       font-size: 6rem;
       line-height: 1.25;
+    }
+  }
+}
+
+/* Desktop styles all */
+@media (width >= 900px) {
+  main {
+    .banner.variant-3 .banner__inner {
+      align-items: center;
     }
   }
 }
