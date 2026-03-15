@@ -159,6 +159,7 @@ function buildVariant2Metrics() {
   return metrics;
 }
 
+
 /**
  * Builds the floating trend card for variant 1.
  * @returns {HTMLDivElement}
@@ -293,6 +294,37 @@ function decorateVariant2Heading(heading) {
 }
 
 /**
+ * Styles the last two words of the heading for banner variant 4.
+ * @param {Element} heading The authored heading.
+ */
+function decorateVariant4Heading(heading) {
+  if (!heading || heading.children.length) {
+    return;
+  }
+
+  const words = heading.textContent.trim().split(/\s+/);
+
+  if (words.length < 3) {
+    return;
+  }
+
+  const accentWords = words.splice(-2).join(' ');
+  const baseText = words.join(' ');
+
+  heading.textContent = '';
+
+  const baseLine = document.createElement('span');
+  baseLine.className = 'banner__heading-line';
+  baseLine.textContent = baseText;
+
+  const accentLine = document.createElement('span');
+  accentLine.className = 'banner__heading-line banner__heading-line--accent';
+  accentLine.textContent = accentWords;
+
+  heading.append(baseLine, accentLine);
+}
+
+/**
  * Builds the media badge for banner variant 2.
  * @param {string} text The badge content.
  * @returns {HTMLDivElement|null}
@@ -307,6 +339,39 @@ function buildVariant2Badge(text) {
   badge.textContent = text;
 
   return badge;
+}
+
+/**
+ * Builds the decorative footer note for banner variant 4.
+ * @param {HTMLParagraphElement | undefined} paragraph The authored footer paragraph.
+ * @returns {HTMLDivElement | null}
+ */
+function buildVariant4FooterNote(paragraph) {
+  if (!paragraph) {
+    return null;
+  }
+
+  const note = document.createElement('div');
+  note.className = 'banner__footer-note';
+
+  const ornament = document.createElement('div');
+  ornament.className = 'banner__footer-ornament';
+  ornament.setAttribute('aria-hidden', 'true');
+
+  const primaryBubble = document.createElement('span');
+  primaryBubble.className = 'banner__footer-bubble banner__footer-bubble--primary';
+  primaryBubble.textContent = '2K';
+
+  const secondaryBubble = document.createElement('span');
+  secondaryBubble.className = 'banner__footer-bubble banner__footer-bubble--secondary';
+  secondaryBubble.textContent = '+';
+
+  ornament.append(primaryBubble, secondaryBubble);
+
+  paragraph.className = 'banner__footer-text';
+  note.append(ornament, paragraph);
+
+  return note;
 }
 
 /**
@@ -411,6 +476,84 @@ function decorateVariant3(block) {
 }
 
 /**
+ * Decorates banner variant 4.
+ * @param {Element} block The block element.
+ */
+function decorateVariant4(block) {
+  const [row] = getRows(block);
+  const columns = row ? [...row.children] : [];
+  const [contentColumn, mediaColumn] = columns;
+
+  if (!contentColumn || !mediaColumn) {
+    return;
+  }
+
+  const paragraphs = contentColumn.querySelectorAll(':scope > p');
+  const eyebrow = paragraphs[0];
+  const description = paragraphs[1];
+  const actionsParagraph = paragraphs[2];
+  const footerParagraph = paragraphs[3];
+  const heading = contentColumn.querySelector('h1, h2, h3, h4, h5, h6');
+  const links = actionsParagraph ? [...actionsParagraph.querySelectorAll('a')] : [];
+  const picture = mediaColumn.querySelector('picture');
+  const footerNote = buildVariant4FooterNote(footerParagraph);
+
+  if (!picture) {
+    return;
+  }
+
+  const layout = document.createRange().createContextualFragment(`
+    <div class="banner__hero">
+      <div class="banner__background-media"></div>
+      <div class="banner__content-mask">
+        <div class="banner__inner">
+          <div class="banner__content"></div>
+        </div>
+      </div>
+    </div>
+  `);
+
+  const backgroundMedia = layout.querySelector('.banner__background-media');
+  const content = layout.querySelector('.banner__content');
+
+  backgroundMedia.append(picture);
+
+  if (eyebrow) {
+    eyebrow.className = 'banner__eyebrow';
+    content.append(eyebrow);
+  }
+
+  if (heading) {
+    heading.classList.add('banner__heading');
+    decorateVariant4Heading(heading);
+    content.append(heading);
+  }
+
+  if (description) {
+    description.className = 'banner__description';
+    content.append(description);
+  }
+
+  if (links.length) {
+    const actions = document.createElement('div');
+    actions.className = 'banner__actions';
+
+    links.forEach((link, index) => {
+      link.className = `banner__button ${index === 0 ? 'banner__button--primary' : 'banner__button--secondary'}`;
+      actions.append(link);
+    });
+
+    content.append(actions);
+  }
+
+  if (footerNote) {
+    content.append(footerNote);
+  }
+
+  block.replaceChildren(layout);
+}
+
+/**
  * Decorates the banner block.
  * @param {Element} block The block element.
  */
@@ -419,6 +562,9 @@ export default function decorate(block) {
   block.dataset.variant = variant;
 
   switch (variant) {
+    case 'variant-4':
+      decorateVariant4(block);
+      break;
     case 'variant-3':
       decorateVariant3(block);
       break;
