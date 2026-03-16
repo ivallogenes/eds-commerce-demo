@@ -73,7 +73,9 @@ main > .section .carousel-wrapper {
 }
 
 .carousel nav {
-    position: relative;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
 .carousel .carousel-slide-indicators {
@@ -90,6 +92,7 @@ main > .section .carousel-wrapper {
     display: flex;
     padding: 0;
     line-height: 0;
+    pointer-events: auto;
 }
 
 .carousel .carousel-slide-indicator {
@@ -128,33 +131,56 @@ main > .section .carousel-wrapper {
     align-items: center;
     justify-content: space-between;
     z-index: 1;
+    pointer-events: none;
 }
 
+.carousel .carousel-navigation-buttons button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgb(19 19 19 / 55%);
+    color: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background-color 0.2s ease;
+}
 
 .carousel .carousel-navigation-buttons button:hover,
 .carousel .carousel-navigation-buttons button:focus-visible {
     background-color: rgb(19 19 19 / 75%);
 }
 
+.carousel .carousel-slides:focus-visible,
+.carousel .carousel-navigation-buttons button:focus-visible,
+.carousel .carousel-slide-indicator button:focus-visible {
+    outline: 2px solid var(--color-neutral-50);
+    outline-offset: 2px;
+}
+
 .carousel .carousel-navigation-buttons button::after {
     display: block;
     content: '';
-    border-bottom: 0;
-    border-left: 0;
-    height: 12px;
-    width: 12px;
+    width: 20px;
+    height: 20px;
     position: absolute;
     top: 50%;
-    left: calc(50% + 2px);
-    transform: translate(-50%, -50%) rotate(-135deg);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7.5 15L12.5 10L7.5 5' stroke='%23ffffff' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.carousel .carousel-navigation-buttons button.slide-prev::after {
+    transform: translate(-50%, -50%) rotate(180deg);
 }
 
 .carousel .carousel-navigation-buttons button.slide-next::after {
-    transform: translate(-50%, -50%) rotate(45deg);
-    left: calc(50% - 2px);
+    transform: translate(-50%, -50%);
 }
 
-@media (min-width: 600px) {
+/* Desktop only styles */
+@media (min-width: 900px) {
     .carousel .carousel-navigation-buttons {
         left: 24px;
         right: 24px;
@@ -162,7 +188,6 @@ main > .section .carousel-wrapper {
 
     .carousel .carousel-slide .carousel-slide-content {
         --slide-content-width: calc((100% - 184px) / 2);
-
         margin: 92px;
     }
 
