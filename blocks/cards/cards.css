@@ -40,8 +40,127 @@
          object-fit: cover;
     }
 
-@media (min-width: 900px) {
-    .cards-container .cards-wrapper {
-
+.cards-container .cards-wrapper .cards.shop-by > ul > li {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background-color: rgb(245 245 245 / 30%);
     }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-image-link {
+      display: block;
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin: 0;
+      padding: var(--spacing-medium);
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .image_badge {
+      position: absolute;
+      top: var(--spacing-medium);
+      left: var(--spacing-medium);
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0.8rem 1.6rem;
+      border-radius: 40px;
+      background-color: rgba(255,255,255,0.85);
+      backdrop-filter: blur(2px);
+      color: var(--color-brand-500);
+      font: var(--type-body-2-default-font);
+      letter-spacing: var(--type-body-2-default-letter-spacing);
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .image_badge::before {
+        content: '';
+        display: inline-block;
+        width: 1.6rem;
+        height: 1.6rem;
+        margin-right: 0.8rem;
+        background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6.62467 10.3333C6.56515 10.1026 6.44489 9.89206 6.27641 9.72358C6.10793 9.5551 5.89738 9.43485 5.66667 9.37533L1.57667 8.32066C1.50689 8.30085 1.44547 8.25883 1.40174 8.20096C1.35801 8.14309 1.33435 8.07253 1.33435 7.99999C1.33435 7.92746 1.35801 7.8569 1.40174 7.79903C1.44547 7.74116 1.50689 7.69913 1.57667 7.67933L5.66667 6.62399C5.8973 6.56453 6.1078 6.44438 6.27627 6.27602C6.44474 6.10766 6.56504 5.89725 6.62467 5.66666L7.67933 1.57666C7.69894 1.50661 7.74092 1.44489 7.79888 1.40092C7.85684 1.35696 7.92759 1.33316 8.00033 1.33316C8.07308 1.33316 8.14383 1.35696 8.20179 1.40092C8.25974 1.44489 8.30173 1.50661 8.32133 1.57666L9.37533 5.66666C9.43485 5.89737 9.55511 6.10792 9.72359 6.27641C9.89207 6.44489 10.1026 6.56514 10.3333 6.62466L14.4233 7.67866C14.4937 7.69806 14.5557 7.74 14.5999 7.79804C14.6441 7.85609 14.668 7.92703 14.668 7.99999C14.668 8.07295 14.6441 8.1439 14.5999 8.20194C14.5557 8.25999 14.4937 8.30193 14.4233 8.32133L10.3333 9.37533C10.1026 9.43485 9.89207 9.5551 9.72359 9.72358C9.55511 9.89206 9.43485 10.1026 9.37533 10.3333L8.32067 14.4233C8.30106 14.4934 8.25908 14.5551 8.20112 14.5991C8.14316 14.643 8.07241 14.6668 7.99967 14.6668C7.92692 14.6668 7.85617 14.643 7.79821 14.5991C7.74026 14.5551 7.69827 14.4934 7.67867 14.4233L6.62467 10.3333Z' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.3333 2V4.66667' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.6667 3.33334H12' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.66666 11.3333V12.6667' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.33333 12H2' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        vertical-align: middle;
+      }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-heading {
+      margin: 0;
+      color: #1a1a1a;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-description {
+      margin: 0;
+      color: #757575;
+      font-size: 1.4rem;
+      line-height: 1.43;
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-action {
+      margin: 0;
+      margin-top: auto;
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-action .cards-card-link,
+    .cards-container .cards-wrapper .cards.shop-by .cards-card-link.button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-block-size: auto;
+      padding: 1rem 2rem 1rem 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      color: var(--color-brand-500);
+      font-size: 1.6rem;
+      font-weight: 500;
+      line-height: 1.5;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-action .cards-card-link::after, .cards-container .cards-wrapper .cards.shop-by .cards-card-link.button::after {
+        content: '';
+        display: inline-block;
+        width: 1.6rem;
+        height: 1.6rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.33334 8H12.6667' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 3.33331L12.6667 7.99998L8 12.6666' stroke='%2353A257' stroke-width='1.33333' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: 18px 20px;
+        background-position: top;
+        transition: transform 0.2s ease;
+      }
+
+.cards-container .cards-wrapper .cards.shop-by > ul > li:hover .cards-card-link::after,
+    .cards-container .cards-wrapper .cards.shop-by > ul > li:focus-within .cards-card-link::after {
+      transform: translateX(5px);
+    }
+
+.cards-container .cards-wrapper .cards.shop-by .cards-card-image-link:focus-visible,
+    .cards-container .cards-wrapper .cards.shop-by .cards-card-link:focus-visible {
+      outline: 2px solid var(--color-brand-500);
+      outline-offset: 0.4rem;
+    }
+
+.cards-container.shop-by-section .default-content-wrapper {
+      margin-bottom: var(--spacing-xbig);
+    }
+
+@media (min-width: 900px) {
+      .cards-container.shop-by-section .default-content-wrapper {
+        text-align: center;
+        margin-bottom: var(--spacing-xxbig);
+      }
 }

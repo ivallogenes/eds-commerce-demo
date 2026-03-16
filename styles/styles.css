@@ -14,8 +14,8 @@
   --color-neutral-500: #b8b8b8;
   --color-neutral-600: #8f8f8f;
   --color-neutral-700: #666;
-  --color-neutral-800: #3d3d3d;
-  --color-neutral-900: #292929;
+  --color-neutral-800: #292929;
+  --color-neutral-900: #1A1A1A;
   --color-positive-200: #eff5ef;
   --color-positive-500: #7fb078;
   --color-positive-800: #53824c;
@@ -144,7 +144,7 @@ body {
   letter-spacing: 0.04em;
   letter-spacing: var(--type-body-1-default-letter-spacing);
   margin: 0;
-  color: #3d3d3d;
+  color: #292929;
   color: var(--color-neutral-800);
   background-color: #fff;
   background-color: var(--background-color);
@@ -289,7 +289,7 @@ button {
 }
 
 a:not(.dropin-design a) {
-  color: #3d3d3d;
+  color: #292929;
   color: var(--color-neutral-800);
   font: normal normal 500 1.6rem/2.4rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
   font: var(--type-body-1-strong-font);
