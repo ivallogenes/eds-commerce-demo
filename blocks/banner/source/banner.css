@@ -447,7 +447,7 @@ main .banner.variant-4 {
     justify-content: center;
     min-height: 56rem;
     overflow: hidden;
-    padding: var(--spacing-xxlarge) var(--spacing-medium);
+    padding: var(--spacing-medium);
   }
 
   .banner__background-media {

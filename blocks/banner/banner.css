@@ -455,7 +455,7 @@ main .banner.variant-4 .banner__hero {
     justify-content: center;
     min-height: 56rem;
     overflow: hidden;
-    padding: var(--spacing-xxlarge) var(--spacing-medium);
+    padding: var(--spacing-medium);
   }
 
 main .banner.variant-4 .banner__background-media {

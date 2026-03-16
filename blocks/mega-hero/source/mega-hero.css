@@ -131,7 +131,7 @@ main .mega-hero {
 
   .mega-hero__feature-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.2rem;
     color: #1a1a1a;
     font: var(--type-body-1-default-font);
