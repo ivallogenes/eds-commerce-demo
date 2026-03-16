@@ -1,0 +1,263 @@
+.section.countdown-banner-container {
+  margin: 0;
+}
+
+.countdown-banner-container {
+  max-width: none;
+  padding: 0;
+}
+
+.countdown-banner-container .countdown-banner-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+main .countdown-banner {
+  --countdown-banner-background: #53A257;
+  --countdown-banner-font-color: #fff;
+  --countdown-banner-panel: rgb(255 255 255 / 20%);
+  --countdown-banner-panel-soft: rgb(255 255 255 / 12%);
+  --countdown-banner-panel-border: rgb(255 255 255 / 26%);
+  --countdown-banner-font-muted: rgb(255 255 255 / 80%);
+  --countdown-banner-button-text: var(--countdown-banner-background);
+  padding: var(--spacing-xxbig) var(--spacing-medium);
+  color: #fff;
+  color: var(--countdown-banner-font-color);
+  background:
+    linear-gradient(90deg,
+      #53A257 0%,
+      rgb(104, 173, 107) 100%);
+}
+
+@supports (color: color-mix(in lch, red, blue)) {
+main .countdown-banner {
+  background:
+    linear-gradient(90deg,
+      var(--countdown-banner-background) 0%,
+      color-mix(in srgb, var(--countdown-banner-background) 88%, white 12%) 100%);
+}
+}
+
+main .countdown-banner .countdown-banner__inner {
+    display: grid;
+    grid-gap: var(--spacing-xxbig);
+    gap: var(--spacing-xxbig);
+    align-items: center;
+    max-width: var(--layout-content-max-width);
+    margin: 0 auto;
+  }
+
+main .countdown-banner .countdown-banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-big);
+  }
+
+main .countdown-banner .countdown-banner__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+    margin: 0;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background-color: var(--countdown-banner-panel);
+    color: var(--countdown-banner-font-color);
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+  }
+
+main .countdown-banner .countdown-banner__badge::before {
+      content: '';
+      inline-size: 0.8rem;
+      block-size: 0.8rem;
+      border-radius: 50%;
+      background-color: currentColor;
+      opacity: 0.75;
+    }
+
+main .countdown-banner .countdown-banner__heading,
+  main .countdown-banner .countdown-banner__description,
+  main .countdown-banner .countdown-banner__time-value,
+  main .countdown-banner .countdown-banner__time-label,
+  main .countdown-banner .countdown-banner__promo-value,
+  main .countdown-banner .countdown-banner__promo-heading,
+  main .countdown-banner .countdown-banner__promo-text {
+    margin: 0;
+    color: inherit;
+  }
+
+main .countdown-banner .countdown-banner__heading {
+    max-width: 28rem;
+    font: var(--type-display-2-font);
+    letter-spacing: var(--type-display-2-letter-spacing);
+    line-height: 1.05;
+  }
+
+main .countdown-banner .countdown-banner__description {
+    max-width: 40rem;
+    color: var(--countdown-banner-font-muted);
+    font: var(--type-body-1-default-font);
+    letter-spacing: var(--type-body-1-default-letter-spacing);
+  }
+
+main .countdown-banner .countdown-banner__button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    min-block-size: 4rem;
+    padding: 0 1.4rem;
+    border: 0;
+    border-radius: var(--shape-border-radius-2);
+    background-color: var(--countdown-banner-font-color);
+    color: var(--countdown-banner-button-text);
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  }
+
+main .countdown-banner .countdown-banner__button:hover,
+    main .countdown-banner .countdown-banner__button:focus-visible {
+      color: var(--countdown-banner-button-text);
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: var(--shape-shadow-2);
+    }
+
+main .countdown-banner .countdown-banner__button:focus-visible {
+      outline: 2px solid var(--countdown-banner-font-color);
+      outline-offset: 2px;
+    }
+
+main .countdown-banner .countdown-banner__button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.6rem;
+    block-size: 1.6rem;
+  }
+
+main .countdown-banner .countdown-banner__button-icon svg {
+      inline-size: 100%;
+      block-size: 100%;
+    }
+
+main .countdown-banner .countdown-banner__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-medium);
+  }
+
+main .countdown-banner .countdown-banner__timer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-gap: var(--spacing-small);
+    gap: var(--spacing-small);
+    inline-size: min(100%, 31.8rem);
+  }
+
+main .countdown-banner .countdown-banner__time-part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    min-block-size: 8rem;
+    padding: 1.2rem 1rem;
+    border-radius: var(--shape-border-radius-3);
+    background-color: var(--countdown-banner-panel);
+    text-align: center;
+  }
+
+main .countdown-banner .countdown-banner__time-value {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+main .countdown-banner .countdown-banner__time-label {
+    color: var(--countdown-banner-font-muted);
+    font: var(--type-details-caption-1-font);
+    letter-spacing: var(--type-details-caption-1-letter-spacing);
+    text-transform: uppercase;
+  }
+
+main .countdown-banner .countdown-banner__promo {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    grid-gap: var(--spacing-medium);
+    gap: var(--spacing-medium);
+    inline-size: min(100%, 31.8rem);
+    min-block-size: 9.2rem;
+    padding: 1.6rem 2rem;
+    border: 0.67px solid var(--countdown-banner-panel-border);
+    border-radius: var(--shape-border-radius-4);
+    background-color: var(--countdown-banner-panel-soft);
+    backdrop-filter: blur(6px);
+  }
+
+main .countdown-banner .countdown-banner__promo-value {
+    font-size: clamp(4.2rem, 12vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+main .countdown-banner .countdown-banner__promo-divider {
+    inline-size: 1px;
+    block-size: 4rem;
+    background-color: var(--countdown-banner-panel-border);
+  }
+
+main .countdown-banner .countdown-banner__promo-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+main .countdown-banner .countdown-banner__promo-heading {
+    font: var(--type-body-1-emphasized-font);
+    letter-spacing: var(--type-body-1-emphasized-letter-spacing);
+    text-transform: uppercase;
+  }
+
+main .countdown-banner .countdown-banner__promo-text {
+    color: var(--countdown-banner-font-muted);
+    font: var(--type-details-caption-1-font);
+    letter-spacing: var(--type-details-caption-1-letter-spacing);
+  }
+
+@media (min-width: 600px) {
+    main .countdown-banner .countdown-banner__promo {
+      padding-inline: 2.4rem;
+    }
+  }
+
+@media (min-width: 900px) {
+
+main .countdown-banner {
+    padding: var(--spacing-large) var(--spacing-big);
+}
+
+    main .countdown-banner .countdown-banner__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(28rem, 0.72fr);
+      gap: 6.4rem;
+    }
+
+    main .countdown-banner .countdown-banner__heading {
+      max-width: 40rem;
+      font-size: 5.6rem;
+      line-height: 1.05;
+    }
+
+    main .countdown-banner .countdown-banner__aside {
+      align-items: flex-end;
+      justify-self: end;
+    }
+  }
