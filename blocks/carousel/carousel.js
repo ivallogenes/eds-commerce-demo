@@ -1,5 +1,13 @@
 import { fetchPlaceholders } from '../../scripts/commerce.js';
 
+function copyAnchorAttributes(source, target) {
+  ['href', 'target', 'rel', 'title', 'aria-label'].forEach((attribute) => {
+    if (source.hasAttribute(attribute)) {
+      target.setAttribute(attribute, source.getAttribute(attribute));
+    }
+  });
+}
+
 function getRealSlideIndex(slides, slideIndex) {
   if (slideIndex < 0) {
     return slides.length - 1;
@@ -38,6 +46,33 @@ function updateActiveSlide(slide) {
       indicator.querySelector('button').setAttribute('disabled', 'true');
     }
   });
+}
+
+function decorateShopByDefaultContent(block) {
+  const container = block.closest('.carousel-container');
+  const defaultContent = container?.querySelector(':scope > .default-content-wrapper');
+
+  if (!defaultContent) {
+    return;
+  }
+
+  const badgeSource = defaultContent.querySelector(':scope > p');
+
+  if (!badgeSource) {
+    return;
+  }
+
+  const badgeText = badgeSource.textContent.trim();
+  badgeSource.remove();
+
+  if (!badgeText || badgeText.toLowerCase() === 'no-badge') {
+    return;
+  }
+
+  const badge = document.createElement('p');
+  badge.className = 'slider_badge';
+  badge.textContent = badgeText;
+  defaultContent.prepend(badge);
 }
 
 export function showSlide(block, slideIndex = 0) {
@@ -106,9 +141,9 @@ function bindEvents(block, autoplayController) {
   const slideIndicators = block.querySelector('.carousel-slide-indicators');
   const slidesWrapper = block.querySelector('.carousel-slides');
 
-  if (!slideIndicators || !slidesWrapper) return;
+  if (!slidesWrapper) return;
 
-  slideIndicators.querySelectorAll('button').forEach((button) => {
+  slideIndicators?.querySelectorAll('button').forEach((button) => {
     button.addEventListener('click', (e) => {
       const slideIndicator = e.currentTarget.parentElement;
       showSlide(block, parseInt(slideIndicator.dataset.targetSlide, 10));
@@ -157,8 +192,10 @@ function bindEvents(block, autoplayController) {
     }
   });
 
-  block.addEventListener('mouseenter', () => autoplayController.stop());
-  block.addEventListener('mouseleave', () => autoplayController.start());
+  if (autoplayController) {
+    block.addEventListener('mouseenter', () => autoplayController.stop());
+    block.addEventListener('mouseleave', () => autoplayController.start());
+  }
 
   const slideObserver = new IntersectionObserver(
     (entries) => {
@@ -194,12 +231,52 @@ function createSlide(row, slideIndex, carouselId) {
   return slide;
 }
 
+function createShopBySlide(row, slideIndex, carouselId) {
+  const columns = row.querySelectorAll(':scope > div');
+  const imageColumn = columns[0];
+  const contentColumn = columns[1];
+  const image = imageColumn?.querySelector('picture');
+  const actionLink = contentColumn?.querySelector('a[href]');
+
+  if (!imageColumn || !contentColumn || !image || !actionLink) {
+    return createSlide(row, slideIndex, carouselId);
+  }
+
+  const slide = document.createElement('li');
+  const slideLabel = actionLink.textContent.trim();
+  const slideLink = document.createElement('a');
+  const slideText = document.createElement('span');
+
+  slide.dataset.slideIndex = slideIndex;
+  slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
+  slide.classList.add('carousel-slide', 'carousel-slide--shop-by');
+  slide.setAttribute('aria-label', slideLabel || `Slide ${slideIndex + 1}`);
+
+  imageColumn.classList.add('carousel-slide-image', 'carousel-slide-image--shop-by');
+
+  slideLink.className = 'carousel-slide-link';
+  copyAnchorAttributes(actionLink, slideLink);
+
+  if (!slideLink.hasAttribute('aria-label') && slideLabel) {
+    slideLink.setAttribute('aria-label', slideLabel);
+  }
+
+  slideText.className = 'carousel-slide-label';
+  slideText.textContent = slideLabel;
+
+  slideLink.append(imageColumn, slideText);
+  slide.append(slideLink);
+
+  return slide;
+}
+
 let carouselId = 0;
 export default async function decorate(block) {
   carouselId += 1;
   block.setAttribute('id', `carousel-${carouselId}`);
   const rows = Array.from(block.querySelectorAll(':scope > div'));
   const isSingleSlide = rows.length < 2;
+  const isShopByVariant = block.classList.contains('shop-by');
 
   const placeholders = await fetchPlaceholders();
 
@@ -215,23 +292,35 @@ export default async function decorate(block) {
   const slidesWrapper = document.createElement('ul');
   slidesWrapper.classList.add('carousel-slides');
   slidesWrapper.setAttribute('tabindex', '0');
-  block.prepend(slidesWrapper);
 
+  let slideIndicatorsNav;
   let slideIndicators;
   if (!isSingleSlide) {
-    const slideIndicatorsNav = document.createElement('nav');
+    slideIndicatorsNav = document.createElement('nav');
     slideIndicatorsNav.setAttribute(
       'aria-label',
       placeholders.carouselSlideControls || 'Carousel Slide Controls',
     );
-    slideIndicators = document.createElement('ol');
-    slideIndicators.classList.add('carousel-slide-indicators');
-    slideIndicatorsNav.append(createNavigationButtons(placeholders), slideIndicators);
+
+    slideIndicatorsNav.append(createNavigationButtons(placeholders));
+
+    if (!isShopByVariant) {
+      slideIndicators = document.createElement('ol');
+      slideIndicators.classList.add('carousel-slide-indicators');
+      slideIndicatorsNav.append(slideIndicators);
+    }
+
     container.append(slideIndicatorsNav);
   }
 
+  if (isShopByVariant) {
+    decorateShopByDefaultContent(block);
+  }
+
   rows.forEach((row, idx) => {
-    const slide = createSlide(row, idx, carouselId);
+    const slide = isShopByVariant
+      ? createShopBySlide(row, idx, carouselId)
+      : createSlide(row, idx, carouselId);
     slidesWrapper.append(slide);
 
     if (slideIndicators) {
@@ -251,8 +340,8 @@ export default async function decorate(block) {
   updateActiveSlide(slidesWrapper.querySelector('.carousel-slide'));
 
   if (!isSingleSlide) {
-    const autoplayController = createAutoplayController(block);
+    const autoplayController = isShopByVariant ? null : createAutoplayController(block);
     bindEvents(block, autoplayController);
-    autoplayController.start();
+    autoplayController?.start();
   }
 }
