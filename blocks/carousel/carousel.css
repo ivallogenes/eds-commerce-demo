@@ -1,6 +1,10 @@
+body.plp .section.hero-container {
+    margin-bottom: 0;
+}
+
 main > .section .carousel-wrapper {
-    max-width: unset;
     padding: 0 var(--spacing-medium);
+    max-width: var(--layout-content-max-width);
 }
 
 .carousel-container h2, .carousel-container p {
