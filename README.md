@@ -10,6 +10,18 @@ This project uses the Document Authoring (DA) tool as the content management sys
 
 ### Icons from [Lucide](https://lucide.dev/)
 
+### Custom content blocks collection:
+
+- banner (variant-1) | variant-2, variant-3, variant-4
+- countdown-banner
+- mega-hero
+- interactive-banner | default and (corporate) variant
+- contact-form
+- store-locator
+- newsletter-subscribe
+- cards (shop-by)
+- carousel (shop-by)
+
 ## Documentation
 
 Before using the boilerplate, we recommend you to go through the documentation on <https://experienceleague.adobe.com/developer/commerce/storefront/> and more specifically:
