@@ -1,39 +1,49 @@
-
-  .product-recommendations .recommendations__header {
+.product-recommendations {
+  & .recommendations__header {
     min-height: 0;
   }
-.product-recommendations .dropin-content-grid {
+
+  .dropin-content-grid {
     overflow: hidden;
   }
-.product-recommendations .recommendations-product-list {
+
+  & .recommendations-product-list {
     gap: var(--spacing-medium);
     padding-bottom: var(--spacing-medium);
   }
-.product-recommendations .recommendations-product-list__heading {
+
+  & .recommendations-product-list__heading {
     margin-bottom: 0;
     padding-bottom: var(--spacing-xsmall);
   }
-.product-recommendations .recommendations__wrapper.recommendations--with-carousel-controls .recommendations-product-list__heading {
+
+  & .recommendations__wrapper.recommendations--with-carousel-controls {
+    & .recommendations-product-list__heading {
       display: none;
     }
-.product-recommendations .recommendations-carousel-controls {
+  }
+
+  & .recommendations-carousel-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-medium);
     margin-bottom: var(--spacing-medium);
-  }
-.product-recommendations .recommendations-carousel-controls .recommendations-carousel-heading {
+
+    & .recommendations-carousel-heading {
       flex: 1 1 auto;
       margin: 0;
       color: var(--color-neutral-800);
       font: var(--type-headline-1-font);
       letter-spacing: var(--type-headline-1-letter-spacing);
     }
-.product-recommendations .recommendations-product-list__content {
+  }
+
+  & .recommendations-product-list__content {
     margin-top: 0;
   }
-.product-recommendations .recommendations-carousel__content {
+
+  & .recommendations-carousel__content {
     display: flex;
     gap: clamp(1rem, 2vw, 1.5rem);
     padding: 0.25rem 0 1rem;
@@ -43,23 +53,26 @@
     overflow-y: hidden;
     scroll-padding-inline: 0.25rem;
     scrollbar-width: none;
-  }
-.product-recommendations .recommendations-carousel__content::-webkit-scrollbar {
+
+    &::-webkit-scrollbar {
       display: none;
     }
-.product-recommendations .recommendations-carousel__content > * {
+
+    > * {
       display: flex;
       flex: 0 0 auto;
       scroll-snap-align: start;
     }
-.product-recommendations .carousel-navigation-buttons {
+  }
+
+  & .carousel-navigation-buttons {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
     justify-content: flex-end;
     gap: 1rem;
-  }
-.product-recommendations .carousel-navigation-buttons button {
+
+    & button {
       position: relative;
       width: 44px;
       height: 44px;
@@ -70,20 +83,23 @@
       color: transparent;
       cursor: pointer;
       transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
-    }
-.product-recommendations .carousel-navigation-buttons button:hover,
-      .product-recommendations .carousel-navigation-buttons button:focus-visible {
+
+      &:hover,
+      &:focus-visible {
         background-color: var(--color-neutral-300);
       }
-.product-recommendations .carousel-navigation-buttons button:disabled {
+
+      &:disabled {
         opacity: 0.45;
         cursor: default;
       }
-.product-recommendations .carousel-navigation-buttons button:focus-visible {
+
+      &:focus-visible {
         outline: 2px solid var(--color-brand-500);
         outline-offset: 2px;
       }
-.product-recommendations .carousel-navigation-buttons button::after {
+
+      &::after {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -93,13 +109,18 @@
         content: '';
         background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7.5 15L12.5 10L7.5 5' stroke='%231a1a1a' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       }
-.product-recommendations .carousel-navigation-buttons button.slide-prev::after {
+
+      &.slide-prev::after {
         transform: translate(-50%, -50%) rotate(180deg);
       }
-.product-recommendations .carousel-navigation-buttons button.slide-next::after {
+
+      &.slide-next::after {
         transform: translate(-50%, -50%);
       }
-.product-recommendations .dropin-product-item-card {
+    }
+  }
+
+  & .dropin-product-item-card {
     display: grid;
     grid-template-rows: auto 1fr;
     width: 100%;
@@ -110,17 +131,20 @@
     background: #fff;
     box-shadow:  var(--shape-shadow-1);
     transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-  }
-.product-recommendations .dropin-product-item-card:hover {
+
+    &:hover {
       border-color: #d5d5d5;
       box-shadow: var(--shape-shadow-2);
       transform: translateY(-2px);
     }
-.product-recommendations .dropin-product-item-card:focus-within {
+
+    &:focus-within {
       border-color: #c9c9c9;
       box-shadow: var(--shape-shadow-2);
     }
-.product-recommendations .dropin-product-item-card__image-container {
+  }
+
+  & .dropin-product-item-card__image-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,92 +152,106 @@
     overflow: hidden;
     background: linear-gradient(180deg, #f3f0ec 0%, #ebe7e2 100%);
   }
-.product-recommendations .dropin-product-item-card__image,
-  .product-recommendations .dropin-product-item-card__image a,
-  .product-recommendations .dropin-product-item-card__image picture {
+
+  & .dropin-product-item-card__image,
+  & .dropin-product-item-card__image a,
+  & .dropin-product-item-card__image picture {
     display: flex;
     width: 100%;
     height: 100%;
   }
-.product-recommendations .dropin-product-item-card__image img {
+
+  & .dropin-product-item-card__image img {
     display: block;
     width: 100%;
     height: 100%;
     max-height: none;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     background: transparent;
   }
-.product-recommendations .dropin-product-item-card__content {
+
+  & .dropin-product-item-card__content {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    grid-gap: 0.5rem;
     gap: 0.5rem;
     align-content: start;
     border-top: var(--border-default);
     padding: 1.25rem 1.125rem 1.125rem;
     color: #1a1a1a;
   }
-.product-recommendations .dropin-product-item-card__title,
-  .product-recommendations .dropin-product-item-card__sku,
-  .product-recommendations .dropin-product-item-card__price,
-  .product-recommendations .dropin-product-item-card__swatches,
-  .product-recommendations .dropin-product-item-card__action {
+
+  & .dropin-product-item-card__title,
+  & .dropin-product-item-card__sku,
+  & .dropin-product-item-card__price,
+  & .dropin-product-item-card__swatches,
+  & .dropin-product-item-card__action {
     grid-column: 1;
   }
-.product-recommendations .dropin-product-item-card__title {
+
+  & .dropin-product-item-card__title {
     margin: 0;
     color: #1a1a1a;
     font-size: 1.75rem;
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -0.02em;
-  }
-.product-recommendations .dropin-product-item-card__title a {
+
+    & a {
       color: inherit;
       text-decoration: none;
-    }
-.product-recommendations .dropin-product-item-card__title a:hover,
-      .product-recommendations .dropin-product-item-card__title a:focus-visible {
+
+      &:hover,
+      &:focus-visible {
         color: inherit;
         text-decoration: none;
       }
-.product-recommendations .dropin-product-item-card__sku {
+    }
+  }
+
+  & .dropin-product-item-card__sku {
     color: #757575;
     font-size: 1.2rem;
     line-height: 1.4;
   }
-.product-recommendations .dropin-product-item-card__price,
-  .product-recommendations .dropin-product-item-card__price .dropin-price,
-  .product-recommendations .dropin-product-item-card__price .dropin-price--default {
+
+  & .dropin-product-item-card__price,
+  & .dropin-product-item-card__price .dropin-price,
+  & .dropin-product-item-card__price .dropin-price--default {
     color: #f44336;
     font-size: 1.9rem;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
-.product-recommendations .dropin-product-item-card__price .dropin-price-range {
+
+  & .dropin-product-item-card__price {
+    & .dropin-price-range {
       color: #f44336;
       font-weight: 700;
     }
-.product-recommendations .dropin-product-item-card__action {
-    margin-top: 0.5rem;
   }
-.product-recommendations .dropin-product-item-card__action a {
+
+  & .dropin-product-item-card__action {
+    margin-top: 0.5rem;
+
+    & a {
       text-decoration: none;
     }
-.product-recommendations .footer__wrapper {
+  }
+
+  & .footer__wrapper {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     width: 100%;
   }
-.product-recommendations .footer__button--add-to-cart {
+
+  & .footer__button--add-to-cart {
     flex: 1 1 auto;
     min-width: 0;
-  }
-.product-recommendations .footer__button--add-to-cart .dropin-button--primary,
-    .product-recommendations .footer__button--add-to-cart .dropin-button--tertiary {
+
+    & .dropin-button--primary,
+    & .dropin-button--tertiary {
       width: 100%;
       min-height: 4.8rem;
       justify-content: center;
@@ -223,69 +261,82 @@
       letter-spacing: 0;
       text-align: center;
     }
-.product-recommendations .footer__button--add-to-cart .dropin-button--primary {
+
+    & .dropin-button--primary {
       background: #53a257;
       color: #fff;
-    }
-.product-recommendations .footer__button--add-to-cart .dropin-button--primary:hover,
-      .product-recommendations .footer__button--add-to-cart .dropin-button--primary:focus:hover {
+
+      &:hover,
+      &:focus:hover {
         background: #478e4b;
       }
-.product-recommendations .footer__button--add-to-cart .dropin-button--primary:active {
+
+      &:active {
         background: #3d7a40;
       }
-.product-recommendations .footer__button--add-to-cart .dropin-button--tertiary {
+    }
+
+    & .dropin-button--tertiary {
       border: 1px solid #53a257;
       background: #fff;
       color: #53a257;
-    }
-.product-recommendations .footer__button--add-to-cart .dropin-button--tertiary:hover,
-      .product-recommendations .footer__button--add-to-cart .dropin-button--tertiary:focus:hover {
+
+      &:hover,
+      &:focus:hover {
         border-color: #478e4b;
         color: #478e4b;
       }
-.product-recommendations .footer__button--add-to-cart .dropin-button--with-icon {
-      justify-content: center;
-      -moz-column-gap: 0.625rem;
-           column-gap: 0.625rem;
     }
-.product-recommendations .footer__button--add-to-cart .dropin-button-icon {
+
+    & .dropin-button--with-icon {
+      justify-content: center;
+      column-gap: 0.625rem;
+    }
+
+    & .dropin-button-icon {
       height: 1.8rem;
       width: 1.8rem;
     }
-.product-recommendations .footer__button--wishlist-toggle {
+  }
+
+  & .footer__button--wishlist-toggle {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
     width: 4.8rem;
     height: 4.8rem;
-  }
-.product-recommendations .footer__button--wishlist-toggle .dropin-iconButton,
-    .product-recommendations .footer__button--wishlist-toggle .dropin-button,
-    .product-recommendations .footer__button--wishlist-toggle button {
+
+    & .dropin-iconButton,
+    & .dropin-button,
+    & button {
       width: 100%;
       height: 100%;
       min-width: 0;
       min-height: 0;
       border-radius: 999px;
     }
-@media (min-width: 768px) {
-      .product-recommendations .recommendations-carousel-controls .recommendations-carousel-heading {
+  }
+
+  @media (min-width: 768px) {
+    & .recommendations-carousel-controls {
+      & .recommendations-carousel-heading {
         font: var(--type-display-3-font);
         letter-spacing: var(--type-display-3-letter-spacing);
       }
+    }
 
-    .product-recommendations .dropin-product-item-card__image-container {
+    & .dropin-product-item-card__image-container {
       min-height: 340px;
     }
 
-    .product-recommendations .dropin-product-item-card__content {
+    & .dropin-product-item-card__content {
       padding: 1.5rem 1.25rem 1.25rem;
     }
 
-    .product-recommendations .recommendations-carousel__content {
+    & .recommendations-carousel__content {
       overflow-x: auto;
       scroll-padding-inline: 0;
     }
   }
+}

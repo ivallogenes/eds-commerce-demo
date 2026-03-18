@@ -61,6 +61,143 @@ function getPurchaseHistory(storeViewCode) {
   }
 }
 
+function createCarouselNavigationButton(direction, label) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = direction === 'previous' ? 'slide-prev' : 'slide-next';
+  button.setAttribute('aria-label', label);
+  return button;
+}
+
+function getCarouselScrollAmount(track) {
+  const firstSlide = track.firstElementChild;
+
+  if (!firstSlide) {
+    return track.clientWidth;
+  }
+
+  const gapValue = window.getComputedStyle(track).gap || '0';
+  const gap = parseFloat(gapValue) || 0;
+
+  return firstSlide.getBoundingClientRect().width + gap;
+}
+
+function updateCarouselNavigationState(track, previousButton, nextButton) {
+  const maxScrollLeft = track.scrollWidth - track.clientWidth;
+  const currentScrollLeft = Math.round(track.scrollLeft);
+
+  previousButton.disabled = currentScrollLeft <= 0;
+  nextButton.disabled = currentScrollLeft >= Math.max(0, Math.round(maxScrollLeft) - 1);
+}
+
+function decorateRecommendationsCarousel(wrapper, labels) {
+  wrapper.recommendationsCarouselCleanup?.();
+
+  const header = wrapper.querySelector('.recommendations__header');
+  const section = wrapper.querySelector('.recommendations__list .recommendations-product-list');
+  const heading = section?.querySelector('.recommendations-product-list__heading');
+  const track = section?.querySelector('.recommendations-carousel__content');
+
+  if (!header || !section || !track || track.children.length < 2) {
+    header?.replaceChildren();
+    wrapper.classList.remove('recommendations--with-carousel-controls');
+    wrapper.recommendationsCarouselCleanup = null;
+    return;
+  }
+
+  wrapper.classList.add('recommendations--with-carousel-controls');
+
+  const controls = document.createElement('div');
+  controls.className = 'recommendations-carousel-controls';
+
+  const headingText = heading?.textContent?.trim();
+  const headingElement = document.createElement('div');
+  headingElement.className = 'recommendations-carousel-heading';
+  headingElement.textContent = headingText || labels?.Recommendations?.ProductList?.heading || 'You might also like';
+
+  const navigation = document.createElement('div');
+  navigation.className = 'carousel-navigation-buttons';
+
+  const previousButton = createCarouselNavigationButton(
+    'previous',
+    labels.previous || 'Previous Slide',
+  );
+  const nextButton = createCarouselNavigationButton(
+    'next',
+    labels.next || 'Next Slide',
+  );
+
+  navigation.append(previousButton, nextButton);
+  controls.append(headingElement, navigation);
+  header.replaceChildren(controls);
+
+  const scrollTrack = (direction) => {
+    track.scrollBy({
+      left: getCarouselScrollAmount(track) * direction,
+      behavior: 'smooth',
+    });
+  };
+
+  const handlePreviousClick = () => scrollTrack(-1);
+  const handleNextClick = () => scrollTrack(1);
+  const handleScroll = () => {
+    updateCarouselNavigationState(track, previousButton, nextButton);
+  };
+  const handleResize = () => {
+    updateCarouselNavigationState(track, previousButton, nextButton);
+  };
+
+  previousButton.addEventListener('click', handlePreviousClick);
+  nextButton.addEventListener('click', handleNextClick);
+  track.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize);
+
+  updateCarouselNavigationState(track, previousButton, nextButton);
+
+  wrapper.recommendationsCarouselCleanup = () => {
+    previousButton.removeEventListener('click', handlePreviousClick);
+    nextButton.removeEventListener('click', handleNextClick);
+    track.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleResize);
+  };
+}
+
+function observeRecommendationsCarousel(list, wrapper, labels) {
+  let frame = null;
+
+  const scheduleDecoration = () => {
+    if (frame) {
+      window.cancelAnimationFrame(frame);
+    }
+
+    frame = window.requestAnimationFrame(() => {
+      frame = null;
+      decorateRecommendationsCarousel(wrapper, labels);
+    });
+  };
+
+  const observer = new MutationObserver(() => {
+    scheduleDecoration();
+  });
+
+  observer.observe(list, {
+    childList: true,
+    subtree: true,
+  });
+
+  scheduleDecoration();
+
+  return () => {
+    if (frame) {
+      window.cancelAnimationFrame(frame);
+    }
+
+    observer.disconnect();
+    wrapper.recommendationsCarouselCleanup?.();
+    wrapper.recommendationsCarouselCleanup = null;
+  };
+}
+
 export default async function decorate(block) {
   const labels = await fetchPlaceholders();
 
@@ -76,12 +213,14 @@ export default async function decorate(block) {
   // Layout
   const fragment = document.createRange().createContextualFragment(`
     <div class="recommendations__wrapper">
+      <div class="recommendations__header"></div>
       <div class="recommendations__list"></div>
     </div>
   `);
 
   const $list = fragment.querySelector('.recommendations__list');
   const $wrapper = fragment.querySelector('.recommendations__wrapper');
+  const stopObservingCarousel = observeRecommendationsCarousel($list, $wrapper, labels);
 
   block.appendChild(fragment);
 
@@ -228,7 +367,7 @@ export default async function decorate(block) {
               });
             },
           },
-        })($wrapper),
+        })($list),
       ]);
     } finally {
       isLoading = false;
@@ -320,4 +459,6 @@ export default async function decorate(block) {
     });
     inViewObserver.observe(section);
   }
+
+  block.cleanupRecommendationsCarousel = stopObservingCarousel;
 }
