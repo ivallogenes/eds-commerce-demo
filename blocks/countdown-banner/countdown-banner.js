@@ -20,7 +20,8 @@ const DEFAULT_CONFIG = Object.freeze({
 });
 
 const COLOR_PATTERN = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
-let publishTimestampPromise;
+const COUNTDOWN_STORAGE_KEY_PREFIX = 'countdown-banner:';
+const COUNTDOWN_INTERVAL = Symbol('countdown-banner-interval');
 
 function normalizeLines(value) {
   if (Array.isArray(value)) {
@@ -90,42 +91,88 @@ function getMetadataTimestamp() {
   return Number.isNaN(parsed) ? null : parsed;
 }
 
-async function getPublishTimestamp() {
-  if (!publishTimestampPromise) {
-    publishTimestampPromise = (async () => {
-      try {
-        const response = await fetch(window.location.href, {
-          method: 'HEAD',
-          cache: 'no-store',
-        });
+function getDocumentTimestamp() {
+  const parsed = Date.parse(document.lastModified);
+  return Number.isNaN(parsed) ? null : parsed;
+}
 
-        const lastModified = response.headers.get('last-modified');
-        const parsedHeader = lastModified ? Date.parse(lastModified) : Number.NaN;
+function hashValue(value) {
+  let hash = 0;
 
-        if (!Number.isNaN(parsedHeader)) {
-          return parsedHeader;
-        }
-      } catch (error) {
-        // Ignore header lookup failures and use page-level fallbacks.
-      }
-
-      const metaTimestamp = getMetadataTimestamp();
-
-      if (metaTimestamp) {
-        return metaTimestamp;
-      }
-
-      const documentTimestamp = Date.parse(document.lastModified);
-
-      if (!Number.isNaN(documentTimestamp)) {
-        return documentTimestamp;
-      }
-
-      return Date.now();
-    })();
+  for (let index = 0; index < value.length; index += 1) {
+    hash = ((hash << 5) - hash) + value.charCodeAt(index);
+    hash |= 0;
   }
 
-  return publishTimestampPromise;
+  return Math.abs(hash).toString(36);
+}
+
+function createCountdownStorageKey(config, promoLines, durationHours) {
+  const signature = JSON.stringify([
+    window.location.pathname,
+    durationHours,
+    config.badge,
+    config.heading,
+    config.description,
+    config['button-text'],
+    config['button-link'],
+    promoLines,
+  ]);
+
+  return `${COUNTDOWN_STORAGE_KEY_PREFIX}${hashValue(signature)}`;
+}
+
+function readStoredCountdownState(storageKey) {
+  try {
+    const storedValue = window.localStorage.getItem(storageKey);
+
+    if (!storedValue) {
+      return null;
+    }
+
+    const parsed = JSON.parse(storedValue);
+    const hasValidShape = Number.isFinite(parsed?.startTimestamp)
+      && Number.isFinite(parsed?.endTimestamp)
+      && Number.isInteger(parsed?.durationHours);
+
+    return hasValidShape ? parsed : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeStoredCountdownState(storageKey, state) {
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch (error) {
+    // Ignore storage access failures and continue with the current session state.
+  }
+}
+
+function resolveCountdownState(storageKey, durationHours) {
+  const metaTimestamp = getMetadataTimestamp();
+  const storedState = readStoredCountdownState(storageKey);
+
+  if (storedState && storedState.durationHours === durationHours) {
+    const shouldResetFromMetadata = Number.isFinite(metaTimestamp)
+      && storedState.metaTimestamp !== metaTimestamp;
+
+    if (!shouldResetFromMetadata) {
+      return storedState;
+    }
+  }
+
+  const startTimestamp = metaTimestamp ?? getDocumentTimestamp() ?? Date.now();
+  const countdownState = {
+    durationHours,
+    metaTimestamp,
+    startTimestamp,
+    endTimestamp: startTimestamp + (durationHours * 60 * 60 * 1000),
+  };
+
+  writeStoredCountdownState(storageKey, countdownState);
+
+  return countdownState;
 }
 
 function getRemainingTime(endTimestamp) {
@@ -191,7 +238,7 @@ function createPromoCard(lines) {
  * Builds the countdown banner block.
  * @param {Element} block The countdown banner block element.
  */
-export default async function decorate(block) {
+export default function decorate(block) {
   const config = {
     ...DEFAULT_CONFIG,
     ...readBlockConfig(block),
@@ -200,6 +247,12 @@ export default async function decorate(block) {
   const fontColor = normalizeColor(config['font-color'], DEFAULT_CONFIG['font-color']);
   const promoLines = normalizeLines(config['promo-label']);
   const durationHours = parseDurationHours(config['promotion-duration']);
+  const storageKey = createCountdownStorageKey(config, promoLines, durationHours);
+
+  if (block[COUNTDOWN_INTERVAL]) {
+    window.clearInterval(block[COUNTDOWN_INTERVAL]);
+    delete block[COUNTDOWN_INTERVAL];
+  }
 
   const fragment = document.createRange().createContextualFragment(`
     <div class="countdown-banner__inner">
@@ -262,10 +315,9 @@ export default async function decorate(block) {
   block.style.setProperty('--countdown-banner-font-color', fontColor);
   block.dataset.promotionDurationHours = String(durationHours);
 
-  const publishTimestamp = await getPublishTimestamp();
-  const endTimestamp = publishTimestamp + (durationHours * 60 * 60 * 1000);
+  const { startTimestamp, endTimestamp } = resolveCountdownState(storageKey, durationHours);
 
-  block.dataset.utcStartTime = new Date(publishTimestamp).toISOString();
+  block.dataset.utcStartTime = new Date(startTimestamp).toISOString();
   block.dataset.utcEndTime = new Date(endTimestamp).toISOString();
 
   block.replaceChildren(fragment);
@@ -275,16 +327,18 @@ export default async function decorate(block) {
     return;
   }
 
-  const intervalId = window.setInterval(() => {
+  block[COUNTDOWN_INTERVAL] = window.setInterval(() => {
     if (!block.isConnected) {
-      window.clearInterval(intervalId);
+      window.clearInterval(block[COUNTDOWN_INTERVAL]);
+      delete block[COUNTDOWN_INTERVAL];
       return;
     }
 
     const complete = updateTimer(timer, endTimestamp);
 
     if (complete) {
-      window.clearInterval(intervalId);
+      window.clearInterval(block[COUNTDOWN_INTERVAL]);
+      delete block[COUNTDOWN_INTERVAL];
     }
   }, 1000);
 }

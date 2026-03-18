@@ -256,7 +256,7 @@ main > .section .carousel-wrapper {
 .carousel.shop-by .carousel-slide .carousel-slide-image picture > img {
     display: block;
     object-fit: cover;
-    transition: transform 0.2s ease;
+    transition: transform 0.35s ease;
 }
 
 .carousel.shop-by .carousel-slide:hover .carousel-slide-image picture > img {
