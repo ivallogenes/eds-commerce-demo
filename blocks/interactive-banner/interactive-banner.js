@@ -1,4 +1,6 @@
-const SOCIAL_PROOF_MARKERS = ['A', 'M', 'S', 'K'];
+const DEFAULT_SOCIAL_PROOF_MARKERS = ['A', 'M', 'S', 'K'];
+
+const CORPORATE_SOCIAL_PROOF_MARKERS = ['J', 'R', 'L', 'T'];
 
 /**
  * Returns the authored rows for a block.
@@ -28,23 +30,74 @@ function getHeading(children) {
 }
 
 /**
+ * Returns the active banner variant.
+ * @param {Element} block The block element.
+ * @returns {'default' | 'corporate'}
+ */
+function getVariant(block) {
+  return block.classList.contains('corporate') ? 'corporate' : 'default';
+}
+
+/**
+ * Extracts trailing text lines from a paragraph after media content.
+ * @param {HTMLParagraphElement} paragraph The authored paragraph.
+ * @returns {string[]}
+ */
+function getParagraphLines(paragraph) {
+  const lines = [];
+  let currentLine = '';
+
+  [...paragraph.childNodes].forEach((node) => {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const element = /** @type {Element} */ (node);
+
+      if (element.tagName === 'PICTURE') {
+        return;
+      }
+
+      if (element.tagName === 'BR') {
+        if (currentLine.trim()) {
+          lines.push(currentLine.trim());
+        }
+
+        currentLine = '';
+        return;
+      }
+    }
+
+    const text = node.textContent || '';
+
+    if (text) {
+      currentLine += text;
+    }
+  });
+
+  if (currentLine.trim()) {
+    lines.push(currentLine.trim());
+  }
+
+  return lines;
+}
+
+/**
  * Builds the styled social proof footer.
  * @param {HTMLParagraphElement} paragraph The authored paragraph.
+ * @param {string[]} markers Marker letters for the social proof cluster.
  * @returns {HTMLDivElement}
  */
-function buildSocialProof(paragraph) {
+function buildSocialProof(paragraph, markers = DEFAULT_SOCIAL_PROOF_MARKERS) {
   const wrapper = document.createElement('div');
   wrapper.className = 'interactive-banner__social-proof';
 
-  const markers = document.createElement('div');
-  markers.className = 'interactive-banner__social-proof-markers';
-  markers.setAttribute('aria-hidden', 'true');
+  const markersWrapper = document.createElement('div');
+  markersWrapper.className = 'interactive-banner__social-proof-markers';
+  markersWrapper.setAttribute('aria-hidden', 'true');
 
-  SOCIAL_PROOF_MARKERS.forEach((marker) => {
+  markers.forEach((marker) => {
     const item = document.createElement('span');
     item.className = 'interactive-banner__social-proof-marker';
     item.textContent = marker;
-    markers.append(item);
+    markersWrapper.append(item);
   });
 
   const text = document.createElement('p');
@@ -66,7 +119,7 @@ function buildSocialProof(paragraph) {
     text.textContent = content;
   }
 
-  wrapper.append(markers, text);
+  wrapper.append(markersWrapper, text);
   return wrapper;
 }
 
@@ -107,7 +160,7 @@ function buildActions(paragraph) {
  * @param {Element} mediaColumn The authored media column.
  * @returns {{ link: HTMLAnchorElement, label: string }[]}
  */
-function getMediaItems(mediaColumn) {
+function getDefaultMediaItems(mediaColumn) {
   const paragraphs = [...mediaColumn.querySelectorAll(':scope > p')];
 
   const items = paragraphs
@@ -146,7 +199,7 @@ function getMediaItems(mediaColumn) {
  * @param {{ link: HTMLAnchorElement, label: string }[]} items The authored media items.
  * @returns {HTMLDivElement}
  */
-function buildMediaCluster(items) {
+function buildDefaultMediaCluster(items) {
   const media = document.createElement('div');
   media.className = 'interactive-banner__media';
 
@@ -197,10 +250,136 @@ function buildMediaCluster(items) {
 }
 
 /**
- * Decorates the interactive-banner block.
+ * Extracts corporate media cards from the authored media column.
+ * @param {Element} mediaColumn The authored media column.
+ * @returns {{ picture: HTMLPictureElement, title: string, subtitle: string }[]}
+ */
+function getCorporateMediaItems(mediaColumn) {
+  const paragraphs = [...mediaColumn.querySelectorAll(':scope > p')];
+  const items = [];
+
+  for (let index = 0; index < paragraphs.length && items.length < 5; index += 1) {
+    const paragraph = paragraphs[index];
+    const picture = paragraph.querySelector('picture');
+
+    if (!picture) {
+      continue;
+    }
+
+    const lines = getParagraphLines(paragraph);
+    const title = lines[0] || '';
+    let subtitle = lines.slice(1).join(' ').trim();
+    const nextParagraph = paragraphs[index + 1];
+
+    if (!subtitle && nextParagraph && !nextParagraph.querySelector('picture')) {
+      subtitle = nextParagraph.textContent.trim();
+      index += 1;
+    }
+
+    items.push({
+      picture,
+      title,
+      subtitle,
+    });
+  }
+
+  return items;
+}
+
+/**
+ * Builds the corporate media card cluster.
+ * @param {{ picture: HTMLPictureElement, title: string, subtitle: string }[]} items The authored media items.
+ * @returns {HTMLDivElement}
+ */
+function buildCorporateMediaCluster(items) {
+  const media = document.createElement('div');
+  media.className = 'interactive-banner__media interactive-banner__media--corporate';
+
+  const cards = document.createElement('div');
+  cards.className = 'interactive-banner__media-cards';
+
+  items.slice(0, 5).forEach(({ picture, title, subtitle }, index) => {
+    const item = document.createElement('article');
+    item.className = 'interactive-banner__card-item';
+    item.dataset.position = String(index + 1);
+
+    const shell = document.createElement('div');
+    shell.className = 'interactive-banner__card-shell';
+
+    const imageWrapper = document.createElement('div');
+    imageWrapper.className = 'interactive-banner__card-image';
+
+    const image = picture.querySelector('img');
+
+    picture.classList.add('interactive-banner__picture');
+    if (image) {
+      image.classList.add('interactive-banner__image');
+    }
+
+    imageWrapper.append(picture);
+
+    const copy = document.createElement('div');
+    copy.className = 'interactive-banner__card-copy';
+
+    if (title) {
+      const titleElement = document.createElement('p');
+      titleElement.className = 'interactive-banner__card-title';
+      titleElement.textContent = title;
+      copy.append(titleElement);
+    }
+
+    if (subtitle) {
+      const subtitleElement = document.createElement('p');
+      subtitleElement.className = 'interactive-banner__card-subtitle';
+      subtitleElement.textContent = subtitle;
+      copy.append(subtitleElement);
+    }
+
+    const action = document.createElement('span');
+    action.className = 'interactive-banner__card-action';
+    action.setAttribute('aria-hidden', 'true');
+
+    shell.append(imageWrapper, copy, action);
+    item.append(shell);
+    cards.append(item);
+  });
+
+  media.append(cards);
+  return media;
+}
+
+/**
+ * Builds a badge list from authored paragraphs.
+ * @param {HTMLParagraphElement[]} paragraphs Authored badge paragraphs.
+ * @returns {HTMLUListElement | null}
+ */
+function buildBadgeListFromParagraphs(paragraphs) {
+  const items = paragraphs
+    .map((paragraph) => paragraph.textContent.trim())
+    .filter(Boolean);
+
+  if (!items.length) {
+    return null;
+  }
+
+  const list = document.createElement('ul');
+  list.className = 'interactive-banner__badge-list';
+
+  items.forEach((text) => {
+    const item = document.createElement('li');
+    item.className = 'interactive-banner__badge-item';
+    item.textContent = text;
+    list.append(item);
+  });
+
+  return list;
+}
+
+/**
+ * Decorates the default interactive-banner block.
  * @param {Element} block The block element.
  */
-export default function decorate(block) {
+function decorateDefault(block) {
   const [row] = getRows(block);
   const columns = row ? [...row.children] : [];
   const [mediaColumn, contentColumn] = columns;
@@ -209,7 +388,7 @@ export default function decorate(block) {
     return;
   }
 
-  const mediaItems = getMediaItems(mediaColumn);
+  const mediaItems = getDefaultMediaItems(mediaColumn);
 
   if (!mediaItems.length) {
     return;
@@ -276,6 +455,109 @@ export default function decorate(block) {
     content.append(buildSocialProof(footerParagraph));
   }
 
-  inner.append(buildMediaCluster(mediaItems));
+  inner.append(buildDefaultMediaCluster(mediaItems));
   block.replaceChildren(fragment);
+}
+
+/**
+ * Decorates the corporate interactive-banner block.
+ * @param {Element} block The block element.
+ */
+function decorateCorporate(block) {
+  const [row] = getRows(block);
+  const columns = row ? [...row.children] : [];
+  const [contentColumn, mediaColumn] = columns;
+
+  if (!contentColumn || !mediaColumn) {
+    return;
+  }
+
+  const mediaItems = getCorporateMediaItems(mediaColumn);
+
+  if (!mediaItems.length) {
+    return;
+  }
+
+  const contentChildren = [...contentColumn.children];
+  const heading = getHeading(contentChildren);
+  const actionParagraph = contentChildren.find(
+    (child) => child.tagName === 'P' && child.querySelectorAll('a').length,
+  ) || null;
+  const footerParagraph = contentChildren.at(-1)?.tagName === 'P'
+    ? contentChildren.at(-1)
+    : null;
+  const topBadge = contentChildren[0]?.tagName === 'P' ? contentChildren[0] : null;
+  const description = contentChildren.find((child) => (
+    child.tagName === 'P'
+    && child !== topBadge
+    && child !== actionParagraph
+    && child !== footerParagraph
+  )) || null;
+
+  const descriptionIndex = description ? contentChildren.indexOf(description) : -1;
+  const actionIndex = actionParagraph ? contentChildren.indexOf(actionParagraph) : contentChildren.length;
+  const footerIndex = footerParagraph ? contentChildren.indexOf(footerParagraph) : contentChildren.length;
+  const endIndex = Math.min(actionIndex, footerIndex);
+  const badgeParagraphs = contentChildren
+    .slice(descriptionIndex + 1, endIndex)
+    .filter((child) => child.tagName === 'P');
+
+  const fragment = document.createRange().createContextualFragment(`
+    <div class="interactive-banner__inner">
+      <div class="interactive-banner__content"></div>
+    </div>
+  `);
+
+  const inner = fragment.querySelector('.interactive-banner__inner');
+  const content = fragment.querySelector('.interactive-banner__content');
+
+  if (
+    topBadge
+    && topBadge.textContent.trim().toLowerCase() !== 'no-badge'
+  ) {
+    topBadge.className = 'interactive-banner__top-badge';
+    content.append(topBadge);
+  }
+
+  if (heading) {
+    heading.classList.add('interactive-banner__heading');
+    content.append(heading);
+  }
+
+  if (description) {
+    description.className = 'interactive-banner__description';
+    content.append(description);
+  }
+
+  const badgeList = buildBadgeListFromParagraphs(badgeParagraphs);
+  if (badgeList) {
+    content.append(badgeList);
+  }
+
+  const actions = buildActions(actionParagraph);
+  if (actions) {
+    content.append(actions);
+  }
+
+  if (footerParagraph) {
+    content.append(buildSocialProof(footerParagraph, CORPORATE_SOCIAL_PROOF_MARKERS));
+  }
+
+  inner.append(buildCorporateMediaCluster(mediaItems));
+  block.replaceChildren(fragment);
+}
+
+/**
+ * Decorates the interactive-banner block.
+ * @param {Element} block The block element.
+ */
+export default function decorate(block) {
+  block.dataset.variant = getVariant(block);
+
+  if (block.dataset.variant === 'corporate') {
+    decorateCorporate(block);
+    return;
+  }
+
+  decorateDefault(block);
 }
