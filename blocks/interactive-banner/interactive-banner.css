@@ -1,0 +1,713 @@
+.section.interactive-banner-container {
+  margin: 0;
+}
+
+.interactive-banner-container {
+  max-width: none;
+  padding: 0;
+}
+
+.interactive-banner-container .interactive-banner-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+@keyframes interactive-banner-badge-pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgb(233 30 99 / 32%);
+  }
+
+  70% {
+    transform: translateY(-50%) scale(1.18);
+    box-shadow: 0 0 0 0.9rem rgb(233 30 99 / 0%);
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgb(233 30 99 / 0%);
+  }
+}
+
+@keyframes interactive-banner-circle-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(0, -0.8rem, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -1.4rem, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -0.6rem, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+main .interactive-banner {
+  --interactive-banner-bg-start: #fff4f7;
+  --interactive-banner-bg-mid: #ffffff;
+  --interactive-banner-bg-end: #f7fbf2;
+  --interactive-banner-text: #1a1a1a;
+  --interactive-banner-muted: #757575;
+  --interactive-banner-chip-border: #e0e0e0;
+  --interactive-banner-chip-bg: #ffffff;
+  --interactive-banner-chip-shadow: rgb(0 0 0 / 4%);
+  --interactive-banner-primary: #e91e63;
+  --interactive-banner-primary-hover: #cf1556;
+  --interactive-banner-orange: #ff9800;
+  --interactive-banner-green: #53a257;
+  --interactive-banner-teal: #2196a9;
+  --interactive-banner-red: #ed4f58;
+  --interactive-banner-avatar-blue: #2196a9;
+  --interactive-banner-dash: rgb(224 224 224 / 50%);
+  --interactive-banner-dash-soft: rgb(224 224 224 / 25%);
+  --heading-gradient-effect: linear-gradient(90deg, #E91E63 0%, #ED3B5E 7.14%, #F04F58 14.29%, #F46050 21.43%, #F76F47 28.57%, #FA7D3B 35.71%, #FD8B2A 42.86%, #FF9800 50%, #EA9C21 57.14%, #D59E31 64.29%, #BFA03C 71.43%, #A8A144 78.57%, #90A24B 85.71%, #74A252 92.86%, #53A257 100%);
+
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-xxbig) var(--spacing-medium);
+  background:
+    radial-gradient(circle at top left, rgb(255 152 0 / 12%) 0, transparent 23%),
+    radial-gradient(circle at top right, rgb(83 162 87 / 10%) 0, transparent 20%),
+    linear-gradient(135deg,
+      #fff4f7 0%,
+      #ffffff 45%,
+      #f7fbf2 100%);
+}
+
+@supports (color: rgb(0 0 0 / 0)) {
+main .interactive-banner {
+  background:
+    radial-gradient(circle at top left, rgb(255 152 0 / 12%) 0, transparent 23%),
+    radial-gradient(circle at top right, rgb(83 162 87 / 10%) 0, transparent 20%),
+    linear-gradient(135deg,
+      var(--interactive-banner-bg-start) 0%,
+      var(--interactive-banner-bg-mid) 45%,
+      var(--interactive-banner-bg-end) 100%);
+}
+}
+
+main .interactive-banner::before,
+  main .interactive-banner::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+    inset: auto;
+    border-radius: 50%;
+    filter: blur(1px);
+  }
+
+main .interactive-banner::before {
+    top: 7rem;
+    right: 7%;
+    inline-size: 1rem;
+    block-size: 1rem;
+    background-color: var(--interactive-banner-primary);
+    box-shadow:
+      -13rem 22rem 0 0 rgb(255 152 0 / 80%),
+      -8rem 26rem 0 0 rgb(83 162 87 / 85%),
+      -31rem 19rem 0 0 rgb(33 150 169 / 30%);
+  }
+
+main .interactive-banner::after {
+    right: 10%;
+    bottom: 8rem;
+    inline-size: 0.8rem;
+    block-size: 0.8rem;
+    background-color: rgb(83 162 87 / 70%);
+    box-shadow:
+      -18rem -21rem 0 0 rgb(255 152 0 / 55%),
+      -3rem -12rem 0 0 rgb(233 30 99 / 35%),
+      -27rem -8rem 0 0 rgb(83 162 87 / 25%);
+  }
+
+main .interactive-banner .interactive-banner__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-gap: 3.2rem;
+    gap: 3.2rem;
+    align-items: start;
+    max-width: 124.8rem;
+    margin: 0 auto;
+  }
+
+main .interactive-banner .interactive-banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.4rem;
+    min-width: 0;
+    color: var(--interactive-banner-text);
+  }
+
+main .interactive-banner .interactive-banner__top-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.8rem 4.2rem 0.8rem 1.6rem;
+    border: 0.67px solid rgb(233 30 99 / 20%);
+    border-radius: 40px;
+    background: linear-gradient(90deg, rgb(233 30 99 / 10%) 0%, rgb(255 152 0 / 10%) 100%);
+    color: var(--interactive-banner-text);
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+  }
+
+main .interactive-banner .interactive-banner__top-badge::before,
+    main .interactive-banner .interactive-banner__top-badge::after {
+      content: '';
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
+main .interactive-banner .interactive-banner__top-badge::before {
+      inline-size: 1.6rem;
+      block-size: 1.6rem;
+      background: center / contain no-repeat url('../../icons/chip-spark.svg');
+    }
+
+main .interactive-banner .interactive-banner__top-badge::after {
+      position: absolute;
+      top: 50%;
+      right: 1.8rem;
+      inline-size: 0.8rem;
+      block-size: 0.8rem;
+      border-radius: 50%;
+      background-color: var(--interactive-banner-primary);
+      transform: translateY(-50%);
+      animation: interactive-banner-badge-pulse 2.2s ease-out infinite;
+      will-change: transform, box-shadow;
+    }
+
+main .interactive-banner .interactive-banner__heading,
+  main .interactive-banner .interactive-banner__description,
+  main .interactive-banner .interactive-banner__social-proof-text {
+    margin: 0;
+  }
+
+main .interactive-banner .interactive-banner__heading {
+    max-width: 34rem;
+    font: var(--type-display-2-font);
+    letter-spacing: var(--type-display-2-letter-spacing);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+main .interactive-banner .interactive-banner__heading strong,
+    main .interactive-banner .interactive-banner__heading em {
+      font-style: normal;
+      background: linear-gradient(90deg,
+        var(--interactive-banner-primary) 0%,
+        var(--interactive-banner-red) 15%,
+        #f46050 28%,
+        #fd8b2a 44%,
+        var(--interactive-banner-orange) 50%,
+        #bfa03c 72%,
+        #74a252 92%,
+        var(--interactive-banner-green) 100%);
+      -webkit-background-clip: text;
+              background-clip: text;
+      color: transparent;
+    }
+
+main .interactive-banner .interactive-banner__description {
+    max-width: 54rem;
+    color: var(--interactive-banner-muted);
+    font: var(--type-body-1-default-font);
+    letter-spacing: var(--type-body-1-default-letter-spacing);
+  }
+
+main .interactive-banner .interactive-banner__badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+main .interactive-banner .interactive-banner__badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.6rem;
+    border: 0.67px solid var(--interactive-banner-chip-border);
+    border-radius: 40px;
+    background-color: var(--interactive-banner-chip-bg);
+    box-shadow: 0 2px 8px 0 var(--interactive-banner-chip-shadow);
+    color: var(--interactive-banner-text);
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+  }
+
+main .interactive-banner .interactive-banner__badge-item::before {
+      content: '';
+      inline-size: 1.6rem;
+      block-size: 1.6rem;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+main .interactive-banner .interactive-banner__badge-item:nth-child(1)::before {
+      background-image: url('../../icons/chip-flame.svg');
+    }
+
+main .interactive-banner .interactive-banner__badge-item:nth-child(2)::before {
+      background-image: url('../../icons/chip-arrow.svg');
+    }
+
+main .interactive-banner .interactive-banner__badge-item:nth-child(3)::before {
+      background-image: url('../../icons/chip-spark.svg');
+    }
+
+main .interactive-banner .interactive-banner__badge-item:nth-child(n + 4)::before {
+      display: none;
+    }
+
+main .interactive-banner .interactive-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+  }
+
+main .interactive-banner .interactive-banner__button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.6rem 0.9rem 4.4rem;
+    border: 0.67px solid transparent;
+    border-radius: 40px;
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+main .interactive-banner .interactive-banner__button::before,
+    main .interactive-banner .interactive-banner__button::after {
+      content: '';
+      position: absolute;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+main .interactive-banner .interactive-banner__button::before {
+      left: 1.6rem;
+      inline-size: 1.6rem;
+      block-size: 1.6rem;
+    }
+
+main .interactive-banner .interactive-banner__button:hover,
+    main .interactive-banner .interactive-banner__button:focus-visible {
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+main .interactive-banner .interactive-banner__button--primary {
+    background-color: var(--interactive-banner-primary);
+    box-shadow: 0 4px 14px 0 rgb(233 30 99 / 35%);
+    color: #fff;
+  }
+
+main .interactive-banner .interactive-banner__button--primary::before {
+      background-image: url('../../icons/shopping-bag.svg');
+    }
+
+main .interactive-banner .interactive-banner__button--primary:hover,
+    main .interactive-banner .interactive-banner__button--primary:focus-visible {
+      background-color: var(--interactive-banner-primary-hover);
+      color: #fff;
+    }
+
+main .interactive-banner .interactive-banner__button--secondary {
+    padding: 1rem 2rem;
+    padding-right: 4.8rem;
+    border: var(--border-default);
+    background-color: var(--interactive-banner-chip-bg);
+    color: var(--interactive-banner-text);
+  }
+
+main .interactive-banner .interactive-banner__button--secondary::before {
+      display: none;
+    }
+
+main .interactive-banner .interactive-banner__button--secondary::after {
+      right: 2.4rem;
+      inline-size: 1.6rem;
+      block-size: 1.6rem;
+      background-image: url('../../icons/icon-arrow.svg');
+      transition: transform 0.25s ease;
+    }
+
+main .interactive-banner .interactive-banner__button--secondary:hover,
+    main .interactive-banner .interactive-banner__button--secondary:focus-visible {
+      color: var(--interactive-banner-text);
+      transform: none;
+    }
+
+main .interactive-banner .interactive-banner__button--secondary:hover::after, main .interactive-banner .interactive-banner__button--secondary:focus-visible::after {
+        transform: translateX(0.4rem);
+      }
+
+main .interactive-banner .interactive-banner__social-proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+  }
+
+main .interactive-banner .interactive-banner__social-proof-markers {
+    display: flex;
+    align-items: center;
+  }
+
+main .interactive-banner .interactive-banner__social-proof-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 3.6rem;
+    block-size: 3.6rem;
+    margin-left: -0.8rem;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+main .interactive-banner .interactive-banner__social-proof-marker:first-child {
+      margin-left: 0;
+      background-color: var(--interactive-banner-green);
+    }
+
+main .interactive-banner .interactive-banner__social-proof-marker:nth-child(2) {
+      background-color: var(--interactive-banner-avatar-blue);
+    }
+
+main .interactive-banner .interactive-banner__social-proof-marker:nth-child(3) {
+      background-color: var(--interactive-banner-primary);
+    }
+
+main .interactive-banner .interactive-banner__social-proof-marker:nth-child(4) {
+      background-color: var(--interactive-banner-orange);
+    }
+
+main .interactive-banner .interactive-banner__social-proof-text {
+    color: var(--interactive-banner-muted);
+    font: var(--type-body-1-default-font);
+    letter-spacing: var(--type-body-1-default-letter-spacing);
+  }
+
+main .interactive-banner .interactive-banner__social-proof-value {
+    color: var(--interactive-banner-text);
+    font-weight: 700;
+  }
+
+main .interactive-banner .interactive-banner__media {
+    position: relative;
+    display: grid;
+    order: 2;
+    min-width: 0;
+    padding-top: 1.2rem;
+  }
+
+main .interactive-banner .interactive-banner__orbit {
+    display: none;
+  }
+
+main .interactive-banner .interactive-banner__media-cluster {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-gap: 1.6rem;
+    gap: 1.6rem;
+    width: min(100%, 34.6rem);
+  }
+
+main .interactive-banner .interactive-banner__media-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    max-inline-size: 10.2rem;
+    margin: 0 auto;
+  }
+
+main .interactive-banner .interactive-banner__media-link {
+    --interactive-banner-circle-border: var(--interactive-banner-green);
+    --interactive-banner-circle-shadow: rgb(83 162 87 / 12%);
+    position: relative;
+    display: block;
+    inline-size: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 2.67px solid var(--interactive-banner-circle-border);
+    border-radius: 50%;
+    box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+main .interactive-banner .interactive-banner__media-link::before {
+      position: absolute;
+      inset: -0.8rem;
+      content: '';
+      border-radius: 50%;
+      background-color: var(--interactive-banner-circle-shadow);
+      opacity: 0.75;
+      z-index: -1;
+    }
+
+main .interactive-banner .interactive-banner__media-link:nth-child(3) {
+      --interactive-banner-circle-border: var(--interactive-banner-teal);
+      --interactive-banner-circle-shadow: rgb(33 150 169 / 15%);
+    }
+
+main .interactive-banner .interactive-banner__media-link:nth-child(4) {
+      --interactive-banner-circle-border: var(--interactive-banner-primary);
+      --interactive-banner-circle-shadow: rgb(233 30 99 / 12%);
+    }
+
+main .interactive-banner .interactive-banner__media-link:nth-child(5) {
+      --interactive-banner-circle-border: var(--interactive-banner-orange);
+      --interactive-banner-circle-shadow: rgb(255 152 0 / 15%);
+    }
+
+main .interactive-banner .interactive-banner__media-item:nth-child(3) .interactive-banner__media-link {
+    --interactive-banner-circle-border: var(--interactive-banner-teal);
+    --interactive-banner-circle-shadow: rgb(33 150 169 / 15%);
+  }
+
+main .interactive-banner .interactive-banner__media-item:nth-child(4) .interactive-banner__media-link {
+    --interactive-banner-circle-border: var(--interactive-banner-primary);
+    --interactive-banner-circle-shadow: rgb(233 30 99 / 12%);
+  }
+
+main .interactive-banner .interactive-banner__media-item:nth-child(5) .interactive-banner__media-link {
+    --interactive-banner-circle-border: var(--interactive-banner-orange);
+    --interactive-banner-circle-shadow: rgb(255 152 0 / 15%);
+  }
+
+main .interactive-banner .interactive-banner__media-label {
+    margin: 0;
+    max-width: 100%;
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    background-color: var(--interactive-banner-primary);
+    color: #fff;
+    font: var(--type-body-2-strong-font);
+    letter-spacing: var(--type-body-2-strong-letter-spacing);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+main .interactive-banner .interactive-banner__picture,
+  main .interactive-banner .interactive-banner__picture img,
+  main .interactive-banner .interactive-banner__image {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+main .interactive-banner .interactive-banner__picture img,
+  main .interactive-banner .interactive-banner__image {
+    -o-object-fit: cover;
+       object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+
+@media (min-width: 600px) {
+    main .interactive-banner .interactive-banner__heading {
+      max-width: 48rem;
+      font: var(--type-display-1-font);
+      line-height: 1.04;
+    }
+
+    main .interactive-banner .interactive-banner__media-cluster {
+      width: min(100%, 52rem);
+      gap: 2rem;
+    }
+
+    main .interactive-banner .interactive-banner__media-item {
+      max-inline-size: 14rem;
+    }
+  }
+
+@media (min-width: 900px) {
+
+main .interactive-banner {
+    padding: 6rem var(--spacing-big);
+}
+
+    main .interactive-banner .interactive-banner__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 4.8rem;
+      align-items: center;
+    }
+
+    main .interactive-banner .interactive-banner__content {
+      order: 2;
+      gap: 3.2rem;
+      padding-top: 0.4rem;
+    }
+
+    main .interactive-banner .interactive-banner__heading {
+      max-width: 60.8rem;
+    }
+
+    main .interactive-banner .interactive-banner__description {
+      max-width: 44.8rem;
+      font-size: 1.8rem;
+      line-height: 1.625;
+    }
+
+    main .interactive-banner .interactive-banner__media {
+      justify-items: center;
+      order: 1;
+      min-block-size: 54rem;
+      padding-top: 0;
+    }
+
+    main .interactive-banner .interactive-banner__orbit {
+      position: absolute;
+      display: block;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    main .interactive-banner .interactive-banner__orbit--outer {
+      inline-size: 46rem;
+      block-size: 46rem;
+      border: 2px dashed var(--interactive-banner-dash);
+    }
+
+    main .interactive-banner .interactive-banner__orbit--inner {
+      inline-size: 30rem;
+      block-size: 30rem;
+      border: 0.67px dashed var(--interactive-banner-dash-soft);
+    }
+
+    main .interactive-banner .interactive-banner__media-cluster {
+      position: relative;
+      display: block;
+      inline-size: 54rem;
+      block-size: 54rem;
+    }
+
+    main .interactive-banner .interactive-banner__media-item {
+      position: absolute;
+      max-inline-size: none;
+      gap: 0;
+      animation-name: interactive-banner-circle-float;
+      animation-duration: 6.8s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-fill-mode: both;
+      will-change: transform;
+    }
+
+      main .interactive-banner .interactive-banner__media-item:is(:hover, :focus-within) {
+        z-index: 12;
+      }
+
+    main .interactive-banner .interactive-banner__media-link {
+      inline-size: 100%;
+    }
+
+      .interactive-banner__media-item:is(:hover, :focus-within) :is(main .interactive-banner .interactive-banner__media-link) {
+        box-shadow: 0 18px 38px 0 rgb(0 0 0 / 22%);
+        transform: scale(1.12);
+      }
+      .interactive-banner__media-item:is(:hover, :focus-within) :is(main .interactive-banner .interactive-banner__picture img,main .interactive-banner .interactive-banner__image) {
+        transform: scale(1.12);
+      }
+
+    main .interactive-banner .interactive-banner__media-label {
+      position: absolute;
+      bottom: 1.4rem;
+      left: 50%;
+      z-index: 2;
+      max-width: calc(100% - 2.4rem);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 0.6rem);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+      .interactive-banner__media-item:is(:hover, :focus-within) :is(main .interactive-banner .interactive-banner__media-label) {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+    main .interactive-banner .interactive-banner__media-item:nth-child(1) {
+      top: 1.2rem;
+      left: 3rem;
+      inline-size: 22rem;
+      animation-duration: 7.2s;
+      animation-delay: -0.9s;
+    }
+
+    main .interactive-banner .interactive-banner__media-item:nth-child(2) {
+      top: 3.6rem;
+      right: 5.5rem;
+      inline-size: 15rem;
+      animation-duration: 6.2s;
+      animation-delay: -2.2s;
+    }
+
+    main .interactive-banner .interactive-banner__media-item:nth-child(3) {
+      top: 14rem;
+      left: 18.8rem;
+      z-index: 1;
+      inline-size: 26rem;
+      animation-duration: 7.8s;
+      animation-delay: -1.5s;
+    }
+
+      main .interactive-banner .interactive-banner__media-item:nth-child(3):hover {
+        z-index: 12;
+      }
+
+    main .interactive-banner .interactive-banner__media-item:nth-child(4) {
+      right: 6.2rem;
+      bottom: 9.2rem;
+      z-index: 2;
+      inline-size: 16rem;
+      animation-duration: 5.9s;
+      animation-delay: -3.1s;
+    }
+
+    main .interactive-banner .interactive-banner__media-item:nth-child(5) {
+      bottom: 6.4rem;
+      left: 4.8rem;
+      inline-size: 18rem;
+      animation-duration: 6.6s;
+      animation-delay: -2.7s;
+    }
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  main .interactive-banner .interactive-banner__media-item,
+  main .interactive-banner .interactive-banner__top-badge::after {
+    animation: none;
+  }
+}
