@@ -335,11 +335,7 @@ function buildCorporateMediaCluster(items) {
       copy.append(subtitleElement);
     }
 
-    const action = document.createElement('span');
-    action.className = 'interactive-banner__card-action';
-    action.setAttribute('aria-hidden', 'true');
-
-    shell.append(imageWrapper, copy, action);
+    shell.append(imageWrapper, copy);
     item.append(shell);
     cards.append(item);
   });
