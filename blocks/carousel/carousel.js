@@ -20,6 +20,22 @@ function getRealSlideIndex(slides, slideIndex) {
   return slideIndex;
 }
 
+function updateNavigationButtonsState(block) {
+  const slidesWrapper = block.querySelector('.carousel-slides');
+  const previousButton = block.querySelector('.carousel-navigation-buttons .slide-prev');
+  const nextButton = block.querySelector('.carousel-navigation-buttons .slide-next');
+
+  if (!slidesWrapper || !previousButton || !nextButton) {
+    return;
+  }
+
+  const maxScrollLeft = slidesWrapper.scrollWidth - slidesWrapper.clientWidth;
+  const currentScrollLeft = Math.round(slidesWrapper.scrollLeft);
+
+  previousButton.disabled = currentScrollLeft <= 0;
+  nextButton.disabled = currentScrollLeft >= Math.max(0, Math.round(maxScrollLeft) - 1);
+}
+
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
@@ -46,6 +62,8 @@ function updateActiveSlide(slide) {
       indicator.querySelector('button').setAttribute('disabled', 'true');
     }
   });
+
+  updateNavigationButtonsState(block);
 }
 
 function decorateShopByDefaultContent(block) {
@@ -79,6 +97,8 @@ export function showSlide(block, slideIndex = 0) {
   const slides = block.querySelectorAll('.carousel-slide');
   const realSlideIndex = getRealSlideIndex(slides, slideIndex);
   const activeSlide = slides[realSlideIndex];
+
+  block.dataset.activeSlide = realSlideIndex;
 
   activeSlide
     .querySelectorAll('a')
@@ -143,6 +163,14 @@ function bindEvents(block, autoplayController) {
 
   if (!slidesWrapper) return;
 
+  const handleScroll = () => {
+    updateNavigationButtonsState(block);
+  };
+
+  const handleResize = () => {
+    updateNavigationButtonsState(block);
+  };
+
   slideIndicators?.querySelectorAll('button').forEach((button) => {
     button.addEventListener('click', (e) => {
       const slideIndicator = e.currentTarget.parentElement;
@@ -155,12 +183,13 @@ function bindEvents(block, autoplayController) {
 
   previousButton?.addEventListener('click', () => {
     const currentIndex = parseInt(block.dataset.activeSlide || '0', 10);
-    showSlide(block, currentIndex - 1);
+    showSlide(block, Math.max(0, currentIndex - 5));
   });
 
   nextButton?.addEventListener('click', () => {
     const currentIndex = parseInt(block.dataset.activeSlide || '0', 10);
-    showSlide(block, currentIndex + 1);
+    const lastSlideIndex = block.querySelectorAll('.carousel-slide').length - 1;
+    showSlide(block, Math.min(lastSlideIndex, currentIndex + 1));
   });
 
   slidesWrapper.addEventListener('keydown', (event) => {
@@ -208,6 +237,10 @@ function bindEvents(block, autoplayController) {
   block.querySelectorAll('.carousel-slide').forEach((slide) => {
     slideObserver.observe(slide);
   });
+
+  slidesWrapper.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize);
+  updateNavigationButtonsState(block);
 }
 
 function createSlide(row, slideIndex, carouselId) {

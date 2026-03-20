@@ -21,7 +21,7 @@
                     gap: var(--spacing-small);
 
                     img {
-                        width: 48px;
+                        width: 32px;
                         background: var(--icon-background);
                         padding: 24px;
                         border-radius: 50%;
@@ -73,10 +73,8 @@
                     display: flex;
 
                     > div {
-                        gap: var(--spacing-medium);
-
                         img {
-                            width: 64px;
+                            width: 48px;
                         }
                     }
                 }
@@ -87,10 +85,6 @@
             .columns-wrapper .columns-3-cols > div > div {
                 gap: var(--spacing-xxsmall);
                 padding: var(--spacing-big);
-
-                img {
-                    width: 48px;
-                }
             }
         }
     }

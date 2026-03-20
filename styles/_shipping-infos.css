@@ -22,7 +22,7 @@
                 }
 
 .section.shipping-infos .columns-wrapper .columns-4-cols > div > div img, .section.shipping-infos .columns-wrapper .columns-3-cols > div > div img {
-                        width: 48px;
+                        width: 32px;
                         background: var(--icon-background);
                         padding: 24px;
                         border-radius: 50%;
@@ -62,20 +62,11 @@
                 .section.shipping-infos .columns-wrapper .columns-4-cols > div, .section.shipping-infos .columns-wrapper .columns-3-cols > div {
                     display: flex;
                 }
-
-                    .section.shipping-infos .columns-wrapper .columns-4-cols > div > div, .section.shipping-infos .columns-wrapper .columns-3-cols > div > div {
-                        gap: var(--spacing-medium);
-                    }
-
                         .section.shipping-infos .columns-wrapper .columns-4-cols > div > div img, .section.shipping-infos .columns-wrapper .columns-3-cols > div > div img {
-                            width: 64px;
+                            width: 48px;
                         }
             .section.shipping-infos.contact-page-top .columns-wrapper .columns-3-cols > div > div {
                 gap: var(--spacing-xxsmall);
                 padding: var(--spacing-big);
             }
-
-                .section.shipping-infos.contact-page-top .columns-wrapper .columns-3-cols > div > div img {
-                    width: 48px;
-                }
 }

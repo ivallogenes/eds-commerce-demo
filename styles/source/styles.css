@@ -5,7 +5,7 @@
  * These styles will be included in the critical CSS and loaded with the initial page load
  * For non-critical styles that can be loaded post LCP, add them to lazy-styles.css
  */
-/* @import url('./custom.css'); */
+@import url('./_shipping-infos.css');
 
 /* Design Tokens */
 :root,

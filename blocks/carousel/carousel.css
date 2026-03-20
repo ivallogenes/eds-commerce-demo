@@ -173,6 +173,11 @@ main > .section .carousel-wrapper {
     background-color: rgb(19 19 19 / 75%);
 }
 
+.carousel .carousel-navigation-buttons button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
 .carousel .carousel-slides:focus-visible,
 .carousel .carousel-navigation-buttons button:focus-visible,
 .carousel .carousel-slide-indicator button:focus-visible {
