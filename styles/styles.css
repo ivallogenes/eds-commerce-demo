@@ -5,7 +5,7 @@
 }
 
 .section.shipping-infos {
-    max-width: 1240px;
+    max-width: 1640px;
     max-width: var(--layout-content-max-width);
     padding: 0;
 }
@@ -204,7 +204,7 @@
   --background-color: var(--color-neutral-50);
   --nav-height: 6.4rem;
 
-  --layout-content-max-width: 1240px;
+  --layout-content-max-width: 1640px;
   --border-default: 1px solid #e0e0e0;
 }
 
@@ -598,7 +598,7 @@ main > .section:empty {
   }
 
 main > .section > div {
-    max-width: 1240px;
+    max-width: 1640px;
     max-width: var(--layout-content-max-width);
     margin: auto;
     padding: 0 16px;
@@ -732,11 +732,131 @@ main > .section > div {
   z-index: 2;
 }
 
+.dropin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  gap: var(--spacing-xxsmall);
+  margin: 32px 0;
+  margin: var(--spacing-xbig) 0;
+}
+
+.dropin-pagination .dropin-pagination_list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    gap: var(--spacing-xxsmall);
+  }
+
+.dropin-pagination .dropin-pagination_list-item {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+.dropin-pagination .dropin-pagination_list-item button,
+  .dropin-pagination .dropin-pagination_list-item a,
+  .dropin-pagination .dropin-pagination-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.6rem;
+    height: 3.6rem;
+    border: 1px solid transparent;
+    border: var(--shape-border-width-1) solid transparent;
+    border-radius: 4px;
+    border-radius: var(--shape-border-radius-2);
+    padding: 0 12px;
+    padding: 0 var(--spacing-small);
+    background: #fff;
+    background: var(--color-neutral-50);
+    color: #1A1A1A;
+    color: var(--color-neutral-900);
+    font: normal normal 500 1.4rem/2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+    font: var(--type-body-2-strong-font);
+    letter-spacing: 0;
+    line-height: 1;
+    text-decoration: none;
+    transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+  }
+
+.dropin-pagination .dropin-pagination_list-item button,
+  .dropin-pagination .dropin-pagination_list-item a {
+    padding: 0;
+  }
+
+.dropin-pagination .dropin-pagination-arrow {
+    gap: 4px;
+    gap: var(--spacing-xxsmall);
+  }
+
+.dropin-pagination .dropin-pagination-arrow--backward::after {
+    content: 'Previous';
+  }
+
+.dropin-pagination .dropin-pagination-arrow--forward::before {
+    content: 'Next';
+  }
+
+.dropin-pagination button:hover:not(:disabled),
+  .dropin-pagination a:hover:not([aria-disabled='true']) {
+    border-color: #d6d6d6;
+    border-color: var(--color-neutral-400);
+    color: #1A1A1A;
+    color: var(--color-neutral-900);
+    text-decoration: none;
+  }
+
+.dropin-pagination button:focus-visible,
+  .dropin-pagination a:focus-visible {
+    outline: 2px solid #53A257;
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+
+.dropin-pagination .dropin-pagination_list-item--active {
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 4px;
+    border-radius: var(--shape-border-radius-2);
+    background: transparent;
+  }
+
+.dropin-pagination .dropin-pagination_list-item--active button,
+  .dropin-pagination .dropin-pagination_list-item--active a {
+    border-color: #e0e0e0;
+    background: #fff;
+    background: var(--color-neutral-50);
+  }
+
+.dropin-pagination .dropin-pagination_list-item--ellipsis button,
+  .dropin-pagination .dropin-pagination_list-item--ellipsis a {
+    border-color: transparent;
+    background: transparent;
+    pointer-events: none;
+  }
+
+.dropin-pagination .dropin-pagination-arrow--disabled,
+  .dropin-pagination .dropin-pagination-arrow:disabled,
+  .dropin-pagination .dropin-pagination-arrow[aria-disabled='true'] {
+    opacity: 0.5;
+  }
+
+@media (max-width: 599px) {
+    .dropin-pagination .dropin-pagination-arrow {
+      min-width: 3.6rem;
+      padding: 0 8px;
+      padding: 0 var(--spacing-xsmall);
+    }
+}
+
 body.columns main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1640px;
   max-width: var(--layout-content-max-width);
   margin: 0 auto;
   padding: 64px 12px;
