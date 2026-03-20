@@ -116,11 +116,6 @@ header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item {
 header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-cart-item__image img {
                 border-radius: var(--shape-border-radius-2);
             }
-header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-incrementer__content {
-                grid-template-columns: 4rem 6rem 4rem;
-                height: 3rem;
-                margin: 1rem 0;
-            }
 header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-cart-item__title {
                 font: var(--type-body-1-strong-font);
                 letter-spacing: 0;
@@ -131,14 +126,6 @@ header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .d
 header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-cart-item__sku {
                 margin: 0.5rem 0;
             }
-header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-incrementer__decrease-button,
-            header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-incrementer__increase-button {
-                width: 100%;
-                height: 100%;
-            }
-header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-incrementer__decrease-button:hover, header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-incrementer__increase-button:hover {
-                    background: transparent;
-                }
 .commerce-mini-cart__update-message {
     display: none;
     font: var(--type-body-2-default-font);

@@ -10,6 +10,7 @@ The Commerce Cart block renders a comprehensive shopping cart interface with pro
 
 | Configuration Key | Type | Default | Description | Required | Side Effects |
 |-------------------|------|---------|-------------|----------|--------------|
+| `cart-page-title` | string | `'Shopping Cart'` | Sets the custom page title shown in the cart header band | No | Replaces the default cart page heading text |
 | `hide-heading` | string | `'false'` | Controls whether the cart heading is hidden | No | Changes visibility of cart section heading |
 | `max-items` | string | undefined | Maximum number of items to display in cart | No | Limits the number of cart items shown |
 | `hide-attributes` | string | `''` | Comma-separated list of product attributes to hide | No | Hides specified product attributes from display |

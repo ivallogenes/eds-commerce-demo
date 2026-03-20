@@ -42,6 +42,7 @@ export default async function decorate(block) {
     'max-items': maxItems,
     'hide-attributes': hideAttributes = '',
     'enable-item-quantity-update': enableUpdateItemQuantity = 'false',
+    'cart-page-title': cartPageTitle = '',
     'enable-item-remove': enableRemoveItem = 'true',
     'enable-estimate-shipping': enableEstimateShipping = 'false',
     'start-shopping-url': startShoppingURL = '',
@@ -53,6 +54,8 @@ export default async function decorate(block) {
   const placeholders = await fetchPlaceholders();
 
   const _cart = Cart.getCartDataFromCache();
+  const shouldHideBlockHeading = hideHeading === 'true';
+  const resolvedCartPageTitle = getConfigText(cartPageTitle) || 'Shopping Cart';
 
   // Modal state
   let currentModal = null;
@@ -60,6 +63,12 @@ export default async function decorate(block) {
 
   // Layout
   const fragment = document.createRange().createContextualFragment(`
+    <div class="cart__header">
+      <div class="cart__header-content">
+        <h1 class="cart__header-title">${resolvedCartPageTitle}</h1>
+        <p class="cart__header-subtitle"></p>
+      </div>
+    </div>
     <div class="cart__notification"></div>
     <div class="cart__wrapper">
       <div class="cart__left-column">
@@ -74,6 +83,8 @@ export default async function decorate(block) {
     <div class="cart__empty-cart"></div>
   `);
 
+  const $header = fragment.querySelector('.cart__header');
+  const $headerSubtitle = fragment.querySelector('.cart__header-subtitle');
   const $wrapper = fragment.querySelector('.cart__wrapper');
   const $notification = fragment.querySelector('.cart__notification');
   const $list = fragment.querySelector('.cart__list');
@@ -84,6 +95,9 @@ export default async function decorate(block) {
 
   block.innerHTML = '';
   block.appendChild(fragment);
+
+  $header.hidden = shouldHideBlockHeading;
+  updateCartHeader(_cart, $headerSubtitle);
 
   // Wishlist variables
   const routeToWishlist = '/wishlist';
@@ -172,7 +186,7 @@ export default async function decorate(block) {
   await Promise.all([
     // Cart List
     provider.render(CartSummaryList, {
-      hideHeading: hideHeading === 'true',
+      hideHeading: true,
       routeProduct: createProductLink,
       routeEmptyCartCTA: startShoppingURL ? () => rootLink(startShoppingURL) : undefined,
       maxItems: parseInt(maxItems, 10) || undefined,
@@ -295,6 +309,7 @@ export default async function decorate(block) {
   events.on(
     'cart/data',
     (cartData) => {
+      updateCartHeader(cartData, $headerSubtitle);
       toggleEmptyCart(isCartEmpty(cartData));
 
       const isEmpty = !cartData || cartData.totalQuantity < 1;
@@ -328,6 +343,25 @@ function isCartEmpty(cart) {
   return cart ? cart.totalQuantity < 1 : true;
 }
 
+function getCartLineItemCount(cart) {
+  if (Array.isArray(cart?.items)) {
+    return cart.items.length;
+  }
+
+  if (Array.isArray(cart?.itemsV2?.items)) {
+    return cart.itemsV2.items.length;
+  }
+
+  return cart?.totalQuantity || 0;
+}
+
+function updateCartHeader(cart, headerSubtitle) {
+  const itemCount = getCartLineItemCount(cart);
+  const itemLabel = itemCount === 1 ? 'item' : 'items';
+
+  headerSubtitle.textContent = `${itemCount} ${itemLabel} in your cart`;
+}
+
 function swatchImageSlot(ctx) {
   const { imageSwatchContext, defaultImageProps } = ctx;
   tryRenderAemAssetsImage(ctx, {
@@ -340,4 +374,12 @@ function swatchImageSlot(ctx) {
       height: defaultImageProps.height,
     },
   });
+}
+
+function getConfigText(value) {
+  if (Array.isArray(value)) {
+    return value.find((entry) => entry?.trim())?.trim() || '';
+  }
+
+  return typeof value === 'string' ? value.trim() : '';
 }

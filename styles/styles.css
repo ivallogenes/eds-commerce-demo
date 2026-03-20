@@ -208,6 +208,11 @@
   --border-default: 1px solid #e0e0e0;
 }
 
+.dropin-illustrated-message__icon {
+  color: #292929;
+  color: var(--color-neutral-800);
+}
+
 @font-face {
   font-family: adobe-clean;
   size-adjust: 100%;
@@ -779,6 +784,59 @@ body.columns main > .section:empty {
 .dropin-product-item-card {
   border: medium none currentcolor;
   border: initial;
+}
+
+.dropin-cart-item__quantity {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.dropin-cart-item__quantity__incrementer,
+.dropin-cart-item__quantity__picker {
+  margin-bottom: 0;
+}
+
+.dropin-incrementer__content {
+  overflow: hidden;
+  grid-template-columns: 3.2rem 4.8rem 3.2rem;
+  min-block-size: 3.2rem;
+  border: 1px solid #e0e0e0;
+  border: var(--border-default);
+  border-radius: 4px;
+  border-radius: var(--shape-border-radius-2);
+  margin-top: 12px;
+  margin-top: var(--spacing-small);
+  background: #fff;
+  background: var(--color-neutral-50);
+}
+
+.dropin-incrementer__decrease-button,
+.dropin-incrementer__increase-button {
+  inline-size: 100%;
+  min-block-size: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+.dropin-incrementer__decrease-button:hover,
+.dropin-incrementer__increase-button:hover,
+.dropin-incrementer__decrease-button:focus-visible,
+.dropin-incrementer__increase-button:focus-visible {
+  background: transparent !important;
+}
+
+.dropin-incrementer__input {
+  min-block-size: 100%;
+  padding: 0;
+  border-inline: 1px solid #e0e0e0;
+  border-inline: var(--border-default);
+  color: #1A1A1A;
+  color: var(--color-neutral-900);
+  font: normal normal 500 1.4rem/2rem adobe-clean, roboto, roboto-fallback, system-ui, sans-serif;
+  font: var(--type-body-2-strong-font);
+  letter-spacing: 0.04em;
+  letter-spacing: var(--type-body-2-strong-letter-spacing);
+  text-align: center;
 }
 
 @media (min-width: 900px) {

@@ -70,6 +70,12 @@
   gap: var(--dropin-in-line-alert-gap);
 }
 
+.dropin-in-line-alert__description,
+.dropin-button .dropin-in-line-alert__additional-action {
+  color: #fff;
+  color: var(--dropin-in-line-alert--info-color);
+}
+
 .dropin-in-line-alert__title-container {
   display: flex;
   align-items: center;

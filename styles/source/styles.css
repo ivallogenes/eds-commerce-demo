@@ -133,6 +133,10 @@
   --border-default: 1px solid #e0e0e0;
 }
 
+.dropin-illustrated-message__icon {
+  color: var(--color-neutral-800);
+}
+
 /* fallback font */
 @font-face {
   font-family: adobe-clean;
@@ -574,6 +578,50 @@ body.columns main {
 
 .dropin-product-item-card {
   border: unset;
+}
+
+.dropin-cart-item__quantity {
+  width: fit-content;
+}
+
+.dropin-cart-item__quantity__incrementer,
+.dropin-cart-item__quantity__picker {
+  margin-bottom: 0;
+}
+
+.dropin-incrementer__content {
+  overflow: hidden;
+  grid-template-columns: 3.2rem 4.8rem 3.2rem;
+  min-block-size: 3.2rem;
+  border: var(--border-default);
+  border-radius: var(--shape-border-radius-2);
+  margin-top: var(--spacing-small);
+  background: var(--color-neutral-50);
+}
+
+.dropin-incrementer__decrease-button,
+.dropin-incrementer__increase-button {
+  inline-size: 100%;
+  min-block-size: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+.dropin-incrementer__decrease-button:hover,
+.dropin-incrementer__increase-button:hover,
+.dropin-incrementer__decrease-button:focus-visible,
+.dropin-incrementer__increase-button:focus-visible {
+  background: transparent !important;
+}
+
+.dropin-incrementer__input {
+  min-block-size: 100%;
+  padding: 0;
+  border-inline: var(--border-default);
+  color: var(--color-neutral-900);
+  font: var(--type-body-2-strong-font);
+  letter-spacing: var(--type-body-2-strong-letter-spacing);
+  text-align: center;
 }
 
 @media (min-width: 900px) {
