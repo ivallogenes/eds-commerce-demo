@@ -124,6 +124,7 @@
   box-shadow: var(--shape-shadow-3);
   color: transparent;
   cursor: pointer;
+  user-select: none;
   transition: background-color 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
   opacity: 0;
   visibility: hidden;
