@@ -182,6 +182,8 @@ header .nav-search-input.nav-search-panel {
             display: flex;
             justify-content: center;
             margin-top: 2.4rem;
+
+            > div { width: 100%; }
         }
 
         & .product-discovery-product-list__footer .dropin-button,
@@ -225,6 +227,10 @@ header .nav-search-input.nav-search-panel {
 
         & .search-bar-result .product-discovery-product-list__grid {
             grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        & .search-bar-result .product-discovery-product-list__footer > div {
+            width: auto;
         }
 
         .dropin-input-container {

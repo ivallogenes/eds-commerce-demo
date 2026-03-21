@@ -133,7 +133,6 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 0.5rem;
-    align-content: start;
     border-top: var(--border-default);
     padding: 1.25rem 1.125rem 1.125rem;
     color: #1a1a1a;
@@ -340,10 +339,6 @@
 }
 
 @media only screen and (min-width: 1440px) {
-    main > .section > .product-list-page-wrapper {
-        margin-bottom: var(--spacing-huge);
-    }
-
     .product-discovery-product-list__grid {
         grid-template-columns: repeat(4, 1fr);
     }
