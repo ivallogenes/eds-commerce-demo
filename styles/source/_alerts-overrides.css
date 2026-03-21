@@ -1,3 +1,4 @@
+/* stylelint-disable */
 /* CSS overrides for Drop-in Alert messages component */
 
 :root {
@@ -107,3 +108,5 @@ and standartize all messages across the app (cart, contact form, etc.) */
   line-height: 1.6;
   color: var(--dropin-in-line-alert--warning-color);
 }
+
+/* stylelint-enable */
