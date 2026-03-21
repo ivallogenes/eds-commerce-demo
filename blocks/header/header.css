@@ -446,52 +446,6 @@ header nav .nav-tools button.nav-search-button {
   background-size: 16px 16px;
 }
 
-header .nav-search-panel {
-  padding: var(--spacing-small);
-}
-
-header .nav-search-panel input {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  font: var(--type-headline-2-default-font);
-  letter-spacing: var(--type-headline-2-default-letter-spacing);
-  border: 1px solid currentcolor;
-  appearance: none;
-}
-
-header .nav-search-panel .dropin-input-container {
-  width: 100%;
-}
-
-header .nav-search-panel .search-bar-result {
-  width: 100%;
-  position: relative;
-}
-
-header .nav-search-panel .search-bar-result .product-discovery-product-list__grid {
-  margin-block: var(--spacing-small);
-}
-
-/* Popover List */
-header .nav-search-panel .search-bar-result .dropin-product-item-card {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-}
-
-/* Product Item Skeleton */
-header .nav-search-panel .search-bar-result .dropin-product-item-card__content .dropin-skeleton-row {
-  height: 1em;
-}
-
-header .nav-search-panel .search-bar-result .product-discovery-product-list__footer button {
-  width: 100%;
-}
-
-header .nav-search-input .search_autocomplete .popover-container {
-  width: 100%;
-}
-
 @media (min-width: 1024px) {
   header nav .nav-tools-wrapper {
     position: relative;
@@ -499,10 +453,6 @@ header .nav-search-input .search_autocomplete .popover-container {
 
   header nav .nav-tools-panel {
     top: calc(-12px + var(--nav-height));
-  }
-
-  header nav .nav-search-panel {
-    width: 398px;
   }
 }
 

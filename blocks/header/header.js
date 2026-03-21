@@ -462,7 +462,7 @@ export default async function decorate(block) {
           }
         });
 
-        UI.render(Input, {
+        await UI.render(Input, {
           name: 'search',
           placeholder: labels.Global?.Search,
           onValue: (phrase) => {
@@ -484,6 +484,39 @@ export default async function decorate(block) {
             }, { scope: 'popover' });
           },
         })(searchForm);
+
+        // Reset search button in search input
+        const searchInput = searchForm.querySelector('input[name="search"]');
+        const searchInputContainer = searchForm.querySelector('.dropin-input-container');
+
+        if (searchInput && searchInputContainer) {
+          const clearSearchButton = document.createElement('button');
+          clearSearchButton.type = 'button';
+          clearSearchButton.className = 'nav-search-clear-button';
+          clearSearchButton.setAttribute('aria-label', labels.Global?.ClearSearch || 'Clear search');
+
+          const syncClearSearchButton = () => {
+            const hasValue = Boolean(searchInput.value);
+            searchInputContainer.classList.toggle('nav-search-input-container--has-value', hasValue);
+          };
+
+          clearSearchButton.addEventListener('click', () => {
+            if (!searchInput.value) {
+              toggleSearch(false);
+              return;
+            }
+
+            searchInput.value = '';
+            searchResult.style.display = 'none';
+            syncClearSearchButton();
+            search(null, { scope: 'popover' });
+            searchInput.focus();
+          });
+
+          searchInput.addEventListener('input', syncClearSearchButton);
+          searchInputContainer.prepend(clearSearchButton);
+          syncClearSearchButton();
+        }
       });
       togglePanel(searchPanel, state);
       searchForm?.querySelector('input')?.focus();
