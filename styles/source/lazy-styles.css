@@ -21,7 +21,7 @@
   bottom: 24px;
   right: 24px;
 
-  /* Sits above page content (z-index: 2) but below modals and header overlays (z-index: 100+) */
+  /* Sits above page content but below modals and header overlays */
   z-index: 99;
   width: 44px;
   height: 44px;
