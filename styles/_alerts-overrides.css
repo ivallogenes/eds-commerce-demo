@@ -31,8 +31,16 @@
   border: 1px solid transparent;
   font-size: 15px;
   font-size: var(--dropin-in-line-alert-font-size);
-  gap: 8px;
-  gap: var(--dropin-in-line-alert-gap);
+  gap: 0;
+}
+
+.dropin-in-line-alert .dropin-in-line-alert__item-list-container,
+.dropin-in-line-alert .dropin-in-line-alert__item-list-container span
+.dropin-in-line-alert .dropin-in-line-alert__actions-container,
+.dropin-in-line-alert .dropin-in-line-alert__actions-container a {
+  color: #fff;
+  color: var(--dropin-in-line-alert--info-color);
+  font-size: 14px;
 }
 
 .dropin-in-line-alert.dropin-in-line-alert--warning {

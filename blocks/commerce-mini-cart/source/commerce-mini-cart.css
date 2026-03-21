@@ -147,6 +147,18 @@ header nav .minicart-panel {
             }
         }
     }
+
+    .dropin-cart-item__total {
+        flex-direction: row;
+        gap: var(--spacing-small);
+    }
+
+    .cart-mini-cart__footer__ctas {
+        a.dropin-button {
+            box-sizing: border-box;
+            height: 40px;
+        }
+    }
 }
 
 .commerce-mini-cart__update-message {

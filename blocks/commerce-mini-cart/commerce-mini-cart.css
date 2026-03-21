@@ -126,6 +126,14 @@ header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .d
 header nav .minicart-panel .dropin-cart-list__wrapper .dropin-cart-list__item .dropin-cart-item__sku {
                 margin: 0.5rem 0;
             }
+header nav .minicart-panel .dropin-cart-item__total {
+        flex-direction: row;
+        gap: var(--spacing-small);
+    }
+header nav .minicart-panel .cart-mini-cart__footer__ctas a.dropin-button {
+            box-sizing: border-box;
+            height: 40px;
+        }
 .commerce-mini-cart__update-message {
     display: none;
     font: var(--type-body-2-default-font);

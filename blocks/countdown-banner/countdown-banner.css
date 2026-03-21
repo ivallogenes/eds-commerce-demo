@@ -192,7 +192,6 @@ main .countdown-banner .countdown-banner__promo {
     align-items: center;
     grid-gap: var(--spacing-medium);
     gap: var(--spacing-medium);
-    inline-size: min(100%, 31.8rem);
     min-block-size: 9.2rem;
     padding: 1.6rem 2rem;
     border: 0.67px solid var(--countdown-banner-panel-border);
@@ -244,6 +243,8 @@ main .countdown-banner .countdown-banner__promo-text {
 main .countdown-banner {
     padding: var(--spacing-large) var(--spacing-big);
 }
+
+    main .countdown-banner .countdown-banner__promo { width: 100%; }
 
     main .countdown-banner .countdown-banner__inner {
       grid-template-columns: minmax(0, 1fr) minmax(28rem, 0.72fr);

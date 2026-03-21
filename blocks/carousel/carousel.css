@@ -333,7 +333,7 @@ main > .section .carousel-wrapper {
     margin-top: 0;
 }
 
-.carousel-container:has(.carousel.shop-by) .default-content-wrapper > p:last-child {
+.carousel-container:has(.carousel.shop-by) .default-content-wrapper > p:last-child:not(.slider_badge) {
     color: var(--color-neutral-700);
 }
 

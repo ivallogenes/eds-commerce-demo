@@ -38,7 +38,16 @@
   border-radius: var(--dropin-in-line-alert-border-radius);
   border: 1px solid transparent;
   font-size: var(--dropin-in-line-alert-font-size);
-  gap: var(--dropin-in-line-alert-gap);
+  gap: 0;
+}
+
+
+.dropin-in-line-alert .dropin-in-line-alert__item-list-container,
+.dropin-in-line-alert .dropin-in-line-alert__item-list-container span
+.dropin-in-line-alert .dropin-in-line-alert__actions-container,
+.dropin-in-line-alert .dropin-in-line-alert__actions-container a {
+  color: var(--dropin-in-line-alert--info-color);
+  font-size: 14px;
 }
 
 /* Warning variant */

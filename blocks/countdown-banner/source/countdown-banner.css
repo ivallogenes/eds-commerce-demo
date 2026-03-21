@@ -178,7 +178,6 @@ main .countdown-banner {
     grid-template-columns: auto auto minmax(0, 1fr);
     align-items: center;
     gap: var(--spacing-medium);
-    inline-size: min(100%, 31.8rem);
     min-block-size: 9.2rem;
     padding: 1.6rem 2rem;
     border: 0.67px solid var(--countdown-banner-panel-border);
@@ -227,6 +226,8 @@ main .countdown-banner {
 
   @media (width >= 900px) {
     padding: var(--spacing-large) var(--spacing-big);
+
+    .countdown-banner__promo { width: 100%; }
 
     .countdown-banner__inner {
       grid-template-columns: minmax(0, 1fr) minmax(28rem, 0.72fr);

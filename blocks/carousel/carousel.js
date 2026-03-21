@@ -183,7 +183,7 @@ function bindEvents(block, autoplayController) {
 
   previousButton?.addEventListener('click', () => {
     const currentIndex = parseInt(block.dataset.activeSlide || '0', 10);
-    showSlide(block, Math.max(0, currentIndex - 5));
+    showSlide(block, Math.max(0, currentIndex - 6));
   });
 
   nextButton?.addEventListener('click', () => {

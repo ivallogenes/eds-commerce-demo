@@ -5,7 +5,8 @@
  * These styles will be included in the critical CSS and loaded with the initial page load
  * For non-critical styles that can be loaded post LCP, add them to lazy-styles.css
  */
-@import url('./_shipping-infos.css');
+@import './_shipping-infos.css';
+@import './_nav-search-dropdown.css';
 
 /* Design Tokens */
 :root,
@@ -702,7 +703,7 @@ body.columns main {
   min-block-size: 3.2rem;
   border: var(--border-default);
   border-radius: var(--shape-border-radius-2);
-  margin-top: var(--spacing-small);
+  margin: var(--spacing-small) 0;
   background: var(--color-neutral-50);
 }
 
