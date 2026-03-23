@@ -115,7 +115,7 @@
   & .dropin-product-item-card__image,
   & .dropin-product-item-card__image a,
   & .dropin-product-item-card__image picture {
-    display: flex;
+    display: block;
     width: 100%;
     height: 100%;
   }
