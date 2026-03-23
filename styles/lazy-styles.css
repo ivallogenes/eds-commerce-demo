@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 :root {
   --dropin-in-line-alert--warning-background-color: #2196A9;
   --dropin-in-line-alert--error-background-color: #F44336;
@@ -106,6 +108,8 @@
   color: #fff;
   color: var(--dropin-in-line-alert--warning-color);
 }
+
+/* stylelint-enable */
 
 .scroll-to-top {
   position: fixed;

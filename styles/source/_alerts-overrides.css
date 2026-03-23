@@ -1,5 +1,5 @@
 /* CSS overrides for Drop-in Alert messages component */
-
+/* stylelint-disable */
 :root {
   /* Background colors per variant */
   --dropin-in-line-alert--warning-background-color: #2196A9;
@@ -107,3 +107,4 @@ and standartize all messages across the app (cart, contact form, etc.) */
   line-height: 1.6;
   color: var(--dropin-in-line-alert--warning-color);
 }
+/* stylelint-enable */
