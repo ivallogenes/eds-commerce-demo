@@ -1,0 +1,47 @@
+/* Scroll to top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  /* Sits above page content but below modals and header overlays */
+  z-index: 99;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: 50%;
+  background-color: var(--color-neutral-50);
+  box-shadow: var(--shape-shadow-3);
+  color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+
+  &::after {
+    display: block;
+    content: '';
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7.5 15L12.5 10L7.5 5' stroke='%231a1a1a' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  &.scroll-to-top--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:hover {
+    background-color: var(--color-brand-500);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+}
