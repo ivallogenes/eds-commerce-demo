@@ -65,7 +65,7 @@ function buildAutoBlocks(main) {
     if (fragments.length > 0) {
       // eslint-disable-next-line import/no-cycle
       import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
-        fragments.forEach(async (fragment) => {
+        fragments.forEach(async fragment => {
           try {
             const { pathname } = new URL(fragment.href);
             const frag = await loadFragment(pathname);
@@ -82,6 +82,32 @@ function buildAutoBlocks(main) {
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }
+}
+
+/**
+ * Adds a scroll-to-top button to all pages.
+ */
+function loadScrollToTop() {
+  const button = document.createElement('button');
+  button.className = 'scroll-to-top';
+  button.setAttribute('aria-label', 'Scroll to top');
+  button.setAttribute('type', 'button');
+  document.body.append(button);
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        button.classList.toggle('scroll-to-top--visible', window.scrollY > 600);
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }, { passive: true });
+
+  button.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
 /**
@@ -150,6 +176,7 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+  loadScrollToTop();
 }
 
 /**
