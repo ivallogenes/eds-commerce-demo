@@ -19,6 +19,7 @@
                     flex-direction: column;
                     align-items: center;
                     gap: var(--spacing-small);
+                    max-width: 300px;
 
                     img {
                         width: 32px;
@@ -71,10 +72,11 @@
             .columns-3-cols {
                 > div {
                     display: flex;
+                    justify-content: center;
 
                     > div {
                         img {
-                            width: 48px;
+                            width: 42px;
                         }
                     }
                 }

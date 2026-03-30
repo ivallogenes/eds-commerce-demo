@@ -55,7 +55,7 @@ main > .section > div.commerce-cart-wrapper {
   & .cart__header-content {
     display: grid;
     gap: var(--spacing-xsmall);
-    padding-block: var(--spacing-xxbig);
+    padding: var(--spacing-xxbig) 0;
   }
 
   & .cart__header-title,
@@ -380,6 +380,8 @@ main > .section > div.commerce-cart-wrapper {
         grid-column-start: 1;
         grid-column-end: 3;
       }
+
+      & .cart__header-content { padding: var(--spacing-xxbig) var(--spacing-small); }
 
       & .cart__header-title {
         font: var(--type-display-2-font);

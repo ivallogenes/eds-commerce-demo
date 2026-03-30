@@ -19,6 +19,7 @@
                     flex-direction: column;
                     align-items: center;
                     gap: var(--spacing-small);
+                    max-width: 300px;
                 }
 
 .section.shipping-infos .columns-wrapper .columns-4-cols > div > div img, .section.shipping-infos .columns-wrapper .columns-3-cols > div > div img {
@@ -61,9 +62,10 @@
     }
                 .section.shipping-infos .columns-wrapper .columns-4-cols > div, .section.shipping-infos .columns-wrapper .columns-3-cols > div {
                     display: flex;
+                    justify-content: center;
                 }
                         .section.shipping-infos .columns-wrapper .columns-4-cols > div > div img, .section.shipping-infos .columns-wrapper .columns-3-cols > div > div img {
-                            width: 48px;
+                            width: 42px;
                         }
             .section.shipping-infos.contact-page-top .columns-wrapper .columns-3-cols > div > div {
                 gap: var(--spacing-xxsmall);
