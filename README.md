@@ -49,3 +49,9 @@ npm run postinstall # Copies scripts from node_modules into scripts/__dropins__
 ```
 
 This is a custom script which copies files out of `node_modules` and into a local directory which EDS can serve. You must manually run `postinstall` due to a design choice in `npm` which does not execute `postinstall` after you install a _specific_ package.
+
+### Product Detail Pages (PDPs)
+
+Since October 2025, folder mapping is no longer configured by default as its [deprecated](https://www.aem.live/developer/folder-mapping). To keep it easy to start, static product pages have been created as part of the site template for all products listed on the homepage.
+
+It is highly recommended to create physical product detail pages in Edge Delivery Services. Use the [AEM Commerce Prerenderer](https://github.com/adobe-rnd/aem-commerce-prerender) to implement a [byom overlay](https://www.aem.live/developer/byom#setup-byom-as-content-overlay) that creates and publishes product detail pages from the product data available in Catalog Service.
